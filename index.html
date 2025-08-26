@@ -12,7 +12,10 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- CSS local -->
     <link rel="stylesheet" href="css/style.css" />
+
+    <!-- js -->
     <script src="js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/inicial.js" defer></script>
     <title>King of Kings</title>
   </head>
   <body>
@@ -39,7 +42,10 @@
           </button>
 
           <!-- MENU CENTRALIZADO -->
-          <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarContent"
+          >
             <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link active" href="#">Início</a>
@@ -69,13 +75,24 @@
                 <i class="bi bi-search"></i>
               </button>
             </form>
-          <!-- CARRINHO + AJUDA + Login -->
 
-           <div class="Carrinho-flex align-items-center">
-            <a href="#" class="btn  me-2">
-              <i class="bi bi-cart3"></i> 
-            </a>
-          </div>
+            <!-- Carrinho -->
+            <div class="cart-popup" id="cartPopup">
+              <div class="cart-header">
+                <p class="text">Carrinho <span>(0 item)</span></p>
+                <button type="button" class="close-cart" id="closeCart">
+                  ✖
+                </button>
+              </div>
+              <p class="empty">Nenhum produto encontrado.</p>
+            </div>
+            <!-- Div com ícone no lugar do botão -->
+            <div class="Carrinho-flex align-items-center">
+              <a href="#" id="openCart" class="btn me-2">
+                <i class="bi bi-cart3"></i>
+              </a>
+            </div>
+
 
           <div class="d-flex align-items-center">
             <a href="#" class="btn  me-2">
@@ -83,13 +100,12 @@
             </a>
           </div>
         
-         <div class="d-flex align-items-center">
-            <a href="#" class="btn  me-2">
-              <i class="bi bi-person-circle"></i> 
-            </a> 
+          <div class="d-flex align-items-center">
+         <a href="login.html" class="btn me-2">
+              <i class="bi bi-person-circle fs-4"></i>
+            </a>
           </div>
         </div>
-          </div>
 
       </nav>
     </header>
@@ -101,19 +117,41 @@
         <div id="carouselLoja" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <img src="images/bannerLJ1.png" class="d-block w-100" alt="Banner 1" />
+              <img
+                src="images/bannerLJ1.png"
+                class="d-block w-100"
+                alt="Banner 1"
+              />
             </div>
             <div class="carousel-item">
-              <img src="images/bannerLJ2.png" class="d-block w-100" alt="Banner 2" />
+              <img
+                src="images/bannerLJ2.png"
+                class="d-block w-100"
+                alt="Banner 2"
+              />
             </div>
             <div class="carousel-item">
-              <img src="images/bannerLJ3.png" class="d-block w-100" alt="Banner 3" />
+              <img
+                src="images/bannerLJ3.png"
+                class="d-block w-100"
+                alt="Banner 3"
+              />
             </div>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselLoja" data-bs-slide="prev">
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselLoja"
+            data-bs-slide="prev"
+          >
             <span class="carousel-control-prev-icon"></span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselLoja" data-bs-slide="next">
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselLoja"
+            data-bs-slide="next"
+          >
             <span class="carousel-control-next-icon"></span>
           </button>
         </div>
@@ -121,208 +159,264 @@
 
       <!-- PRODUTOS EM DESTAQUE -->
       <section class="my-5">
-  <h2 class="text-center mb-4"> Produtos em Destaque</h2>
+        <h2 class="text-center mb-4">Produtos em Destaque</h2>
 
-  <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
+        <div
+          id="carouselProdutos"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <!-- PRIMEIRO SLIDE -->
+            <div class="carousel-item active">
+              <div class="row row-cols-1 row-cols-md-4 g-4">
+                <!-- CARD 1 -->
+                <div class="col">
+                  <div class="card h-100 shadow-sm">
+                    <img
+                      src="images/produto1.jpg"
+                      class="card-img-top"
+                      alt="Produto 1"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Produto</h5>
+                      <p class="fw-bold text-success">R$ 299,90</p>
+                      <button class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Comprar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- CARD 2 -->
+                <div class="col">
+                  <div class="card h-100 shadow-sm">
+                    <img
+                      src="images/produto2.jpg"
+                      class="card-img-top"
+                      alt="Produto 2"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Produto</h5>
+                      <p class="fw-bold text-success">R$ 119,90</p>
+                      <button class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Comprar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- CARD 3 -->
+                <div class="col">
+                  <div class="card h-100 shadow-sm">
+                    <img
+                      src="images/produto3.jpg"
+                      class="card-img-top"
+                      alt="Produto 3"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Produto</h5>
+                      <p class="fw-bold text-success">R$ 499,90</p>
+                      <button class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Comprar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- CARD 4 -->
+                <div class="col">
+                  <div class="card h-100 shadow-sm">
+                    <img
+                      src="images/produto4.jpg"
+                      class="card-img-top"
+                      alt="Produto 4"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Produto</h5>
+                      <p class="fw-bold text-success">R$ 359,90</p>
+                      <button class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Comprar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <!-- PRIMEIRO SLIDE -->
-      <div class="carousel-item active">
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-          <!-- CARD 1 -->
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <img src="images/produto1.jpg" class="card-img-top" alt="Produto 1" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Produto</h5>
-                <p class="fw-bold text-success">R$ 299,90</p>
-                <button class="btn btn-primary"><i class="bi bi-cart-plus"></i> Comprar</button>
+            <!-- SEGUNDO SLIDE -->
+            <div class="carousel-item">
+              <div class="row row-cols-1 row-cols-md-4 g-4">
+                <!-- CARD 5 -->
+                <div class="col">
+                  <div class="card h-100 shadow-sm">
+                    <img
+                      src="images/produto5.jpg"
+                      class="card-img-top"
+                      alt="Produto 5"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Produto</h5>
+                      <p class="fw-bold text-success">R$ 249,90</p>
+                      <button class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Comprar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- CARD 6 -->
+                <div class="col">
+                  <div class="card h-100 shadow-sm">
+                    <img
+                      src="images/produto6.jpg"
+                      class="card-img-top"
+                      alt="Produto 6"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Produto</h5>
+                      <p class="fw-bold text-success">R$ 699,90</p>
+                      <button class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Comprar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- CARD 7 -->
+                <div class="col">
+                  <div class="card h-100 shadow-sm">
+                    <img
+                      src="images/produto7.jpg"
+                      class="card-img-top"
+                      alt="Produto 7"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Produto</h5>
+                      <p class="fw-bold text-success">R$ 199,90</p>
+                      <button class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Comprar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- CARD 8 -->
+                <div class="col">
+                  <div class="card h-100 shadow-sm">
+                    <img
+                      src="images/produto8.jpg"
+                      class="card-img-top"
+                      alt="Produto 8"
+                    />
+                    <div class="card-body text-center">
+                      <h5 class="card-title">Produto</h5>
+                      <p class="fw-bold text-success">R$ 899,90</p>
+                      <button class="btn btn-primary">
+                        <i class="bi bi-cart-plus"></i> Comprar
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <!-- CARD 2 -->
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <img src="images/produto2.jpg" class="card-img-top" alt="Produto 2" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Produto</h5>
-                <p class="fw-bold text-success">R$ 119,90</p>
-                <button class="btn btn-primary"><i class="bi bi-cart-plus"></i> Comprar</button>
-              </div>
-            </div>
-          </div>
-          <!-- CARD 3 -->
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <img src="images/produto3.jpg" class="card-img-top" alt="Produto 3" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Produto</h5>
-                <p class="fw-bold text-success">R$ 499,90</p>
-                <button class="btn btn-primary"><i class="bi bi-cart-plus"></i> Comprar</button>
-              </div>
-            </div>
-          </div>
-          <!-- CARD 4 -->
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <img src="images/produto4.jpg" class="card-img-top" alt="Produto 4" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Produto</h5>
-                <p class="fw-bold text-success">R$ 359,90</p>
-                <button class="btn btn-primary"><i class="bi bi-cart-plus"></i> Comprar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- SEGUNDO SLIDE -->
-      <div class="carousel-item">
-        <div class="row row-cols-1 row-cols-md-4 g-4">
-          <!-- CARD 5 -->
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <img src="images/produto5.jpg" class="card-img-top" alt="Produto 5" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Produto</h5>
-                <p class="fw-bold text-success">R$ 249,90</p>
-                <button class="btn btn-primary"><i class="bi bi-cart-plus"></i> Comprar</button>
-              </div>
-            </div>
-          </div>
-          <!-- CARD 6 -->
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <img src="images/produto6.jpg" class="card-img-top" alt="Produto 6" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Produto</h5>
-                <p class="fw-bold text-success">R$ 699,90</p>
-                <button class="btn btn-primary"><i class="bi bi-cart-plus"></i> Comprar</button>
-              </div>
-            </div>
-          </div>
-          <!-- CARD 7 -->
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <img src="images/produto7.jpg" class="card-img-top" alt="Produto 7" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Produto</h5>
-                <p class="fw-bold text-success">R$ 199,90</p>
-                <button class="btn btn-primary"><i class="bi bi-cart-plus"></i> Comprar</button>
-              </div>
-            </div>
-          </div>
-          <!-- CARD 8 -->
-          <div class="col">
-            <div class="card h-100 shadow-sm">
-              <img src="images/produto8.jpg" class="card-img-top" alt="Produto 8" />
-              <div class="card-body text-center">
-                <h5 class="card-title">Produto</h5>
-                <p class="fw-bold text-success">R$ 899,90</p>
-                <button class="btn btn-primary"><i class="bi bi-cart-plus"></i> Comprar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
- 
-
-    <!-- CONTROLES -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselProdutos" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselProdutos" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-  </div>
-      </section>
-
-
-<!-- CATEGORIAS -->
-      <section class="my-5">
-  <h2 class="text-center mb-4">CAtegorias</h2>
-<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-
-    <!-- Primeiro slide -->
-    <div class="carousel-item active">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body text-center">Item 1</div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body text-center">Item 2</div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body text-center">Item 3</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Segundo slide -->
-    <div class="carousel-item">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body text-center">Item 4</div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body text-center">Item 5</div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <div class="card-body text-center">Item 6</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Controles -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
-</div>
-      </section>
-            <div class="cart-popup">
-
-        <div class="cart-header">
-
-          <p class="text">
-            Carrinho <span>(0 item)</span>
-          </p>
-
-          <button type="button" class="close-cart" data-close-cart="" data-ready="true">
-            <svg class="icon"><use xlink:href="#icon-close"></use></svg>
+          <!-- CONTROLES -->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselProdutos"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
           </button>
-
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselProdutos"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </button>
         </div>
-          <p class="empty">
-              Nenhum produto encontrado.
-           </p>
-         </div>
+      </section>
+
+      <!-- CATEGORIAS -->
+      <section class="my-5">
+        <h2 class="text-center mb-4">CAtegorias</h2>
+        <div
+          id="carouselExample"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <!-- Primeiro slide -->
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 1</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 2</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 3</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Segundo slide -->
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 4</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 5</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 6</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controles -->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </section>
     </main>
 
     <!-- RODAPÉ -->
     <footer class="container-fluid bg-dark text-white p-4 mt-5">
       <div class="text-center">
         <p class="mb-1">Desenvolvido por Erik Carvalho da Silva™ 2025</p>
-        <a href="https://github.com/ErikCarvalho1?tab=repositories" class="text-white-50">
+        <a
+          href="https://github.com/ErikCarvalho1?tab=repositories"
+          class="text-white-50"
+        >
           ErikCarvalho.com.br
         </a>
       </div>
