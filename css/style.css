@@ -3,7 +3,9 @@
 @charset "utf8";
 
 /*tela principal  */
-
+header text{
+  color: #fff ;
+}
  .carousel-control-prev-icon,
   .carousel-control-next-icon {
     background-image: none; /* remove o ícone padrão */
