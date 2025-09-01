@@ -18,14 +18,14 @@
     <script src="js/inicial.js" defer></script>
     <title>King of Kings</title>
   </head>
-  <body>
+  <body >
     <!-- CABEÇALHO -->
     <header>
-      <nav class="navbar navbar-expand-lg bg-black shadow-sm ">
+      <nav class="navbar navbar-expand-lg  shadow-sm ">
         <div class="container-fluid">
           <!-- LOGO (IMAGEM) -->
           <a class="navbar-brand" href="#">
-            <img src="images/LogoZentral.png" alt="Logo Loja" width="120" />
+            <img src="images/LogoZentralBranco.png" alt="Logo Loja" width="120" />
           </a>
 
           <!-- BOTÃO RESPONSIVO -->
@@ -42,71 +42,53 @@
           </button>
 
           <!-- MENU CENTRALIZADO -->
-          <div
-            class="collapse navbar-collapse justify-content-center "
-            id="navbarContent"
-          >
-            <ul class="navbar-nav mb-2 mb-lg-0 ">
-              <li class="nav-item">
-                <a class="nav-link active text-white" href="#">Início</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Masculino</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Feminino</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Infantil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Promoções</a>
-              </li>
-            </ul>
-            <!-- Pesquisa -->
-            <form class="d-flex" role="search">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Buscar produtos..."
-                aria-label="Search"
-              />
-              <button class="btn btn" type="submit">
-                <i class="bi bi-search fs-5"></i>
-              </button>
-            </form>
+        <div class="collapse navbar-collapse" id="navbarContent">
+  <!-- Navegação central -->
+  <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
+    <li class="nav-item">
+      <a class="nav-link active text-white" href="#">Início</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Produtos</a>
+    </li>
 
-            <!-- Carrinho -->
-            <div class="cart-popup" id="cartPopup">
-              <div class="cart-header">
-                <p class="text">Carrinho <span>(0 item)</span></p>
-                <button type="button" class="close-cart" id="closeCart">
-                  <i class="bi bi-x"></i>
-                </button>
-              </div>
-              <p class="empty">Nenhum produto encontrado.</p>
-            </div>
-            <!-- Div com ícone no lugar do botão -->
-            <div class="Carrinho-flex align-items-center">
-              <a href="#" id="openCart" class="btn me-2">
-                <i class="bi bi-cart3 fs-5"></i>
-              </a>
-            </div>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Promoções</a>
+    </li>
+  </ul>
 
+  <!-- Direita: pesquisa + ícones -->
+  <div class="d-flex align-items-center">
+    <!-- Pesquisa -->
+    <form class="d-flex me-3" role="search">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Buscar produtos..."
+        aria-label="Search"
+      />
+      <button class="btn text-white" type="submit">
+        <i class="bi bi-search fs-5"></i>
+      </button>
+    </form>
 
-          <div class="d-flex align-items-center">
-            <a href="#" class="btn  me-2">
-              <i class="bi bi-globe2 fs-5"></i>
-            </a>
-          </div>
-        
-          <div class="d-flex align-items-center">
-         <a href="login.html" class="btn me-2">
-              <i class="bi bi-person-circle fs-5"></i>
-            </a>
-          </div>
-        </div>
+    <!-- Ícone Carrinho -->
+    <a href="#" id="openCart" class="btn me-2 text-white">
+      <i class="bi bi-cart3 fs-5"></i>
+    </a>
 
+    <!-- Ícone Globo -->
+    <a href="#" class="btn me-2 text-white">
+      <i class="bi bi-globe2 fs-5"></i>
+    </a>
+
+    <!-- Ícone Usuário -->
+    <a href="login.html" class="btn me-2 text-white">
+      <i class="bi bi-person-circle fs-5"></i>
+    </a>
+  </div>
+</div>
       </nav>
     </header>
 
@@ -401,6 +383,81 @@
             class="carousel-control-next"
             type="button"
             data-bs-target="#carouselExample"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </section>
+
+
+
+       <!-- promoções-->
+      <section class="my-5
+      ">
+        <h2 class="text-center mb-4">Promoções</h2>
+        <div
+          id="carouselPromocoes"
+          class="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <!-- Primeiro slide -->
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 1</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 2</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 3</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Segundo slide -->
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 4</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 5</div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body text-center">Item 6</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controles -->
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselPromocoes"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselPromocoes"
             data-bs-slide="next"
           >
             <span class="carousel-control-next-icon"></span>
