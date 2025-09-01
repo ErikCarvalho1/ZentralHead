@@ -73,8 +73,13 @@
 /* login tela */
 
  .card-body{
-  background-color: rgba(0, 0, 0, 0)
+  background-color: rgba(255, 252, 252, 0)
  }
-
+ .body-cadastro{
+  background-color: #ffffff50;
+ }
+#card-cadastro{
+  margin-top: 250px;
+}
 
  
