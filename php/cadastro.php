@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
   <!-- Bootstrap 5.3 -->
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../css/bootstrap.min.css" />
   <!-- CSS local -->
-  <link rel="stylesheet" href="css/style.css" />
-  <script src="js/bootstrap.bundle.min.js" defer></script>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="../js/bootstrap.bundle.min.js" defer></script>
 </head>
 <body>
     <body>
@@ -20,7 +20,7 @@
 
         <div class="d-flex flex-column  align-items-center vh-100 bg" id="card-cadastro">
             <!-- Logo em cima -->
-            <img src="images/LogoZentralPreto.png" width="300" alt="" class="mb-2">
+            <img src="../images/LogoZentralPreto.png" width="300" alt="" class="mb-2">
       
           <div class=" p-5 shadow " style="width: 400px; ">
       

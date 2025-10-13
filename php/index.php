@@ -8,15 +8,16 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+    
     <!-- Bootstrap 5.3 -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <!-- CSS local -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
 
     <!-- js -->
-    <script src="js/bootstrap.bundle.min.js" defer></script>
-    <script src="js/inicial.js" defer></script>
-    <title>King of Kings</title>
+    <script src="../js/bootstrap.bundle.min.js" defer></script>
+    <script src="../js/inicial.js" defer></script>
+    <title>ZentralHead</title>
   </head>
   <body >
     <!-- CABEÇALHO -->
@@ -25,7 +26,7 @@
         <div class="container-fluid">
           <!-- LOGO (IMAGEM) -->
           <a class="navbar-brand" href="#">
-            <img src="images/LogoZentralBranco.png" alt="Logo Loja" width="120" />
+            <img src="../images/LogoZentralBranco.png" alt="Logo Loja" width="120" />
           </a>
 
           <!-- BOTÃO RESPONSIVO -->
@@ -100,21 +101,21 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <img
-                src="images/bannerLJ1.png"
+                src="../images/bannerLJ1.png"
                 class="d-block w-100"
                 alt="Banner 1"
               />
             </div>
             <div class="carousel-item">
               <img
-                src="images/bannerLJ2.png"
+                src="../images/bannerLJ2.png"
                 class="d-block w-100"
                 alt="Banner 2"
               />
             </div>
             <div class="carousel-item">
               <img
-                src="images/bannerLJ3.png"
+                src="../images/bannerLJ3.png"
                 class="d-block w-100"
                 alt="Banner 3"
               />
@@ -156,7 +157,7 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="images/produto1.jpg"
+                      src="../../images/produto1.jpg"
                       class="card-img-top"
                       alt="Produto 1"
                     />
@@ -173,7 +174,7 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="images/produto2.jpg"
+                      src="../images/produto2.jpg"
                       class="card-img-top"
                       alt="Produto 2"
                     />
@@ -190,7 +191,7 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="images/produto3.jpg"
+                      src="../images/produto3.jpg"
                       class="card-img-top"
                       alt="Produto 3"
                     />
@@ -207,7 +208,7 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="images/produto4.jpg"
+                      src="../images/produto4.jpg"
                       class="card-img-top"
                       alt="Produto 4"
                     />
@@ -230,7 +231,7 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="images/produto5.jpg"
+                      src="../images/produto5.jpg"
                       class="card-img-top"
                       alt="Produto 5"
                     />
@@ -247,7 +248,7 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="images/produto6.jpg"
+                      src="../images/produto6.jpg"
                       class="card-img-top"
                       alt="Produto 6"
                     />
@@ -264,7 +265,7 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="images/produto7.jpg"
+                      src="../images/produto7.jpg"
                       class="card-img-top"
                       alt="Produto 7"
                     />
@@ -281,7 +282,7 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="images/produto8.jpg"
+                      src="../images/produto8.jpg"
                       class="card-img-top"
                       alt="Produto 8"
                     />
