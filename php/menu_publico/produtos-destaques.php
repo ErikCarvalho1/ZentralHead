@@ -21,7 +21,7 @@
                     <div class="card-body text-center">
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 299,90</p>
-                      <button class="btn btn-primary">
+                      <button class="btn ">
                         <i class="bi bi-cart-plus"></i> Comprar
                       </button>
                     </div>
@@ -38,7 +38,7 @@
                     <div class="card-body text-center">
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 119,90</p>
-                      <button class="btn btn-primary">
+                      <button class="btn ">
                         <i class="bi bi-cart-plus"></i> Comprar
                       </button>
                     </div>
@@ -55,7 +55,7 @@
                     <div class="card-body text-center">
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 499,90</p>
-                      <button class="btn btn-primary">
+                      <button class="btn ">
                         <i class="bi bi-cart-plus"></i> Comprar
                       </button>
                     </div>
@@ -72,7 +72,7 @@
                     <div class="card-body text-center">
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 359,90</p>
-                      <button class="btn btn-primary">
+                      <button class="btn ">
                         <i class="bi bi-cart-plus"></i> Comprar
                       </button>
                     </div>
@@ -95,7 +95,7 @@
                     <div class="card-body text-center">
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 249,90</p>
-                      <button class="btn btn-primary">
+                      <button class="btn">
                         <i class="bi bi-cart-plus"></i> Comprar
                       </button>
                     </div>
@@ -112,7 +112,7 @@
                     <div class="card-body text-center">
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 699,90</p>
-                      <button class="btn btn-primary">
+                      <button class="btn ">
                         <i class="bi bi-cart-plus"></i> Comprar
                       </button>
                     </div>
@@ -129,7 +129,7 @@
                     <div class="card-body text-center">
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 199,90</p>
-                      <button class="btn btn-primary">
+                      <button class="btn ">
                         <i class="bi bi-cart-plus"></i> Comprar
                       </button>
                     </div>
@@ -139,14 +139,14 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="../images/produto8.jpg"
+                      src="../../images/produto1.jpg"
                       class="card-img-top"
                       alt="Produto 8"
                     />
                     <div class="card-body text-center">
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 899,90</p>
-                      <button class="btn btn-primary">
+                      <button class="btn ">
                         <i class="bi bi-cart-plus"></i> Comprar
                       </button>
                     </div>
