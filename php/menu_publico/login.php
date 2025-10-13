@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../css/style.css" />
   <script src="../../js/bootstrap.bundle.min.js" defer></script>
 
-  <!-- TELA LOGIN -->
+      <!-- TELA LOGIN -->
 </head>
 
 <body class="body-cadastro">
