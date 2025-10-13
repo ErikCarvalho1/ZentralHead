@@ -25,13 +25,14 @@
   }
   /* ======= ESTILO DO CARRINHO ======= */
     .cart-popup {
+      
       position: fixed;
       top: 0;
       right: -300px; /* escondido fora da tela */
       width: 280px;
       height: 100%;
       background: #fff;
-      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+      box-shadow: -2px 0 8px rgba(255, 255, 255, 0.2);
       transition: right 0.3s ease;
       padding: 20px;
       z-index: 9999;
@@ -70,11 +71,35 @@
     .open-cart-btn i {
       font-size: 18px;
     }
+
+    header nav{
+      background-color: #1B022C;
+    }
+    body{
+      background-color: rgb(255, 255, 255);
+    }
+
+    .form-control {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
 /* login tela */
 
  .card-body{
-  background-color: rgba(0, 0, 0, 0)
+  background-color: rgba(255, 252, 252, 0)
  }
+
+ .carousel-item img {
+  width: 100vh;      /* altura total da tela */
+  
+
+}
+#carouselLoja {
+
+  box-shadow: #1B022C;
+}
+
 
 
  
