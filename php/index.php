@@ -26,7 +26,7 @@
         <div class="container-fluid">
           <!-- LOGO (IMAGEM) -->
           <a class="navbar-brand" href="#">
-            <img src="../images/LogoZentralBranco.png" alt="Logo Loja" width="120" />
+            <img src="images/LogoZentral.png" alt="Logo Loja" width="120" />
           </a>
 
           <!-- BOTÃO RESPONSIVO -->
