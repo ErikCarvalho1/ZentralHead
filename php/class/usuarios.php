@@ -75,7 +75,26 @@ class Usuarios{
  
         return $cmd ->execute();
     }
+   
+    public function listar(): array {
+        $cmd = $this->pdo->query("select * from usuario order by id DESC");
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+       public function efetuarLogin(string $loginInformado, string $senhaInformada):array {
+        $sql = "select * from usuarios where email = :email and senha = md5(:senha)";
+        $cmd =  $this->pdo->prepare($sql);
+        $cmd -> bindValue(":email", $loginInformado);
+         $cmd -> bindValue(":senha", $senhaInformada);
+        $cmd->execute();
+       
+            $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+            return $dados;
+         
+ 
+    }
 }
+
 
 
 
