@@ -48,11 +48,11 @@ class Usuarios{
     public function Inserir(){
         $sql = "CALL sp_usuario_insert(:nivel_id, :nome, :email, :senha, :ativo)";
         $cmd = $this->pdo->prepare($sql);
-        $cmd->bindValues(":nivel_id", $this->nivelId);
-        $cmd->bindValues(":nome", $this->nome);
-        $cmd->bindValues(":email", $this->email);
-        $cmd->bindValues(":senha", $this->senha);
-        $cmd->bindValues(":ativo", $this->ativo);
+        $cmd->bindValue(":nivel_id", $this->nivelId);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":email", $this->email);
+        $cmd->bindValue(":senha", $this->senha);
+        $cmd->bindValue(":ativo", $this->ativo);
         $cmd->execute();
         if($cmd->execute()){
             $this->id = $this->pdo->lastInsertId();
@@ -67,10 +67,10 @@ class Usuarios{
         if(!$this->id) return false;
          $sql = "CALL sp_usuario_update(:nivel_id, :nome, :email, :ativo)";
          $cmd = $this->pdo->prepare($sql);
-         $cmd->bindValues("nivel_id", $this->nivelId);
-         $cmd->bindValues(":nome", $this->nome);
-         $cmd->bindValues("email", $this->email);
-         $cmd->bindValues("ativo", $this->ativo);
+         $cmd->bindValue("nivel_id", $this->nivelId);
+         $cmd->bindValue(":nome", $this->nome);
+         $cmd->bindValue("email", $this->email);
+         $cmd->bindValue("ativo", $this->ativo);
          $cmd->bindValue(":id", $this ->id, PDO:: PARAM_INT);
  
         return $cmd ->execute();
