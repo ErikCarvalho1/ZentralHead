@@ -95,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`clientes` (
   `cpf` CHAR(11) NOT NULL,
   `telefone` CHAR(14) NULL DEFAULT NULL,
   `email` VARCHAR(60) NOT NULL,
+  `senha` VARCHAR(32) NOT NULL,
   `data_nasc` DATE NULL DEFAULT NULL,
   `data_cad` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `ativo` BIT(1) NOT NULL DEFAULT b'1',
@@ -102,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`clientes` (
   UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 10015
+AUTO_INCREMENT = 10016
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -381,9 +382,9 @@ DELIMITER ;
 DELIMITER $$
 USE `zentralhead`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cliente_insert`(
-    spnome varchar(100), spcpf char(11), sptelefone char(14), spemail varchar(60), spdatanasc date)
+    spnome varchar(100), spcpf char(11), sptelefone char(14), spemail varchar(60),spsenha varchar(32), spdatanasc date)
 BEGIN
-    INSERT INTO clientes VALUES (0, spnome, spcpf, sptelefone, spemail, spdatanasc, DEFAULT, 1);
+    INSERT INTO clientes VALUES (0, spnome, spcpf, sptelefone, spemail, MD5(spsenha), spdatanasc, DEFAULT, 1);
     SELECT LAST_INSERT_ID();
 END$$
 

@@ -32,7 +32,7 @@ class Cliente{
 
     }
    
-    public function setCpf(int $nivelId){
+    public function setCpf(string $cpf){
         $this->cpf = $cpf;
 
     } 
@@ -75,13 +75,13 @@ class Cliente{
 
 
     public function Inserir(){
-        $sql = "CALL sp_usuario_insert(:nivel_id, :nome, :email, :senha, :ativo)";
+        $sql = "CALL sp_cliente_insert(:nome, :email, :senha, :data_nasc :ativo)";
         $cmd = $this->pdo->prepare($sql);
-        $
-        $cmd->blindValues(":nome", $this->nome);
-        $cmd->blindValues(":email", $this->email);
-        $cmd->blindValues(":senha", $this->senha);
-        $cmd->blindValues(":ativo", $this->ativo);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":email", $this->email);
+        $cmd->bindValue(":senha", $this->senha);
+        $cmd->bindValue(":data_nasc", $this->dataNasc);
+        $cmd->bindValue(":ativo", $this->ativo);
         $cmd->execute();
         if($cmd->execute()){
             $this->id = $this->pdo->lastInsertId();
@@ -116,7 +116,6 @@ class Cliente{
         $cmd -> bindValue(":email", $loginInformado);
          $cmd -> bindValue(":senha", $senhaInformada);
         $cmd->execute();
-       
             $dados = $cmd->fetch(PDO::FETCH_ASSOC);
             return $dados;
          
