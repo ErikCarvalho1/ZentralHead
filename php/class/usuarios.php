@@ -8,6 +8,7 @@ class Usuarios{
     private $email;
     private $senha;
     private $ativo;
+    private $pdo;
 
   public function __construct() {
         $this->pdo = getConnection();
