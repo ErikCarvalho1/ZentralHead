@@ -21,7 +21,7 @@ class Usuarios{
 
     }
     public function setNiveld(int $nivelId){
-        $this->getNivelId = $nivelId;
+        $this->nivelId = $nivelId;
 
     }
     public function getNome(){
@@ -48,11 +48,11 @@ class Usuarios{
     public function Inserir(){
         $sql = "CALL sp_usuario_insert(:nivel_id, :nome, :email, :senha, :ativo)";
         $cmd = $this->pdo->prepare($sql);
-        $cmd->blindValues(":nivel_id", $this->nivelId);
-        $cmd->blindValues(":nome", $this->nome);
-        $cmd->blindValues(":email", $this->email);
-        $cmd->blindValues(":senha", $this->senha);
-        $cmd->blindValues(":ativo", $this->ativo);
+        $cmd->bindValues(":nivel_id", $this->nivelId);
+        $cmd->bindValues(":nome", $this->nome);
+        $cmd->bindValues(":email", $this->email);
+        $cmd->bindValues(":senha", $this->senha);
+        $cmd->bindValues(":ativo", $this->ativo);
         $cmd->execute();
         if($cmd->execute()){
             $this->id = $this->pdo->lastInsertId();
@@ -66,12 +66,12 @@ class Usuarios{
              $id = $idUpdate;
         if(!$this->id) return false;
          $sql = "CALL sp_usuario_update(:nivel_id, :nome, :email, :ativo)";
-         $cmd = $this->pfo-prepare($sql);
-         $cmd->blindValues("nivel_id", $this->nivelId);
-         $cmd->blindValues(":nome", $this->nome);
-         $cmd-blindValues("email", $this->emial);
-         $cmd->blindValues("ativo", $this->ativo);
-         $cmd -> bindValue(":id", $this ->id, PDO:: PARAM_INT);
+         $cmd = $this->pdo->prepare($sql);
+         $cmd->bindValues("nivel_id", $this->nivelId);
+         $cmd->bindValues(":nome", $this->nome);
+         $cmd->bindValues("email", $this->email);
+         $cmd->bindValues("ativo", $this->ativo);
+         $cmd->bindValue(":id", $this ->id, PDO:: PARAM_INT);
  
         return $cmd ->execute();
     }
