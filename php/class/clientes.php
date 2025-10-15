@@ -98,7 +98,7 @@ class Cliente{
              $id = $idUpdate;
         if(!$this->id) return false;
          $sql = "CALL sp_cliente_update(:nome,  :telefone, :email, :ativo)";
-         $cmd = $this->pdo-prepare($sql);
+         $cmd = $this->pdo->prepare($sql);
          $cmd->bindValue(":nome", $this->nome);
          $cmd->bindValue(":telefone", $this->telefone);
          $cmd->bindValue(":email", $this->email);
