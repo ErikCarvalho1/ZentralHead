@@ -11,6 +11,7 @@ class Cliente{
     private $dataNasc;
     private $dataCad;
     private $ativo;
+    private $pdo;
 
   public function __construct() {
         $this->pdo = getConnection();
@@ -63,7 +64,7 @@ class Cliente{
 
     }
     public function setDataCad(int $DataCad){
-        $this->DataCad = $DataCad;
+        $this->dataCad = $DataCad;
 
     }
     public function getAtivo(){
@@ -97,12 +98,12 @@ class Cliente{
              $id = $idUpdate;
         if(!$this->id) return false;
          $sql = "CALL sp_cliente_update(:nome,  :telefone, :email, :ativo)";
-         $cmd = $this->pfo-prepare($sql);
-         $cmd->bindValues(":nome", $this->nome);
-          $cmd-bindValues(":telefone", $this->telefobe);
-         $cmd-bindValues(":email", $this->email);
-         $cmd->bindValues(":ativo", $this->ativo);
-         $cmd -> bindValue(":id", $this ->id, PDO:: PARAM_INT);
+         $cmd = $this->pdo-prepare($sql);
+         $cmd->bindValue(":nome", $this->nome);
+         $cmd->bindValue(":telefone", $this->telefone);
+         $cmd->bindValue(":email", $this->email);
+         $cmd->bindValue(":ativo", $this->ativo);
+         $cmd->bindValue(":id", $this ->id, PDO:: PARAM_INT);
  
         return $cmd ->execute();
     }
@@ -115,8 +116,8 @@ class Cliente{
        public function efetuarLogin(string $loginInformado, string $senhaInformada):array {
         $sql = "select * from clientes where email = :email and senha = md5(:senha)";
         $cmd =  $this->pdo->prepare($sql);
-        $cmd -> bindValue(":email", $loginInformado);
-         $cmd -> bindValue(":senha", $senhaInformada);
+        $cmd-> bindValue(":email", $loginInformado);
+        $cmd-> bindValue(":senha", $senhaInformada);
         $cmd->execute();
             $dados = $cmd->fetch(PDO::FETCH_ASSOC);
             return $dados;
