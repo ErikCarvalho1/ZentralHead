@@ -28,14 +28,32 @@ class catergorias{
         $this->sigla = $sigla;
     }
     public function insert (){
-        $sql = "INSERT INTO categorias (nome, sigla) VALUES (:nome, :sigla)";
-        $cmd = $this->pdo-> prepare()
+        $sql = "call sp_categoria_insert (nome, sigla) VALUES (:nome, :sigla)";
+        $cmd = $this->pdo-> prepare($sql);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":sigla", $this->sigla);
+        $cmd->execute();
+
     }
-    
+    public function update($id){
+        $sql = "CALL sp_categoria_upadate SET nome = :nome, sigla = :sigla WHERE id = :id";
+        $cmd = $this->pdo-> prepare($sql);
+        $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":sigla", $this->sigla);
+        $cmd->bindValue(":id", $id);
+        $cmd->execute();
+    }
+    public function delete($id){
+        $sql = " CALL sp_categoria_delelete WHERE id = :id";
+        $cmd = $this->pdo-> prepare($sql);
+        $cmd->bindValue(":id", $id);
+        $cmd->execute();
+    }
+    public function listar (){
+        $sql = "SELECT * FROM categorias";
+        $cmd = $this->pdo-> prepare($sql);
+        $cmd->execute();
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
-
-
-
-
-
 ?>
