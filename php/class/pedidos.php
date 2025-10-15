@@ -26,11 +26,14 @@ class pedidos {
     public function setCliente_id(int $cliente_id){
         $this->cliente_id = $cliente_id;
     }
-    public function getCliente_id(){
-        return $this = $cliente_id;
+    public function getCliente_id() {
+        return $this-> cliente_id;
     }
     public function setData(string $data){
         $this->data = $data;
+    }
+    public function getData(){
+        return $this->data;
     }
 }
 
