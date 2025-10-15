@@ -70,15 +70,15 @@ class Usuarios{
          $cmd = $this->pdo->prepare($sql);
          $cmd->bindValue("nivel_id", $this->nivelId);
          $cmd->bindValue(":nome", $this->nome);
-         $cmd->bindValue("email", $this->email);
-         $cmd->bindValue("ativo", $this->ativo);
+         $cmd->bindValue(":email", $this->email);
+         $cmd->bindValue(":ativo", $this->ativo);
          $cmd->bindValue(":id", $this ->id, PDO:: PARAM_INT);
  
         return $cmd ->execute();
     }
    
     public function listar(): array {
-        $cmd = $this->pdo->query("select * from usuario order by id DESC");
+        $cmd = $this->pdo->query("select * from usuarios order by id DESC");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 

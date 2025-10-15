@@ -75,9 +75,11 @@ class Cliente{
 
 
     public function Inserir(){
-        $sql = "CALL sp_cliente_insert(:nome, :email, :senha, :data_nasc :ativo)";
+        $sql = "CALL sp_cliente_insert(:nome, :cpf, :telefone, :email, :senha, :data_nasc :ativo)";
         $cmd = $this->pdo->prepare($sql);
         $cmd->bindValue(":nome", $this->nome);
+        $cmd->bindValue(":cpf", $this->nome);
+        $cmd->bindValue(":telefone", $this->nome);
         $cmd->bindValue(":email", $this->email);
         $cmd->bindValue(":senha", $this->senha);
         $cmd->bindValue(":data_nasc", $this->dataNasc);
@@ -94,24 +96,24 @@ class Cliente{
     public function Atualizar(int $idUpdate):bool{
              $id = $idUpdate;
         if(!$this->id) return false;
-         $sql = "CALL sp_usuario_update(:nivel_id, :nome, :email, :ativo)";
+         $sql = "CALL sp_cliente_update(:nome,  :telefone, :email, :ativo)";
          $cmd = $this->pfo-prepare($sql);
-         $cmd->blindValues("nivel_id", $this->nivelId);
          $cmd->blindValues(":nome", $this->nome);
-         $cmd-blindValues("email", $this->emial);
-         $cmd->blindValues("ativo", $this->ativo);
+          $cmd-blindValues(":telefone", $this->emial);
+         $cmd-blindValues(":email", $this->emial);
+         $cmd->blindValues(":ativo", $this->ativo);
          $cmd -> bindValue(":id", $this ->id, PDO:: PARAM_INT);
  
         return $cmd ->execute();
     }
    
     public function listar(): array {
-        $cmd = $this->pdo->query("select * from usuario order by id DESC");
+        $cmd = $this->pdo->query("select * from clientes order by id DESC");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 
        public function efetuarLogin(string $loginInformado, string $senhaInformada):array {
-        $sql = "select * from usuarios where email = :email and senha = md5(:senha)";
+        $sql = "select * from clientes where email = :email and senha = md5(:senha)";
         $cmd =  $this->pdo->prepare($sql);
         $cmd -> bindValue(":email", $loginInformado);
          $cmd -> bindValue(":senha", $senhaInformada);
