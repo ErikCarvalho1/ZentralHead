@@ -1,4 +1,5 @@
-# King Of Kings
+# ZentralHead
+
 
 Projeto **King Of Kings** – uma aplicação web desenvolvida para gerenciar produtos, cardápio e atendimento de uma churrascaria/steakhouse online.  
 O objetivo é oferecer uma experiência simples, rápida e responsiva para clientes e administradores.
