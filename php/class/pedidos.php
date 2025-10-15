@@ -35,6 +35,29 @@ class pedidos {
     public function getData(){
         return $this->data;
     }
+    public function setStatus(string $status){
+        $this->status = $status;
+    }
+    public function getStatus(){
+        return $this->status;
+    }
+    public function setPedidos(string $pedidos){
+        $this->pedidos = $pedidos;
+    }
+    public function getPedidos(){
+        return $this->pedidos;
+    }
+    public function Inserir(){
+        $sql = "CALL sp_pedido_insert(:usuario_id, :cliente_id, :data, :status, :pedidos)";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":usuario_id", $this->usuario_id);
+        $cmd->bindValue(":cliente_id", $this->cliente_id);
+        $cmd->bindValue(":data", $this->data);
+        $cmd->bindValue(":status", $this->status);
+        $cmd->bindValue(":pedidos", $this->pedidos);
+        $cmd->execute();
+    }
+
 }
 
 
