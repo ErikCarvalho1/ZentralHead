@@ -22,9 +22,7 @@
         <div class="collapse navbar-collapse" id="navbarContent">
   <!-- Navegação central -->
   <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-    <li class="nav-item">
-      <a class="nav-link active text-white" href="#">Início</a>
-    </li>
+   
     <li class="nav-item">
       <a class="nav-link text-white" href="#">Produtos</a>
     </li>

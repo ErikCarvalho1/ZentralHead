@@ -98,10 +98,10 @@ class Cliente{
         if(!$this->id) return false;
          $sql = "CALL sp_cliente_update(:nome,  :telefone, :email, :ativo)";
          $cmd = $this->pfo-prepare($sql);
-         $cmd->blindValues(":nome", $this->nome);
-          $cmd-blindValues(":telefone", $this->emial);
-         $cmd-blindValues(":email", $this->emial);
-         $cmd->blindValues(":ativo", $this->ativo);
+         $cmd->bindValues(":nome", $this->nome);
+          $cmd-bindValues(":telefone", $this->telefobe);
+         $cmd-bindValues(":email", $this->email);
+         $cmd->bindValues(":ativo", $this->ativo);
          $cmd -> bindValue(":id", $this ->id, PDO:: PARAM_INT);
  
         return $cmd ->execute();
