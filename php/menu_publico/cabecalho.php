@@ -1,4 +1,4 @@
-  <nav class="bg-dark navbar navbar-expand-lg shadow-sm ">
+  <nav class="navbar navbar-expand-lg shadow-sm ">
         <div class="container-fluid">
           <!-- LOGO (IMAGEM) -->
           <a class="navbar-brand" href="#">

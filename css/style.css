@@ -66,15 +66,14 @@
   cursor: pointer;
 }
 
-.open-cart-btn i {
-  font-size: 18px;
+header nav {
+  background-color: rgb(0, 0, 0); /* Roxo translúcido */
+  backdrop-filter: blur(10px); /* Deixa o fundo borrado por trás */
+  padding: 10px 20px;
 }
 
-header nav {
-  background-color: #1b022c;
-}
 body {
-  background: linear-gradient(to bottom, #6a0dad, #000000);
+      background: linear-gradient(to bottom, #50005ece, #000000);
       min-height: 100vh;
       margin: 0;
       font-family: Arial, sans-serif;
@@ -96,11 +95,11 @@ form-control {
   width: 100vh; /* altura total da tela */
 }
 #carouselLoja {
-  box-shadow: #1b022c;
+  box-shadow: #ffffff;
 }
 .card-body .btn {
   color: white;
-  background: #5900ff;
+  background: #000000;
 }
 
 body {
@@ -113,6 +112,10 @@ body {
   width: 100vw; /* ocupa a tela toda */
   object-fit: cover; /* cobre sem distorcer */
 }
-footer{
-  background-color: #000000;
+footer {
+  background-color: rgba(0, 0, 0, 0.801); /* Roxo translúcido */
+  backdrop-filter: blur(10px); /* Deixa o fundo borrado por trás */
+  padding: 10px 20px;
 }
+
+
