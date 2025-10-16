@@ -42,7 +42,7 @@
 
     <!-- RODAPÉ -->
     <footer class="container-fluid text-white p-4 mt-5">
-      <?php include_once "rodape.php"?>
+      <?php include_once "../menu_publico/rodape.php"?>
     </footer>
   </body>
 </html>

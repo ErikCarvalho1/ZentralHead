@@ -1,31 +1,48 @@
 <?php 
 require_once "../class/usuarios.php";
-if($_POST){
-  $login = $_POST['email'];
-  $senha = $_POST['senha'];
-  $user = new Usuarios();  
-  $usuarioLogado = $user->efetuarLogin($login,$senha);
+$usuarioLogado = false; 
+$mensagem = "";
 
-  if(count($usuarioLogado)>0){
-    if(!isset($_SESSION)){
-      session_name("zentralhead");
-      session_start();
-    }
-    $_SESSION['email_usuario'] = $usuarioLogado['email'];
-    $_SESSION['nivel_usuario'] = $usuarioLogado['nivel_id'];
-    $_SESSION['nome_da_sessao'] = session_name();
-     if($usuarioLogado['email']== true){
-      echo "<script>window.open('../admn/index.php','_self')</script>"; 
-    }elseif($usuarioLogado['nivel']=="cli"){
-      echo "<script>window.open('reserva_mesa.php','_self')</script>"; 
-    }
-    
-  }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $login = trim($_POST['email'] ?? '');
+    $senha = trim($_POST['senha'] ?? '');
 
+    if ($login !== "" && $senha !== "") {
+        $user = new Usuarios();  
+        $usuarioLogado = $user->efetuarLogin($login, $senha);
+    }
+
+    if ($usuarioLogado) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_name("zentralhead");
+            session_start();
+        }
+
+        $_SESSION['email_usuario'] = $usuarioLogado['email'];
+        $_SESSION['nivel_usuario'] = $usuarioLogado['nome_nivel']; // ← nome do nível
+        $_SESSION['nome_da_sessao'] = session_name();
+
+        // Redireciona conforme o nome do nível
+        switch (strtolower($usuarioLogado['nome_nivel'])) {
+            case 'admin':
+            case 'administrador':
+                echo "<script>window.open('../adm/index.php','_self')</script>";
+                exit;
+
+            case 'cliente':
+            case 'cli':
+                echo "<script>window.open('../cliente/index.php','_self')</script>";
+                exit;
+
+            default:
+                echo "<script>alert('Nível de acesso desconhecido!'); window.location.href='../index.php';</script>";
+                exit;
+        }
+    } else {
+        $mensagem = "<div class='alert alert-danger text-center mt-3'>Usuário ou senha inválidos!</div>";
+    }
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>

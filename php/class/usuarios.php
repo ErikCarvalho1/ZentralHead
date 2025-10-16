@@ -82,10 +82,12 @@ class Usuarios{
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 public function efetuarLogin(string $loginInformado, string $senhaInformada): array|bool {
-    $sql = "SELECT * FROM usuarios 
-            WHERE email = :email 
-              AND senha = MD5(:senha) 
-              AND ativo = 1
+    $sql = "SELECT u.*, n.nome AS nome_nivel
+            FROM usuarios u
+            INNER JOIN niveis n ON n.id = u.nivel_id
+            WHERE u.email = :email 
+              AND u.senha = MD5(:senha)
+              AND u.ativo = 1
             LIMIT 1";
 
     $cmd = $this->pdo->prepare($sql);
@@ -96,7 +98,6 @@ public function efetuarLogin(string $loginInformado, string $senhaInformada): ar
     $dados = $cmd->fetch(PDO::FETCH_ASSOC);
     return $dados ?: false; // retorna false se não encontrou
 }
-
 }
 
 
