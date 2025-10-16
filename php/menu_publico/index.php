@@ -20,7 +20,7 @@
     <title>ZentralHead</title>
   </head>
 
-  <body >
+  <body>
     <!-- CABEÇALHO -->
     <header>
     <?php include_once "cabecalho.php"?>

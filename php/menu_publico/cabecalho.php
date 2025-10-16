@@ -1,4 +1,4 @@
-  <nav class="navbar navbar-expand-lg  shadow-sm ">
+  <nav class="bg-dark navbar navbar-expand-lg shadow-sm ">
         <div class="container-fluid">
           <!-- LOGO (IMAGEM) -->
           <a class="navbar-brand" href="#">
@@ -26,10 +26,12 @@
     <li class="nav-item">
       <a class="nav-link text-white" href="#">Produtos</a>
     </li>
-
     </li>
     <li class="nav-item">
       <a class="nav-link text-white" href="#">Promoções</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="#">Destaques</a>
     </li>
   </ul>
 
@@ -64,4 +66,4 @@
     </a>
   </div>
 </div>
-      </nav>
+</nav>

@@ -97,7 +97,6 @@ public function efetuarLogin(string $loginInformado, string $senhaInformada): ar
     return $dados ?: false; // retorna false se não encontrou
 }
 
-
 }
 
 

@@ -1,9 +1,9 @@
  <div class="text-center">
-        <p class="mb-1">Desenvolvido por Erik Carvalho da Silva™ 2025</p>
+        <p class="mb-1">Desenvolvido por Zentralhead™ 2025</p>
         <a
-          href="https://github.com/ErikCarvalho1?tab=repositories"
+          href="https://github.com/Zentralhead"
           class="text-white-50"
         >
-          ErikCarvalho.com.br
+          Zentralhead.com.br
         </a>
       </div>

@@ -4,106 +4,115 @@
 
 /*tela principal  */
 
- .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    background-image: none; /* remove o ícone padrão */
-    width: 2rem;
-    height: 2rem;
-    background-color: black; /* seta preta */
-    mask-size: 100% 100%;
-    -webkit-mask-size: 100% 100%;
-    border-radius: 50%;
-  }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-image: none; /* remove o ícone padrão */
+  width: 2rem;
+  height: 2rem;
+  background-color: black; /* seta preta */
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  border-radius: 50%;
+}
 
+.carousel-control-prev-icon {
+  -webkit-mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+}
 
-  .carousel-control-prev-icon {
-    -webkit-mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
-  }
+.carousel-control-next-icon {
+  -webkit-mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+}
+/* ======= ESTILO DO CARRINHO ======= */
+.cart-popup {
+  position: fixed;
+  top: 0;
+  right: -300px; /* escondido fora da tela */
+  width: 280px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 8px rgba(255, 255, 255, 0.2);
+  transition: right 0.3s ease;
+  padding: 20px;
+  z-index: 9999;
+}
 
-  .carousel-control-next-icon {
-    -webkit-mask-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
-  }
-  /* ======= ESTILO DO CARRINHO ======= */
-    .cart-popup {
-      
-      position: fixed;
-      top: 0;
-      right: -300px; /* escondido fora da tela */
-      width: 280px;
-      height: 100%;
-      background: #fff;
-      box-shadow: -2px 0 8px rgba(255, 255, 255, 0.2);
-      transition: right 0.3s ease;
-      padding: 20px;
-      z-index: 9999;
-    }
+.cart-popup.active {
+  right: 0;
+}
 
-    .cart-popup.active {
-      right: 0;
-    }
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.close-cart {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
 
-    .close-cart {
-      background: none;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-    }
+/* Estilo do botão abrir carrinho */
+.open-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-    /* Estilo do botão abrir carrinho */
-    .open-cart-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 16px;
-      background: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+.open-cart-btn i {
+  font-size: 18px;
+}
 
-    .open-cart-btn i {
-      font-size: 18px;
-    }
+header nav {
+  background-color: #1b022c;
+}
+body {
+  background: linear-gradient(to bottom, #6a0dad, #000000);
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white; 
 
-    header nav{
-      background-color: #1B022C;
-    }
-    body{
-      background-color: rgb(255, 255, 255);
-    }
-
-    .form-control {
+}
+form-control {
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
 }
-/* login tela */
 
- .card-body{
-  background-color: rgba(255, 252, 252, 0)
- }
 
- .carousel-item img {
-  width: 100vh;      /* altura total da tela */
-  
+.card-body {
+  background-color: rgba(255, 252, 252, 0);
+}
 
+.carousel-item img {
+  width: 100vh; /* altura total da tela */
 }
 #carouselLoja {
-
-  box-shadow: #1B022C;
+  box-shadow: #1b022c;
 }
-.card-body .btn{
+.card-body .btn {
   color: white;
   background: #5900ff;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* evita rolagem lateral */
+}
 
-
- 
+.carousel-item img {
+  width: 100vw; /* ocupa a tela toda */
+  object-fit: cover; /* cobre sem distorcer */
+}
+footer{
+  background-color: #000000;
+}
