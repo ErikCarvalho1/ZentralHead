@@ -1,5 +1,4 @@
-    <section class="my-5
-      ">
+    <section class="my-5">
         <h2 class="text-center mb-4">Promoções</h2>
         <div
           id="carouselPromocoes"
@@ -12,17 +11,17 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 1</div>
+                    <div class="card-body text-center">Personalização</div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 2</div>
+                    <div class="card-body text-center">Acessorios</div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 3</div>
+                    <div class="card-body text-center">infantil</div>
                   </div>
                 </div>
               </div>
@@ -33,17 +32,17 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 4</div>
+                    <div class="card-body text-center">Camisas</div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 5</div>
+                    <div class="card-body text-center">Calças</div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 6</div>
+                    <div class="card-body text-center">Mangas longas</div>
                   </div>
                 </div>
               </div>

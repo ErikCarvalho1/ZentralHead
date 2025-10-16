@@ -57,10 +57,29 @@ class pedidos {
         $cmd->bindValue(":pedidos", $this->pedidos);
         $cmd->execute();
     }
-
+    public function listarPedidos(){
+        $sql = "SELECT * FROM pedidos";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->execute();
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function exclurir(int $id){
+    $sql = "DELETE FROM pedidos WHERE id = :id";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":id", $id);
+    $cmd->execute();
+    }
+    public function atualizar(int $id){
+    $sql = "CALL sp_pedido_update(:usuario_id, :cliente_id, :data, :status, :pedidos) WHERE id = :id";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":usuario_id", $this->usuario_id);
+    $cmd->bindValue(":cliente_id", $this->cliente_id);
+    $cmd->bindValue(":data", $this->data);
+    $cmd->bindValue(":status", $this->status);
+    $cmd->bindValue(":pedidos", $this->pedidos);
+    $cmd->bindValue(":id", $id);
+    $cmd->execute();
 }
-
-
-
+}
 
 ?>
