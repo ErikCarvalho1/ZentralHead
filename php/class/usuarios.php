@@ -81,19 +81,23 @@ class Usuarios{
         $cmd = $this->pdo->query("select * from usuarios order by id DESC");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
+public function efetuarLogin(string $loginInformado, string $senhaInformada): array|bool {
+    $sql = "SELECT * FROM usuarios 
+            WHERE email = :email 
+              AND senha = MD5(:senha) 
+              AND ativo = 1
+            LIMIT 1";
 
-       public function efetuarLogin(string $loginInformado, string $senhaInformada):array {
-        $sql = "select * from usuarios where email = :email and senha = md5(:senha)";
-        $cmd =  $this->pdo->prepare($sql);
-        $cmd -> bindValue(":email", $loginInformado);
-         $cmd -> bindValue(":senha", $senhaInformada);
-        $cmd->execute();
-       
-            $dados = $cmd->fetch(PDO::FETCH_ASSOC);
-            return $dados;
-         
- 
-    }
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":email", $loginInformado);
+    $cmd->bindValue(":senha", $senhaInformada);
+    $cmd->execute();
+
+    $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+    return $dados ?: false; // retorna false se não encontrou
+}
+
+
 }
 
 

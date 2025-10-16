@@ -1,29 +1,41 @@
 <?php 
 require_once "../class/usuarios.php";
-if($_POST){
-  $login = $_POST['email'];
-  $senha = $_POST['senha'];
-  $user = new Usuarios();  
-  $usuarioLogado = $user->efetuarLogin($login,$senha);
 
-  if(count($usuarioLogado)>0){
-    if(!isset($_SESSION)){
-      session_name("zentralhead");
-      session_start();
-    }
-    $_SESSION['email_usuario'] = $usuarioLogado['email'];
-    $_SESSION['nivel_usuario'] = $usuarioLogado['nivel_id'];
-    $_SESSION['nome_da_sessao'] = session_name();
-     if($usuarioLogado['email']== true){
-      echo "<script>window.open('../admn/index.php','_self')</script>"; 
-    }elseif($usuarioLogado['nivel']=="cli"){
-      echo "<script>window.open('reserva_mesa.php','_self')</script>"; 
-    }
-    
-  }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $senha = trim($_POST['senha'] ?? '');
 
+    $user = new Usuarios();  
+    $usuarioLogado = $user->efetuarLogin($email, $senha);
+
+    if ($usuarioLogado) {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_name("zentralhead");
+            session_start();
+        }
+
+        // Guarda dados principais do usuário logado
+        $_SESSION['id_usuario']    = $usuarioLogado['id'];
+        $_SESSION['nome_usuario']  = $usuarioLogado['nome'];
+        $_SESSION['email_usuario'] = $usuarioLogado['email'];
+        $_SESSION['nivel_usuario'] = $usuarioLogado['nivel_id'];
+        $_SESSION['nome_da_sessao'] = session_name();
+
+        // Redirecionamento conforme o nível de acesso
+        switch ($usuarioLogado['nivel_id']) {
+            case 1: // Administrador
+                echo "<script>window.location.href='../admn/index.php';</script>";
+                break;
+            case 2: // Cliente
+                echo "<script>window.location.href='reserva_mesa.php';</script>";
+                break;
+            default:
+                echo "<script>alert('Nível de acesso desconhecido.');</script>";
+        }
+    } else {
+        echo "<script>alert('E-mail ou senha inválidos ou usuário inativo.');</script>";
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -33,16 +45,17 @@ if($_POST){
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="refresh" content="30;url=../index.php">
     <!-- Bootstrap Icons -->
-    <link
+ 
+     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
     <!-- Bootstrap 5.3 local  - totalmente moderno e atualizado! -->
-    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
     <!-- CSS local (Nosso) -->
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
     <!-- Bootstrap JS com parametro defer, que permite a execução js após o carregamento DOM -->
-    <script src="../js/bootstrap.min.js" defer></script>
+    <script src="../../js/bootstrap.min.js" defer></script>
     <script src="../js/bootstrap.bundle.min.js" defer></script>
     <title>Chuleta Quente</title>
   </head>
