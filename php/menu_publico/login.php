@@ -71,7 +71,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <article>
       <div class="row justify-content-center">
         <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-          <h1 class="text-info text-center mb-4">Faça seu login</h1>
+        <h1 class="text-info text-center mb-4">
+        <a href="../../images/LogoZentralPreto.png" target="_blank">
+         <img src="../../images/LogoZentralPreto.png" alt="Logo Zentral" />
+        </a>
+        </h1>
+
 
           <div class="card shadow-lg">
             <div class="card-body">
