@@ -63,7 +63,7 @@ class pedidos {
         $cmd->execute();
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function exclurir(int $id){
+    public function excluir(int $id){
     $sql = "DELETE FROM pedidos WHERE id = :id";
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(":id", $id);
