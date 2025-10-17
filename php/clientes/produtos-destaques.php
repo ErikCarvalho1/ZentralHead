@@ -1,4 +1,4 @@
-    <section class="my-5">
+<section class="my-5">
         <h2 class="text-center mb-4">Produtos em Destaque</h2>
 
         <div
@@ -13,7 +13,7 @@
                 <!-- CARD 1 -->
                 <div class="col">
                   <div class="card h-100 shadow-sm">
-                    <img
+                     <img
                       src="../../images/produto1.jpg"
                       class="card-img-top"
                       alt="Produto 1"
@@ -22,7 +22,9 @@
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 299,90</p>
                       <button class="btn btn-primary">
+                      <a class="btn btn-primary" href="pagina.php">
                         <i class="bi bi-cart-plus"></i> Comprar
+                      </a>
                       </button>
                     </div>
                   </div>
@@ -39,7 +41,9 @@
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 119,90</p>
                       <button class="btn btn-primary">
-                        <i class="bi bi-cart-plus"></i> Comprar
+                        <a class="btn btn-primary" href="pagina.php">
+                          <i class="bi bi-cart-plus">Comprar</i>
+                        </a>
                       </button>
                     </div>
                   </div>
@@ -56,7 +60,9 @@
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 499,90</p>
                       <button class="btn btn-primary">
-                        <i class="bi bi-cart-plus"></i> Comprar
+                      <a class="btn btn-primary" href="pagina.php">
+                          <i class="bi bi-cart-plus">Comprar</i>
+                        </a>
                       </button>
                     </div>
                   </div>
@@ -73,7 +79,9 @@
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 359,90</p>
                       <button class="btn btn-primary">
-                        <i class="bi bi-cart-plus"></i> Comprar
+                      <a class="btn btn-primary" href="pagina.php">
+                          <i class="bi bi-cart-plus">Comprar</i>
+                        </a>
                       </button>
                     </div>
                   </div>
@@ -96,7 +104,9 @@
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 249,90</p>
                       <button class="btn btn-primary">
-                        <i class="bi bi-cart-plus"></i> Comprar
+                      <a class="btn btn-primary" href="pagina.php">
+                          <i class="bi bi-cart-plus">Comprar</i>
+                        </a>
                       </button>
                     </div>
                   </div>
@@ -113,7 +123,9 @@
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 699,90</p>
                       <button class="btn btn-primary">
-                        <i class="bi bi-cart-plus"></i> Comprar
+                      <a class="btn btn-primary" href="pagina.php">
+                          <i class="bi bi-cart-plus">Comprar</i>
+                        </a>
                       </button>
                     </div>
                   </div>
@@ -130,7 +142,9 @@
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 199,90</p>
                       <button class="btn btn-primary">
-                        <i class="bi bi-cart-plus"></i> Comprar
+                      <a class="btn btn-primary" href="pagina.php">
+                          <i class="bi bi-cart-plus">Comprar</i>
+                        </a>
                       </button>
                     </div>
                   </div>
@@ -147,7 +161,9 @@
                       <h5 class="card-title">Produto</h5>
                       <p class="fw-bold text-success">R$ 899,90</p>
                       <button class="btn btn-primary">
-                        <i class="bi bi-cart-plus"></i> Comprar
+                      <a class="btn btn-primary " href="pagina.php">
+                          <i class="bi bi-cart-plus">Comprar</i>
+                        </a>
                       </button>
                     </div>
                   </div>
