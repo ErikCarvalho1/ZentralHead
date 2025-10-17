@@ -96,7 +96,7 @@ public function efetuarLogin(string $loginInformado, string $senhaInformada): ar
     $cmd->execute();
 
     $dados = $cmd->fetch(PDO::FETCH_ASSOC);
-    return $dados ?: false; // retorna false se não encontrou
+    return $dados ?: false; 
 }
 }
 

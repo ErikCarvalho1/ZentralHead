@@ -19,19 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $_SESSION['email_usuario'] = $usuarioLogado['email'];
-        $_SESSION['nivel_usuario'] = $usuarioLogado['nome_nivel']; // ← nome do nível
+        $_SESSION['nivel_usuario'] = $usuarioLogado['nome_nivel']; 
         $_SESSION['nome_da_sessao'] = session_name();
 
-        // Redireciona conforme o nome do nível
+        
         switch (strtolower($usuarioLogado['nome_nivel'])) {
+            case ' administrador':
             case 'admin':
-            case 'administrador':
                 echo "<script>window.open('../adm/index.php','_self')</script>";
                 exit;
 
             case 'cliente':
             case 'cli':
-                echo "<script>window.open('../cliente/index.php','_self')</script>";
+                echo "<script>window.open('../clientes/index.php','_self')</script>";
                 exit;
 
             default:
@@ -54,14 +54,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap 5.3 local  - totalmente moderno e atualizado! -->
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <!-- CSS local (Nosso) -->
-    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
     <!-- Bootstrap JS com parametro defer, que permite a execução js após o carregamento DOM -->
     <script src="../js/bootstrap.min.js" defer></script>
     <script src="../js/bootstrap.bundle.min.js" defer></script>
-    <title>Chuleta Quente</title>
+    <title>zentral login</title>
   </head>
 
 <body>
