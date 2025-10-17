@@ -21,19 +21,29 @@
           <!-- MENU CENTRALIZADO -->
         <div class="collapse navbar-collapse" id="navbarContent">
   <!-- Navegação central -->
-  <ul class="navbar-nav mx-auto mb-2 mb-lg-0 ">
-   
-    <li class="nav-item">
-      <a class="nav-link text-white" href="#">Produtos</a>
-    </li>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-white" href="#">Promoções</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link text-white" href="#">Destaques</a>
-    </li>
-  </ul>
+<!-- Navegação central -->
+<!-- Navbar -->
+<ul class="navbar-nav d-flex flex-row justify-content-center w-100 mb-2 mb-lg-0">
+  <li class="nav-item mx-3">
+  <a href="#" class="text-decoration-none text-reset">Produtos em destaque</a>
+  </li>
+  <li class="nav-item mx-3">
+  <a href="#" class="text-decoration-none text-reset">Categorias</a>
+  </li>
+  <li class="nav-item mx-3">
+  <a href="#" class="text-decoration-none text-reset">Promoções</a>
+</ul>
+<section id="produtos-destaques">
+  <!-- conteúdo de produtos destaque aqui -->
+</section>
+<section id="Categorias">
+  <!-- conteúdo de produtos destaque aqui -->
+</section>
+<section id="Promoções">
+  <!-- conteúdo de produtos destaque aqui -->
+</section>
+  
+  <!-- conteúdo aqui -->
 
   <!-- Direita: pesquisa + ícones -->
   <div class="d-flex align-items-center">

@@ -1,6 +1,5 @@
     <section class="my-5">
         <h2 class="text-center mb-4">Produtos em Destaque</h2>
-
         <div
           id="carouselProdutos"
           class="carousel slide"
