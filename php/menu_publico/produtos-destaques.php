@@ -13,8 +13,8 @@
                 <div class="col">
                   <div class="card h-100 shadow-sm">
                     <img
-                      src="../../images/produto1.jpg"
-                      class="card-img-top"
+                      src="../../images/camiseta1.png"
+                      class="w-100 h-80 "
                       alt="Produto 1"
                     />
                     <div class="card-body text-center">

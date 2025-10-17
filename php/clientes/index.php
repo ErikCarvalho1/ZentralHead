@@ -30,7 +30,7 @@
       <!-- DESTAQUE -->
       <?php include_once "destaque.php"?>
       <!-- PRODUTOS EM DESTAQUE -->
-      <?php include_once "produtos-destaques.php"?>
+      <?php include_once "../menu_publico/produtos-destaques.php"?>
 
       <!-- CATEGORIAS -->
         <?php include_once "categorias.php"?>
