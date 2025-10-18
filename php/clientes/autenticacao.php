@@ -1,4 +1,4 @@
-<?php 
+<?php
 // ======================================================
 // AUTENTICAÇÃO E VALIDAÇÃO DE SESSÃO - CENTRALIZADO
 // ======================================================
@@ -9,8 +9,8 @@ session_start();
 
 // 2 - Verifica se o usuário está logado
 if (!isset($_SESSION['email_usuario'])) {
-    // Usuário não autenticado → redireciona para login
-    header('Location: login.php'); 
+    // Caminho completo até o login.php (ajuste se necessário)
+    header('Location: /ZENTRALHEAD/php/clientes/login.php');
     exit;
 }
 
@@ -19,7 +19,7 @@ if (!isset($_SESSION['nome_da_sessao'])) {
     $_SESSION['nome_da_sessao'] = session_name();
 } elseif ($_SESSION['nome_da_sessao'] !== session_name()) {
     session_destroy();
-    header('Location: login.php');
+    header('Location: /ZENTRALHEAD/php/clientes/login.php');
     exit;    
 }
 
@@ -38,7 +38,6 @@ if (
     ($_SESSION['user_agent'] !== ($_SERVER['HTTP_USER_AGENT'] ?? ''))
 ) {
     session_destroy();
-    header('Location: login.php');
+    header('Location: /ZENTRALHEAD/php/clientes/login.php');
     exit;
 }
-?>

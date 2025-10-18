@@ -1,5 +1,6 @@
 <?php 
 require_once "../class/usuarios.php";
+
 $usuarioLogado = false; 
 $mensagem = "";
 
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             case 'cliente':
             case 'cli':
-                echo "<script>window.open('../clientes/index.php','_self')</script>";
+                echo "<script>window.open('index.php','_self')</script>";
                 exit;
 
             default:
