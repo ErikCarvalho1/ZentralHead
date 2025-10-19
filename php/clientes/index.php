@@ -1,3 +1,4 @@
+  <?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -30,7 +31,7 @@
       <!-- DESTAQUE -->
       <?php include_once "destaque.php"?>
       <!-- PRODUTOS EM DESTAQUE -->
-      <?php include_once "produtos-destaques.php"?>
+      <?php include_once "../menu_publico/produtos-destaques.php"?>
 
       <!-- CATEGORIAS -->
         <?php include_once "categorias.php"?>
@@ -41,8 +42,8 @@
       </main>
 
     <!-- RODAPÉ -->
-    <footer class="container-fluid bg-dark text-white p-4 mt-5">
-      <?php include_once "rodape.php"?>
+    <footer class="container-fluid text-white p-4 mt-5">
+      <?php include_once "../menu_publico/rodape.php"?>
     </footer>
   </body>
 </html>

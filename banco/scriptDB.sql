@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`niveis` (
   `sigla` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 6
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`usuarios` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 1005;
+AUTO_INCREMENT = 1006
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -68,7 +69,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`caixas` (
     REFERENCES `zentralhead`.`usuarios` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -80,7 +82,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`categorias` (
   `sigla` CHAR(3) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2;
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -92,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`clientes` (
   `cpf` CHAR(11) NOT NULL,
   `telefone` CHAR(14) NULL DEFAULT NULL,
   `email` VARCHAR(60) NOT NULL,
+  `senha` VARCHAR(32) NOT NULL,
   `data_nasc` DATE NULL DEFAULT NULL,
   `data_cad` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `ativo` BIT(1) NOT NULL DEFAULT b'1',
@@ -99,7 +103,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`clientes` (
   UNIQUE INDEX `cpf_UNIQUE` (`cpf` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 10015;
+AUTO_INCREMENT = 10016
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -126,7 +131,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`pedidos` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 100001;
+AUTO_INCREMENT = 100001
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -142,7 +148,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`revendedores` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `cpf_cnpj_UNIQUE` (`cpf_cnpj` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -184,7 +191,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`cupons` (
     REFERENCES `zentralhead`.`revendedores` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -209,7 +217,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`enderecos` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3;
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -237,7 +246,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 7400004;
+AUTO_INCREMENT = 7400004
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -253,7 +263,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`estoques` (
     REFERENCES `zentralhead`.`produtos` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -269,7 +280,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`fornecedores` (
   `email` VARCHAR(60) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC) VISIBLE)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -295,7 +307,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`itempedido` (
     REFERENCES `zentralhead`.`produtos` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
@@ -317,7 +330,8 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`produtofornecedor` (
     REFERENCES `zentralhead`.`produtos` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
 
 USE `zentralhead` ;
 
@@ -368,9 +382,9 @@ DELIMITER ;
 DELIMITER $$
 USE `zentralhead`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cliente_insert`(
-    spnome varchar(100), spcpf char(11), sptelefone char(14), spemail varchar(60), spdatanasc date)
+    spnome varchar(100), spcpf char(11), sptelefone char(14), spemail varchar(60),spsenha varchar(32), spdatanasc date)
 BEGIN
-    INSERT INTO clientes VALUES (0, spnome, spcpf, sptelefone, spemail, spdatanasc, DEFAULT, 1);
+    INSERT INTO clientes VALUES (0, spnome, spcpf, sptelefone, spemail, MD5(spsenha), spdatanasc, DEFAULT, 1);
     SELECT LAST_INSERT_ID();
 END$$
 
@@ -614,6 +628,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario_insert`(spnome varchar(6
 BEGIN
     INSERT INTO usuarios VALUES (0, spnome, spemail, MD5(spsenha), spnivel, DEFAULT);
     SELECT * FROM usuarios WHERE id = LAST_INSERT_ID();
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure sp_usuario_update
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `zentralhead`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario_update`(spid int, spnome varchar(60), spsenha varchar(32), spnivel int)
+BEGIN
+    UPDATE usuarios SET nome = spnome, senha = MD5(spsenha), nivel_id = spnivel WHERE id = spid;
 END$$
 
 DELIMITER ;

@@ -1,5 +1,5 @@
   <!-- CARROSSEL -->
-      <section class="mb-5">
+  <section class="mb-5">
         <div id="carouselLoja" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">

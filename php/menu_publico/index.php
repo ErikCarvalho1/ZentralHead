@@ -20,7 +20,7 @@
     <title>ZentralHead</title>
   </head>
 
-  <body >
+  <body>
     <!-- CABEÇALHO -->
     <header>
     <?php include_once "cabecalho.php"?>
@@ -41,7 +41,7 @@
       </main>
 
     <!-- RODAPÉ -->
-    <footer class="container-fluid bg-dark text-white p-4 mt-5">
+    <footer class="text-white p-4 mt-5">
       <?php include_once "rodape.php"?>
     </footer>
   </body>
