@@ -53,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="refresh" content="30;url=../index.php" />
     <title>Zentral Login</title>
 
     <!-- Bootstrap -->
@@ -132,9 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
               </form>
 
-              <p class="text-center text-secondary mt-3 mb-0 small">
-                Redirecionamento automático em 30 segundos.
-              </p>
+              <p><a class="link" href="cadastro.php">Crie sua conta! </a></p>
             </div>
           </div>
 
