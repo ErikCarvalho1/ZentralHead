@@ -1,4 +1,5 @@
-<?php 
+<?php     
+
 require_once "../class/usuarios.php";
 
 $usuarioLogado = false; 
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_name("zentralhead");
             session_start();
         }
-
+        $_SESSION['nome_usuario'] = $usuarioLogado['nome'];
         $_SESSION['email_usuario'] = $usuarioLogado['email'];
         $_SESSION['nivel_usuario'] = $usuarioLogado['nome_nivel']; 
         $_SESSION['nome_da_sessao'] = session_name();

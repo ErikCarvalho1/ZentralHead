@@ -29,16 +29,16 @@
     <!-- CONTEÚDO -->
     <main class="container my-4">
       <!-- DESTAQUE -->
-      <?php include_once "destaque.php"?>
+      <?php include_once "../menu_publico/destaque.php"?>
       <!-- PRODUTOS EM DESTAQUE -->
       <?php include_once "../menu_publico/produtos-destaques.php"?>
 
       <!-- CATEGORIAS -->
-        <?php include_once "categorias.php"?>
+        <?php include_once "../menu_publico/categorias.php"?>
 
 
        <!-- promoções-->
-        <?php include_once "promocoes.php"?>
+        <?php include_once "../menu_publico/promocoes.php"?>
       </main>
 
     <!-- RODAPÉ -->
