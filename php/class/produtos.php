@@ -1,6 +1,6 @@
 <?php 
 include "db.php";
-class produtos {
+class Produtos {
 
 private $id;
 private $codBarras;
