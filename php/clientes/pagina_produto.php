@@ -11,7 +11,7 @@ $prod = new produtos();
 $produto = $prod->listarPorId($id);
 
 if(!$produto){
-    die("produto não encontrado")
+    die("produto não encontrado");
 }
-
 ?>
+
