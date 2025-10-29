@@ -2,7 +2,7 @@
 
 require_once "../class/usuarios.php";
 
-$usuarioLogado = false; 
+// $usuarioLogado = false; 
 $mensagem = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -12,39 +12,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($login !== "" && $senha !== "") {
         $user = new Usuarios();  
         $usuarioLogado = $user->efetuarLogin($login, $senha);
-    }
-
-    if ($usuarioLogado) {
-        if (session_status() === PHP_SESSION_NONE) {
+        
+        
+        if ($usuarioLogado) {
+          if (session_status() === PHP_SESSION_NONE) {
             session_name("zentralhead");
             session_start();
-        }
+          }
         $_SESSION['nome_usuario'] = $usuarioLogado['nome'];
         $_SESSION['email_usuario'] = $usuarioLogado['email'];
         $_SESSION['nivel_usuario'] = $usuarioLogado['nome_nivel']; 
         $_SESSION['nome_da_sessao'] = session_name();
-
+        
         
         switch (strtolower($usuarioLogado['nome_nivel'])) {
-            case ' administrador':
-            case 'admin':
-                echo "<script>window.open('../adm/index.php','_self')</script>";
-                exit;
-
-            case 'cliente':
-            case 'cli':
-                echo "<script>window.open('index.php','_self')</script>";
-                exit;
-
+          case ' administrador':
+            // case 'admin':
+              echo "<script>window.open('../adm/index.php','_self')</script>";
+              exit;
+              
+              case 'cliente':
+                case 'cli':
+                  echo "<script>window.open('index.php','_self')</script>";
+                  exit;
+                  
             default:
                 echo "<script>alert('Nível de acesso desconhecido!'); window.location.href='../index.php';</script>";
                 exit;
-        }
-    } else {
-        $mensagem = "<div class='alert alert-danger text-center mt-3'>Usuário ou senha inválidos!</div>";
-    }
-} 
-?>
+              }
+            } else {
+              $mensagem = "<div class='alert alert-danger text-center mt-3'>Usuário ou senha inválidos!</div>";
+            }
+          }
+        } 
+          ?>
 <?php
 // login.php
 ?>

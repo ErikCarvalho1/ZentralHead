@@ -1,6 +1,6 @@
 <?php 
 include "db.php";
-class produtos {
+class Produtos {
 
 private $id;
 private $codBarras;
@@ -104,6 +104,15 @@ public function listar (){
     $cmd->execute();
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+
+public function listarPorId ($id){
+    $sql = "SELECT * FROM  produtos WHERE id = :id LIMIT 1";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+    $cmd->execute();
+    return $cmd->fetch(PDO::FETCH_ASSOC);
+}
+
 public function atualizar (){
     $sql = "CALL sp_produtos_update SET codBarras = :codBarras, descricao = :descricao, valorUnit = :valorUnit, unidade_vendas = :unidade_venda, categoria_id = :categoria_id, estoque_minimo = :estoque_minimo, classe_desconto = :classe_desconto, imagem = :imagem, data_cadastro = :data_cadastro, descontinuado = :descontinuado WHERE id = :id";
     $cmd = $this->pdo->prepare($sql);

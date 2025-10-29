@@ -1,176 +1,55 @@
-    <section class="my-5">
-        <h2 class="text-center mb-4">Produtos em Destaque</h2>
-        <div
-          id="carouselProdutos"
-          class="carousel slide"
-          data-bs-ride="carousel"
-        >
-          <div class="carousel-inner">
-            <!-- PRIMEIRO SLIDE -->
-            <div class="carousel-item active">
-              <div class="row row-cols-1 row-cols-md-4 g-4">
-                <!-- CARD 1 -->
-                <div class="col">
-                  <div class="card h-100 shadow-sm">
-                    <img
-                      src="../../images/camiseta1.png"
-                      class="w-100 h-80 "
-                      alt="Produto 1"
-                    />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Produto</h5>
-                      <p class="fw-bold text-success">R$ 299,90</p>
-                      <button class="btn ">
-                        <i class="bi bi-cart-plus"></i> Comprar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- CARD 2 -->
-                <div class="col">
-                  <div class="card h-100 shadow-sm">
-                    <img
-                      src="../images/produto2.jpg"
-                      class="card-img-top"
-                      alt="Produto 2"
-                    />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Produto</h5>
-                      <p class="fw-bold text-success">R$ 119,90</p>
-                      <button class="btn ">
-                        <i class="bi bi-cart-plus"></i> Comprar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- CARD 3 -->
-                <div class="col">
-                  <div class="card h-100 shadow-sm">
-                    <img
-                      src="../images/produto3.jpg"
-                      class="card-img-top"
-                      alt="Produto 3"
-                    />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Produto</h5>
-                      <p class="fw-bold text-success">R$ 499,90</p>
-                      <button class="btn ">
-                        <i class="bi bi-cart-plus"></i> Comprar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- CARD 4 -->
-                <div class="col">
-                  <div class="card h-100 shadow-sm">
-                    <img
-                      src="../images/produto4.jpg"
-                      class="card-img-top"
-                      alt="Produto 4"
-                    />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Produto</h5>
-                      <p class="fw-bold text-success">R$ 359,90</p>
-                      <button class="btn ">
-                        <i class="bi bi-cart-plus"></i> Comprar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<?php 
+include "../class/produtos.php";
+$produto = new Produtos();
+$produtos = $produto->listar(1); 
 
-            <!-- SEGUNDO SLIDE -->
-            <div class="carousel-item">
-              <div class="row row-cols-1 row-cols-md-4 g-4">
-                <!-- CARD 5 -->
-                <div class="col">
-                  <div class="card h-100 shadow-sm">
-                    <img
-                      src="../images/produto5.jpg"
-                      class="card-img-top"
-                      alt="Produto 5"
-                    />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Produto</h5>
-                      <p class="fw-bold text-success">R$ 249,90</p>
-                      <button class="btn">
-                        <i class="bi bi-cart-plus"></i> Comprar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- CARD 6 -->
-                <div class="col">
-                  <div class="card h-100 shadow-sm">
-                    <img
-                      src="../images/produto6.jpg"
-                      class="card-img-top"
-                      alt="Produto 6"
-                    />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Produto</h5>
-                      <p class="fw-bold text-success">R$ 699,90</p>
-                      <button class="btn ">
-                        <i class="bi bi-cart-plus"></i> Comprar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- CARD 7 -->
-                <div class="col">
-                  <div class="card h-100 shadow-sm">
-                    <img
-                      src="../images/produto7.jpg"
-                      class="card-img-top"
-                      alt="Produto 7"
-                    />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Produto</h5>
-                      <p class="fw-bold text-success">R$ 199,90</p>
-                      <button class="btn ">
-                        <i class="bi bi-cart-plus"></i> Comprar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <!-- CARD 8 -->
-                <div class="col">
-                  <div class="card h-100 shadow-sm">
-                    <img
-                      src="../../images/produto1.jpg"
-                      class="card-img-top"
-                      alt="Produto 8"
-                    />
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Produto</h5>
-                      <p class="fw-bold text-success">R$ 899,90</p>
-                      <button class="btn ">
-                        <i class="bi bi-cart-plus"></i> Comprar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          <!-- CONTROLES -->
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselProdutos"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon"></span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselProdutos"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon"></span>
-          </button>
-        </div>
-      </section>
+$linha = count($produtos);
+
+?>
+<section>
+<!-- mostra se a consulta retornar vazio  -->
+ <?php 
+ if($linha == 0){ ?>
+<h2 class="alert alert-danger
+                ">Não há produtos em destaques</h2>
+ <?php } ?>
+
+<?php if($linha > 0 ){?>
+<h2 >Produtos Em Destaques</h2>
+                <div class="row">
+                    <?php  foreach($produtos as $prod):?>
+                    <!-- começa o card produto -->
+          
+                            <!-- começa o card produto -->
+                 <div class="col-sm-6 col-md-4 mb-4">
+                        <div class="card">
+                            <img src="../images/<?=$prod['imagem'] ?>"
+                             alt = "<?=$prod['descricao'] ?>"
+                              class="card-img-top">
+                            <div class="card-body  text-whith">
+                                <h3 class="card-title text-danger">
+                                    <strong><i><?=$prod['descricao']?></i></strong>
+                                </h3>
+                                
+                                <p class="card-text text-start">
+                                    <?=mb_strimwidth($prod['resumo'],0,42,'...') ?>
+                                </p>
+                                </p>
+                                <button class="btn btn-default disabled" role="button" style="cursor: default;">
+                                    <?="R$ ".number_format($prod['valor'],2,',','.')?>
+
+                                </button>
+                                <a href="detalhes_produtos.php?id=<?= $prod['id']?>" class="btn btn-primary float-end">
+                                    <span class="d-nome d-sm-inline">Saiba mais</span>
+                                    <i class="bi bi-eye-fill"></i>
+                                </a>
+                        </div>
+                        </div>
+                    </div><!-- termina o card produto -->
+                 
+                  
+                    <?php endforeach;?>
+                </div>
+                <?php }?>
+            </section>
