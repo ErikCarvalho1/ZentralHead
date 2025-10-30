@@ -1,5 +1,6 @@
+<?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
 <?php include "../class/produtos.php";
-include "../class/produtos.php";
+
 
 if (!isset($_GET['id'])){     //!isset verifica se a variavel não existe
     die ("Produro não encontrado");
@@ -15,14 +16,34 @@ if(!$produto){
 }
 ?>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pagina do produto</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  </head>
+  <bory>
+  <?php include "cabecalho.php"; ?>
+
 <div class="container mt-5">
   <div class="row">
     <!-- Coluna da imagem -->
     <div class="col-md-6">
-      <img src="<?php echo $produto['imagem']; ?>" class="img-fluid rounded mb-3" alt="Imagem do produto">
+
+    <img src="/ZentralHead/images/<?php echo $produto['imagem']; ?>" style="width:350px; height:450px">
       <div class="d-flex gap-2 mt-2">
         <!-- Miniaturas (poderia vir do banco de dados futuramente) -->
-        <img src="<?php echo $produto['imagem']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
+        <img src="/ZentralHead/images/<?php echo $produto['imagem']; ?>"  
+        class="img-thumbnail"  
+        style="width:80px; height:80px; object-fit:cover;">
+
         <img src="<?php echo $produto['imagem']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
         <img src="<?php echo $produto['imagem']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
       </div>
@@ -40,15 +61,15 @@ if(!$produto){
       </div>
 
       <!-- Preço -->
-      <h3 class="text-success mb-3"> R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?> </h3>
-      <p class="text-muted"><?php echo $produto['descricao']; ?></p>
+     
+      <p class="text-muted"><?php echo $produto['valor']; ?></p>
 
       <!-- Modelos / tamanhos -->
       <div class="mb-3">
         <label class="form-label fw-bold">Modelo:</label><br>
-        <button class="btn btn-outline-secondary btn-sm">1 Copo Azul</button>
-        <button class="btn btn-outline-secondary btn-sm">1 Copo Rosa</button>
-        <button class="btn btn-outline-secondary btn-sm">2 Copos Verde</button>
+        <button class="btn btn-outline-secondary btn-sm">Azul</button>
+        <button class="btn btn-outline-secondary btn-sm"> Bege</button>
+        <button class="btn btn-outline-secondary btn-sm">Rosa</button>
       </div>
 
       <!-- Quantidade -->
@@ -61,11 +82,16 @@ if(!$produto){
 
       <!-- Botões -->
       <div class="d-flex gap-2">
-        <button class="btn btn-warning"> 🛒 Adicionar ao carrinho </button>
+        <button class="btn btn-warning"> Adicionar ao carrinho </button>
         <button class="btn btn-danger"> Comprar agora </button>
       </div>
     </div>
   </div>
 </div>
+
+ <?php include "../menu_publico/rodape.php"?> 
+
+</body>
+</html>
 
 

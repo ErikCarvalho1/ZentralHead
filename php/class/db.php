@@ -16,6 +16,4 @@ function getConnection(): PDO{//ddd
     return $pdo;
 }
 
-
-
 ?>
