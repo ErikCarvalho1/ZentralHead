@@ -29,6 +29,7 @@
 
             <!-- Segundo slide -->
             <div class="carousel-item">
+              <img src="../../images/LogoZentral.png">
               <div class="row">
                 <div class="col-md-4">
                   <div class="card">

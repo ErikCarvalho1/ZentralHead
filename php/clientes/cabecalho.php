@@ -26,8 +26,12 @@ if (session_status() === PHP_SESSION_NONE) {
   </li>
   <li class="nav-item mx-3">
   <a href="#" class="text-decoration-none text-reset">Promoções</a></ul>  
+   
     <ul class="navbar-nav ms-auto">
-        
+      <!-- carrinho -->
+        <a href="carrinho.php" class="btn me-2 text-white">
+                    <i class="bi bi-cart3 fs-5"></i>
+                </a>
         <li class="nav-item">
           <span class="btn btn-danger disabled me-2" style="cursor: default;">
             

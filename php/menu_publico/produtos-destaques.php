@@ -24,12 +24,12 @@ $linha = count($produtos);
                             <!-- começa o card produto -->
                  <div class="col-sm-6 col-md-4 mb-4">
                         <div class="card">
-                            <img src="../images/<?=$prod['imagem'] ?>"
-                             alt = "<?=$prod['descricao'] ?>"
+                            <img src="../../images/<?=$prod['imagem'] ?>"
+                             alt = "<?=$prod['nome'] ?>"
                               class="card-img-top">
                             <div class="card-body  text-whith">
                                 <h3 class="card-title text-danger">
-                                    <strong><i><?=$prod['descricao']?></i></strong>
+                                    <strong><i><?=$prod['nome']?></i></strong>
                                 </h3>
                                 
                                 <p class="card-text text-start">
@@ -40,13 +40,14 @@ $linha = count($produtos);
                                     <?="R$ ".number_format($prod['valor'],2,',','.')?>
 
                                 </button>
-                                <a href="detalhes_produtos.php?id=<?= $prod['id']?>" class="btn btn-primary float-end">
-                                    <span class="d-nome d-sm-inline">Saiba mais</span>
+                               
+                                <a href="../clientes/login.php?id=<?= $prod['id']?>" class="btn btn-primary float-end">
+                                    <span class="d-nome d-sm-inline"  >Saiba mais</span>
                                     <i class="bi bi-eye-fill"></i>
                                 </a>
                         </div>
                         </div>
-                    </div><!-- termina o card produto -->
+                    </div><!-- termina o card produto --> 
                  
                   
                     <?php endforeach;?>

@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`niveis` (
   `sigla` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 9
+AUTO_INCREMENT = 11
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -43,13 +43,16 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
   INDEX `fk_usuarios_niveis1_idx` (`nivel_id` ASC) VISIBLE,
+  CONSTRAINT `fk_usuarios_niveis`
+    FOREIGN KEY (`nivel_id`)
+    REFERENCES `zentralhead`.`niveis` (`id`),
   CONSTRAINT `fk_usuarios_niveis1`
     FOREIGN KEY (`nivel_id`)
     REFERENCES `zentralhead`.`niveis` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 1008
+AUTO_INCREMENT = 1012
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -82,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`categorias` (
   `sigla` CHAR(3) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -222,9 +225,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `zentralhead`.`produtos`
+-- Table `zentralhead`.`produtoss`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
+CREATE TABLE IF NOT EXISTS `zentralhead`.`produtoss` (
   `id` INT(4) NOT NULL AUTO_INCREMENT,
   `cod_barras` VARCHAR(60) NOT NULL,
   `descricao` VARCHAR(60) NOT NULL,
@@ -236,6 +239,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
   `imagem` BLOB NULL DEFAULT NULL,
   `data_cad` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `descontinuado` BIT(1) NOT NULL DEFAULT b'0',
+  `destaques` BIT(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `idProduto_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `Produtocol_UNIQUE` (`cod_barras` ASC) VISIBLE,
@@ -246,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 7400004
+AUTO_INCREMENT = 7400008
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -260,7 +264,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`estoques` (
   INDEX `fk_Estoque_Produto1_idx` (`produto_id` ASC) VISIBLE,
   CONSTRAINT `fk_Estoque_Produto1`
     FOREIGN KEY (`produto_id`)
-    REFERENCES `zentralhead`.`produtos` (`id`)
+    REFERENCES `zentralhead`.`produtoss` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -304,7 +308,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`itempedido` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ItemPedido_Produto1`
     FOREIGN KEY (`produto_id`)
-    REFERENCES `zentralhead`.`produtos` (`id`)
+    REFERENCES `zentralhead`.`produtoss` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -327,10 +331,34 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`produtofornecedor` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Produto_has_Fornecedores_Produto1`
     FOREIGN KEY (`produto_id`)
-    REFERENCES `zentralhead`.`produtos` (`id`)
+    REFERENCES `zentralhead`.`produtoss` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `zentralhead`.`produtos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `categoria_id` INT(11) NOT NULL,
+  `nome` VARCHAR(100) NOT NULL,
+  `resumo` VARCHAR(1000) NULL DEFAULT NULL,
+  `valor` DECIMAL(9,2) NULL DEFAULT NULL,
+  `imagem` VARCHAR(50) NULL DEFAULT NULL,
+  `destaque` BIT(1) NOT NULL DEFAULT b'0',
+  `estoque` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_produtos_categorias` (`categoria_id` ASC) VISIBLE,
+  CONSTRAINT `fk_produtos_categorias`
+    FOREIGN KEY (`categoria_id`)
+    REFERENCES `zentralhead`.`categorias` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 18
 DEFAULT CHARACTER SET = utf8mb4;
 
 USE `zentralhead` ;
@@ -672,7 +700,7 @@ USE `zentralhead`$$
 CREATE
 DEFINER=`root`@`localhost`
 TRIGGER `zentralhead`.`trigger_gera_estoque`
-AFTER INSERT ON `zentralhead`.`produtos`
+AFTER INSERT ON `zentralhead`.`produtoss`
 FOR EACH ROW
 BEGIN
     INSERT INTO estoques VALUES(NEW.id, 0, CURRENT_DATE());
