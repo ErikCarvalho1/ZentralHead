@@ -1,5 +1,6 @@
+<?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
 <?php include "../class/produtos.php";
-include "../class/produtos.php";
+
 
 if (!isset($_GET['id'])){     //!isset verifica se a variavel não existe
     die ("Produro não encontrado");
