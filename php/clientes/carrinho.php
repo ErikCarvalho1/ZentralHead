@@ -1,4 +1,5 @@
 <?php
+include_once "../class/db.php";
 session_start();
 
 $total = 0;
