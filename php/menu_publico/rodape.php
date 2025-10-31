@@ -15,7 +15,7 @@
 
       <!-- Coluna newsletter -->
       <div class="col-md-8 mb-4">
-        <h5 class="fw-bold text-uppercase mb-3">Zentralhead Club</h5>
+        <h5 class="fw-bold text-uppercase mb-3">Zentralhead</h5>
         <p class="text-white-50 mb-3">
           Inscreva-se na nossa newsletter e receba novidades, promoções e lançamentos em primeira mão.
         </p>
@@ -39,16 +39,15 @@
     <div class="text-center my-3">
       <h6 class="fw-bold text-uppercase mb-3">Nossas redes sociais</h6>
       <div>
-        <a href="#" class="btn btn-outline-light btn-lg rounded-circle mx-2"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="btn btn-outline-light btn-lg rounded-circle mx-2"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="btn btn-outline-light btn-lg rounded-circle mx-2"><i class="bi bi-tiktok"></i></a>
-        <a href="#" class="btn btn-outline-light btn-lg rounded-circle mx-2"><i class="bi bi-youtube"></i></a>
+        <a href="https://www.facebook.com/" class="btn btn-outline-light btn-lg rounded-circle mx-2"><i class="bi bi-facebook"></i></a>
+        <a href="https://www.instagram.com/" class="btn btn-outline-light btn-lg rounded-circle mx-2"><i class="bi bi-instagram"></i></a>
+        <a href="https://www.tiktok.com/" class="btn btn-outline-light btn-lg rounded-circle mx-2"><i class="bi bi-tiktok"></i></a>
       </div>
     </div>
 
     <!-- Direitos -->
     <div class="text-center text-white-50 border-top border-secondary pt-3 mt-4">
-      <small>Zentralhead Club ® - Todos os Direitos Reservados</small>
+      <small>Zentralhead® - Todos os Direitos Reservados</small>
     </div>
   </div>
 </footer>
