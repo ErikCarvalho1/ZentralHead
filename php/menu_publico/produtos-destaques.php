@@ -41,7 +41,7 @@ $linha = count($produtos);
 
                                 </button>
                                
-                                <a href="../clientes/login.php?id=<?= $prod['id']?>" class="btn btn-primary float-end">
+                                <a href="../clientes/pagina_produto.php?id=<?= $prod['id']?>" class="btn btn-primary float-end">
                                     <span class="d-nome d-sm-inline"  >Saiba mais</span>
                                     <i class="bi bi-eye-fill"></i>
                                 </a>

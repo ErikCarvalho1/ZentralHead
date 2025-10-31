@@ -80,12 +80,11 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `zentralhead`.`categorias`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zentralhead`.`categorias` (
-  `id` INT(4) NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(255) NOT NULL,
-  `sigla` CHAR(3) NULL DEFAULT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 40
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -107,6 +106,62 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`clientes` (
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 10016
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `zentralhead`.`cores`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `zentralhead`.`cores` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(50) NOT NULL,
+  `criado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `zentralhead`.`enderecos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `zentralhead`.`enderecos` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `cliente_id` INT(4) NOT NULL,
+  `cep` CHAR(8) NOT NULL,
+  `logradouro` VARCHAR(100) NULL DEFAULT NULL,
+  `numero` VARCHAR(40) NOT NULL,
+  `complemento` VARCHAR(60) NULL DEFAULT NULL,
+  `bairro` VARCHAR(60) NOT NULL,
+  `cidade` VARCHAR(60) NOT NULL,
+  `uf` CHAR(2) NOT NULL,
+  `tipo_endereco` CHAR(3) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_table1_clientes_idx` (`cliente_id` ASC) VISIBLE,
+  CONSTRAINT `fk_table1_clientes`
+    FOREIGN KEY (`cliente_id`)
+    REFERENCES `zentralhead`.`clientes` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `zentralhead`.`fornecedores`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `zentralhead`.`fornecedores` (
+  `id` INT(4) NOT NULL,
+  `razao_social` VARCHAR(100) NOT NULL,
+  `fantasia` VARCHAR(40) NOT NULL,
+  `cnpj` CHAR(14) NOT NULL,
+  `contato` VARCHAR(60) NULL DEFAULT NULL,
+  `telefone` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(60) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC) VISIBLE)
+ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -139,226 +194,70 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `zentralhead`.`revendedores`
+-- Table `zentralhead`.`produtos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`revendedores` (
+CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(100) NOT NULL,
-  `cpf_cnpj` VARCHAR(18) NOT NULL,
-  `telefone` VARCHAR(20) NULL DEFAULT NULL,
-  `email` VARCHAR(100) NULL DEFAULT NULL,
-  `ativo` BIT(1) NULL DEFAULT b'1',
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `cpf_cnpj_UNIQUE` (`cpf_cnpj` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `zentralhead`.`cupons`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`cupons` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `titulo` VARCHAR(100) NOT NULL,
-  `codigo` VARCHAR(50) NOT NULL,
-  `cupom_tipo` VARCHAR(20) NOT NULL,
-  `data_criacao` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `data_validade` DATE NOT NULL,
-  `valor_pedido_minimo` DECIMAL(10,2) NULL DEFAULT NULL,
-  `valor_maximo_desconto` DECIMAL(10,2) NULL DEFAULT NULL,
-  `valor_maximo_pedido` DECIMAL(10,2) NULL DEFAULT NULL,
-  `valor_desconto` DECIMAL(10,2) NOT NULL,
+  `nome` VARCHAR(150) NOT NULL,
+  `descricao_curta` TEXT NULL DEFAULT NULL,
   `descricao` TEXT NULL DEFAULT NULL,
-  `tipo_desconto` BIT(1) NOT NULL,
-  `cliente_id` INT(11) NULL DEFAULT NULL,
-  `pedido_id` INT(11) NULL DEFAULT NULL,
-  `revendedor_id` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `codigo` (`codigo` ASC) VISIBLE,
-  INDEX `fk_cupons_clientes_idx` (`cliente_id` ASC) VISIBLE,
-  INDEX `fk_cupons_pedidos_idx` (`pedido_id` ASC) VISIBLE,
-  INDEX `fk_cupons_revendedores_idx` (`revendedor_id` ASC) VISIBLE,
-  CONSTRAINT `fk_cupons_clientes`
-    FOREIGN KEY (`cliente_id`)
-    REFERENCES `zentralhead`.`clientes` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_cupons_pedidos`
-    FOREIGN KEY (`pedido_id`)
-    REFERENCES `zentralhead`.`pedidos` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_cupons_revendedores`
-    FOREIGN KEY (`revendedor_id`)
-    REFERENCES `zentralhead`.`revendedores` (`id`)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `zentralhead`.`enderecos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`enderecos` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `cliente_id` INT(4) NOT NULL,
-  `cep` CHAR(8) NOT NULL,
-  `logradouro` VARCHAR(100) NULL DEFAULT NULL,
-  `numero` VARCHAR(40) NOT NULL,
-  `complemento` VARCHAR(60) NULL DEFAULT NULL,
-  `bairro` VARCHAR(60) NOT NULL,
-  `cidade` VARCHAR(60) NOT NULL,
-  `uf` CHAR(2) NOT NULL,
-  `tipo_endereco` CHAR(3) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_table1_clientes_idx` (`cliente_id` ASC) VISIBLE,
-  CONSTRAINT `fk_table1_clientes`
-    FOREIGN KEY (`cliente_id`)
-    REFERENCES `zentralhead`.`clientes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `valor_base` DECIMAL(10,2) NOT NULL,
+  `imagem_principal` VARCHAR(255) NULL DEFAULT NULL,
+  `criado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
+  `atualizado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `zentralhead`.`produtoss`
+-- Table `zentralhead`.`tamanhos`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`produtoss` (
-  `id` INT(4) NOT NULL AUTO_INCREMENT,
-  `cod_barras` VARCHAR(60) NOT NULL,
-  `descricao` VARCHAR(60) NOT NULL,
-  `valor_unit` DECIMAL(10,2) NOT NULL,
-  `unidade_venda` VARCHAR(12) NOT NULL,
-  `categoria_id` INT(4) NOT NULL,
-  `estoque_minimo` DECIMAL(10,2) NOT NULL,
-  `classe_desconto` DECIMAL(10,2) NULL DEFAULT NULL,
-  `imagem` BLOB NULL DEFAULT NULL,
-  `data_cad` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-  `descontinuado` BIT(1) NOT NULL DEFAULT b'0',
-  `destaques` BIT(1) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `idProduto_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `Produtocol_UNIQUE` (`cod_barras` ASC) VISIBLE,
-  INDEX `fk_Produto_Categorias1_idx` (`categoria_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Produto_Categorias1`
-    FOREIGN KEY (`categoria_id`)
-    REFERENCES `zentralhead`.`categorias` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 7400008
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `zentralhead`.`estoques`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`estoques` (
-  `produto_id` INT(4) NOT NULL,
-  `quantidade` DECIMAL(10,2) NOT NULL,
-  `data_ultimo_movimento` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
-  INDEX `fk_Estoque_Produto1_idx` (`produto_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Estoque_Produto1`
-    FOREIGN KEY (`produto_id`)
-    REFERENCES `zentralhead`.`produtoss` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `zentralhead`.`fornecedores`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`fornecedores` (
-  `id` INT(4) NOT NULL,
-  `razao_social` VARCHAR(100) NOT NULL,
-  `fantasia` VARCHAR(40) NOT NULL,
-  `cnpj` CHAR(14) NOT NULL,
-  `contato` VARCHAR(60) NULL DEFAULT NULL,
-  `telefone` VARCHAR(45) NULL DEFAULT NULL,
-  `email` VARCHAR(60) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `cnpj_UNIQUE` (`cnpj` ASC) VISIBLE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `zentralhead`.`itempedido`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`itempedido` (
-  `id` INT(4) NOT NULL AUTO_INCREMENT,
-  `pedido_id` INT(11) NOT NULL,
-  `produto_id` INT(11) NOT NULL,
-  `valor_unit` DECIMAL(10,2) NOT NULL,
-  `quantidade` DECIMAL(10,3) NOT NULL,
-  `desconto` DECIMAL(10,2) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_ItemPedido_Pedido1_idx` (`pedido_id` ASC) VISIBLE,
-  INDEX `fk_ItemPedido_Produto1_idx` (`produto_id` ASC) VISIBLE,
-  CONSTRAINT `fk_ItemPedido_Pedido1`
-    FOREIGN KEY (`pedido_id`)
-    REFERENCES `zentralhead`.`pedidos` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_ItemPedido_Produto1`
-    FOREIGN KEY (`produto_id`)
-    REFERENCES `zentralhead`.`produtoss` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `zentralhead`.`produtofornecedor`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`produtofornecedor` (
-  `produto_id` INT(4) NOT NULL,
-  `fornecedores_id` INT(4) NOT NULL,
-  PRIMARY KEY (`produto_id`, `fornecedores_id`),
-  INDEX `fk_Produto_has_Fornecedores_Fornecedores1_idx` (`fornecedores_id` ASC) VISIBLE,
-  INDEX `fk_Produto_has_Fornecedores_Produto1_idx` (`produto_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Produto_has_Fornecedores_Fornecedores1`
-    FOREIGN KEY (`fornecedores_id`)
-    REFERENCES `zentralhead`.`fornecedores` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Produto_has_Fornecedores_Produto1`
-    FOREIGN KEY (`produto_id`)
-    REFERENCES `zentralhead`.`produtoss` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `zentralhead`.`produtos`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
+CREATE TABLE IF NOT EXISTS `zentralhead`.`tamanhos` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `categoria_id` INT(11) NOT NULL,
-  `nome` VARCHAR(100) NOT NULL,
-  `resumo` VARCHAR(1000) NULL DEFAULT NULL,
-  `valor` DECIMAL(9,2) NULL DEFAULT NULL,
-  `imagem` VARCHAR(50) NULL DEFAULT NULL,
-  `destaque` BIT(1) NOT NULL DEFAULT b'0',
-  `estoque` INT(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_produtos_categorias` (`categoria_id` ASC) VISIBLE,
-  CONSTRAINT `fk_produtos_categorias`
-    FOREIGN KEY (`categoria_id`)
-    REFERENCES `zentralhead`.`categorias` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `nome` VARCHAR(50) NOT NULL,
+  `criado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 18
+AUTO_INCREMENT = 11
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `zentralhead`.`produto_detalhes`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `zentralhead`.`produto_detalhes` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `produto_id` INT(11) NOT NULL,
+  `cor_id` INT(11) NULL DEFAULT NULL,
+  `tamanho_id` INT(11) NULL DEFAULT NULL,
+  `estoque` INT(11) NULL DEFAULT 0,
+  `imagem` VARCHAR(255) NULL DEFAULT NULL,
+  `destaque` BIT(1) NULL DEFAULT NULL,
+  `criado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
+  `atualizado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
+  PRIMARY KEY (`id`),
+  INDEX `fk_produto` (`produto_id` ASC) VISIBLE,
+  INDEX `fk_cor` (`cor_id` ASC) VISIBLE,
+  INDEX `fk_tamanho` (`tamanho_id` ASC) VISIBLE,
+  CONSTRAINT `fk_cor`
+    FOREIGN KEY (`cor_id`)
+    REFERENCES `zentralhead`.`cores` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_produto`
+    FOREIGN KEY (`produto_id`)
+    REFERENCES `zentralhead`.`produtos` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_tamanho`
+    FOREIGN KEY (`tamanho_id`)
+    REFERENCES `zentralhead`.`tamanhos` (`id`)
+    ON DELETE SET NULL
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 17
 DEFAULT CHARACTER SET = utf8mb4;
 
 USE `zentralhead` ;
@@ -691,32 +590,6 @@ BEGIN
         0);
     SELECT * FROM itempedido WHERE id = LAST_INSERT_ID();
 END$$
-
-DELIMITER ;
-USE `zentralhead`;
-
-DELIMITER $$
-USE `zentralhead`$$
-CREATE
-DEFINER=`root`@`localhost`
-TRIGGER `zentralhead`.`trigger_gera_estoque`
-AFTER INSERT ON `zentralhead`.`produtoss`
-FOR EACH ROW
-BEGIN
-    INSERT INTO estoques VALUES(NEW.id, 0, CURRENT_DATE());
-END$$
-
-USE `zentralhead`$$
-CREATE
-DEFINER=`root`@`localhost`
-TRIGGER `zentralhead`.`trigger_baixa_estoque`
-AFTER INSERT ON `zentralhead`.`itempedido`
-FOR EACH ROW
-BEGIN
-    UPDATE estoques SET quantidade = quantidade - NEW.quantidade, data_ultimo_movimento = CURRENT_DATE()
-    WHERE produto_id = NEW.produto_id;
-END$$
-
 
 DELIMITER ;
 
