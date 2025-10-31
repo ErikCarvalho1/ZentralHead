@@ -24,7 +24,7 @@ $linha = count($produtos);
                             <!-- começa o card produto -->
                  <div class="col-sm-6 col-md-4 mb-4">
                         <div class="card">
-                            <img src="../../images/<?=$prod['imagem'] ?>"
+                            <img src="../../images/<?=$prod['imagem_principal'] ?>" style="width:410px; height:400px"
                              alt = "<?=$prod['nome'] ?>"
                               class="card-img-top">
                             <div class="card-body  text-whith">
@@ -33,11 +33,11 @@ $linha = count($produtos);
                                 </h3>
                                 
                                 <p class="card-text text-start">
-                                    <?=mb_strimwidth($prod['resumo'],0,42,'...') ?>
+                                    <?=mb_strimwidth($prod['descricao_curta'],0,42,'...') ?>
                                 </p>
                                 </p>
                                 <button class="btn btn-default disabled" role="button" style="cursor: default;">
-                                    <?="R$ ".number_format($prod['valor'],2,',','.')?>
+                                    <?="R$ ".number_format($prod['valor_base'],2,',','.')?>
 
                                 </button>
                                
