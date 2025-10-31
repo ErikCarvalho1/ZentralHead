@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="defaultNavbar">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-3">
-                    <a href="#" class="text-decoration-none text-reset">Produtos em destaque</a>
+                    <a href="#" class="text-decoration-none text-reset">Produtos</a>
                 </li>
                 <li class="nav-item mx-3">
                     <a href="#" class="text-decoration-none text-reset">Categorias</a>

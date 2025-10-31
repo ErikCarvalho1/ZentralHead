@@ -1,4 +1,4 @@
-  <?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
+<?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
