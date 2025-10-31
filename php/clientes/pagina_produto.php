@@ -37,15 +37,15 @@ if(!$produto){
     <!-- Coluna da imagem -->
     <div class="col-md-6">
 
-    <img src="/ZentralHead/images/<?php echo $produto['imagem']; ?>" style="width:350px; height:450px">
+    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" style="width:350px; height:450px">
       <div class="d-flex gap-2 mt-2">
         <!-- Miniaturas (poderia vir do banco de dados futuramente) -->
-        <img src="/ZentralHead/images/<?php echo $produto['imagem']; ?>"  
+        <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>"  
         class="img-thumbnail"  
         style="width:80px; height:80px; object-fit:cover;">
 
-        <img src="<?php echo $produto['imagem']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
-        <img src="<?php echo $produto['imagem']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
+        <img src="<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
+        <img src="<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
       </div>
     </div>
 
@@ -62,7 +62,7 @@ if(!$produto){
 
       <!-- Preço -->
      
-      <p class="text-muted"><?php echo $produto['valor']; ?></p>
+      <p class="text-muted"><?php echo $produto['valor_base']; ?></p>
 
       <!-- Modelos / tamanhos -->
       <div class="mb-3">

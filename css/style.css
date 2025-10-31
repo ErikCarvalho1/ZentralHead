@@ -113,11 +113,7 @@ body {
   width: 100vw; /* ocupa a tela toda */
   object-fit: cover; /* cobre sem distorcer */
 }
-footer {
-  background-color: rgba(0, 0, 0, 0.801); /* Roxo translúcido */
-  backdrop-filter: blur(10px); /* Deixa o fundo borrado por trás */
-  padding: 10px 20px;
-}
+
 /* Estilo para links da navbar */
 .navbar-nav .nav-link {
   color: white !important;          /* cor branca */
@@ -132,4 +128,13 @@ footer {
   text-decoration: underline !important; /* underline no hover */
   outline: none;                     /* remove contorno do foco */
 }
+
+footer .list-unstyled a {
+  transition: color 0.3s ease;
+}
+
+footer .list-unstyled a:hover {
+  color: white;
+}
+
 
