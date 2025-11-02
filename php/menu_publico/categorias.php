@@ -1,4 +1,4 @@
-  <section class="my-5">
+<section class="my-5">
         <h2 class="text-center mb-4">Categorias</h2>
         <div
           id="carouselExample"
@@ -29,10 +29,13 @@
 
             <!-- Segundo slide -->
             <div class="carousel-item">
-              <img src="../../images/LogoZentral.png">
+             
               <div class="row">
                 <div class="col-md-4">
                   <div class="card">
+                     <div class="d-flex justify-content-center mb-3">
+                <img src="../../images/LogoZentral.png" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+              </div>
                     <div class="card-body text-center">Item 4</div>
                   </div>
                 </div>
