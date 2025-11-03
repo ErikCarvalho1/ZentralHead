@@ -24,10 +24,12 @@ $linha = count($produtos);
                             <!-- começa o card produto -->
                  <div class="col-sm-6 col-md-4 mb-4">
                         <div class="card">
-<img src="../../images/<?=$prod['imagem_principal']?>"
-     alt="<?=$prod['nome']?>"
-     class="card-img-top object-fit-cover"
-     style="height: 250px;">
+                            <div class="card-img-container" style="height: 250px; overflow: hidden;">
+                                <img src="../../images/<?=$prod['imagem_principal']?>"
+                                    alt="<?=$prod['nome']?>"
+                                    class="card-img-top w-100 h-100"
+                                    style="object-fit: contain;">
+                            </div>
                             <div class="card-body  text-whith">
                                 <h3 class="card-title text-danger">
                                     <strong><i><?=$prod['nome']?></i></strong>
