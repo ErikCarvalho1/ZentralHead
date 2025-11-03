@@ -614,3 +614,22 @@ CREATE TABLE avaliacoes (
     CONSTRAINT fk_avaliacao_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
     CONSTRAINT fk_avaliacao_produto FOREIGN KEY (produto_id) REFERENCES produtos(id) ON DELETE CASCADE
 );
+
+CREATE TABLE descontos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    tipo ENUM('percentual','fixo') NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    data_inicio DATE NOT NULL,
+    data_fim DATE NOT NULL,
+    ativo TINYINT(1) DEFAULT 1
+);
+
+
+CREATE TABLE produto_desconto (
+    produto_id INT NOT NULL,
+    desconto_id INT NOT NULL,
+    PRIMARY KEY(produto_id, desconto_id),
+    FOREIGN KEY(produto_id) REFERENCES produtos(id) ON DELETE CASCADE,
+    FOREIGN KEY(desconto_id) REFERENCES descontos(id) ON DELETE CASCADE
+);
