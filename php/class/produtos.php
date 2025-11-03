@@ -104,11 +104,23 @@ public function listar (){
     $cmd->execute();
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
-    public function listarDestaques (){
-    $sql = "SELECT * FROM produtos WHERE destaques = 1 ORDER BY criado_em DESC;";
-    $cmd = $this->pdo->prepare($sql);
-    $cmd->execute();
-    return $cmd->fetchAll(PDO::FETCH_ASSOC);
+  public function listarDestaques() {
+        $sql = "
+            SELECT p.*, d.tipo AS desconto_tipo, d.valor AS desconto_valor
+            FROM produtos p
+            LEFT JOIN produto_desconto pd ON p.id = pd.produto_id
+            LEFT JOIN descontos d ON d.id = pd.desconto_id
+                AND d.ativo = 1
+                AND CURDATE() BETWEEN d.data_inicio AND d.data_fim
+            WHERE p.destaques = 1
+            ORDER BY p.criado_em DESC
+        ";
+
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->execute();
+
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    
 }
 public function listarPorId ($id){
     $sql = "SELECT * FROM  produtos WHERE id = :id LIMIT 1";

@@ -3,7 +3,6 @@ include "../class/produtos.php";
 $produto = new Produtos();
 $produtos = $produto->listarDestaques(1); 
 
-
 $linha = count($produtos);
 ?>
 
@@ -31,6 +30,20 @@ $linha = count($produtos);
 
                 <div class="row justify-content-center">
                     <?php foreach($grupo as $prod): ?>
+                        <?php
+                        // Cálculo do preço final considerando desconto
+                        $precoOriginal = $prod['valor_base'];
+                        $precoFinal = $precoOriginal;
+
+                        if (!empty($prod['desconto_tipo']) && $prod['desconto_valor'] > 0) {
+                            if ($prod['desconto_tipo'] === 'percentual') {
+                                $precoFinal = $precoOriginal - ($precoOriginal * $prod['desconto_valor'] / 100);
+                            } elseif ($prod['desconto_tipo'] === 'fixo') {
+                                $precoFinal = $precoOriginal - $prod['desconto_valor'];
+                            }
+                        }
+                        ?>
+
                         <div class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center">
                             <div class="card h-100" style="width: 16rem;">
                                 <div class="card-img-container img-fluid" style="max-width: 100%; overflow:height: auto;">
@@ -50,9 +63,27 @@ $linha = count($produtos);
                                     </p>
 
                                     <div class="mt-3">
-                                        <button class="btn btn-secondary disabled">
-                                            <?= "R$ ".number_format($prod['valor_base'], 2, ',', '.') ?>
-                                        </button>
+                                        <?php if ($precoFinal < $precoOriginal): ?>
+                                            <div>
+                                                <span class="text-muted text-decoration-line-through">
+                                                    <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
+                                                </span>
+                                                <br>
+                                                <button class="btn btn-success disabled">
+                                                    <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
+                                                </button>
+                                                <br>
+                                                <small class="text-danger">
+                                                    <?= ($prod['desconto_tipo'] === 'percentual')
+                                                        ? "-".$prod['desconto_valor']."% OFF"
+                                                        : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
+                                                </small>
+                                            </div>
+                                        <?php else: ?>
+                                            <button class="btn btn-secondary disabled">
+                                                <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
+                                            </button>
+                                        <?php endif; ?>
                                     </div>
 
                                     <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
