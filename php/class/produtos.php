@@ -104,7 +104,12 @@ public function listar (){
     $cmd->execute();
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
-
+    public function listarDestaques (){
+    $sql = "SELECT * FROM produtos WHERE destaques = 1 ORDER BY criado_em DESC;";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->execute();
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
+}
 public function listarPorId ($id){
     $sql = "SELECT * FROM  produtos WHERE id = :id LIMIT 1";
     $cmd = $this->pdo->prepare($sql);
