@@ -74,7 +74,7 @@ header nav {
 }
 
 body {
-      background: linear-gradient(to bottom, #6b08adce, #000000);
+      background: linear-gradient(to bottom, #000000, #000000);
       min-height: 100vh;
       margin: 0;
       font-family: Arial, sans-serif;
@@ -136,4 +136,19 @@ footer .list-unstyled a {
 footer .list-unstyled a:hover {
   color: white;
 }
+.card {
+  background-color: #36303056; /* tira o fundo branco do card */
+  box-shadow: #000;
+  transform: scale(00.3s);
+  
+}
+.card h2 {
+  background-color: transparent; /* se o título tiver fundo branco */
+}
 
+.card button {
+  background-color: #000; /* ou deixe transparente se quiser */
+}
+footer {
+  background-color: #ddd;
+}

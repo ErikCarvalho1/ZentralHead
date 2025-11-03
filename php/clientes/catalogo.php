@@ -29,122 +29,54 @@
     </header>
 
     <!-- CONTEÚDO -->
-    <div class="container my-5">
-        <h1 class="text-center mb-4">Camisas Zentral </h1>
-        <div class="row g-4">
+    <?php 
+include "../class/produtos.php";
+$produto = new Produtos();
+$produtos = $produto->listar(1); 
 
-            <!-- Produto 1 -->
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="https://via.placeholder.com/200x300" class="card-img-top" alt="Produto 1">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Produto 1</h5>
-                        <p class="card-text flex-grow-1">Descrição breve do produto.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">R$ 99,90</span>
-                            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Produto 2 -->
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="https://via.placeholder.com/200x300" class="card-img-top" alt="Produto 2">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Produto 2</h5>
-                        <p class="card-text flex-grow-1">Descrição breve do produto.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">R$ 99,90</span>
-                            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+$linha = count($produtos);
 
-            <!-- Produto 3 -->
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="https://via.placeholder.com/200x300" class="card-img-top" alt="Produto 3">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Produto 3</h5>
-                        <p class="card-text flex-grow-1">Descrição breve do produto.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">R$ 99,90</span>
-                            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="https://via.placeholder.com/200x300" class="card-img-top" alt="Produto 3">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Produto 4</h5>
-                        <p class="card-text flex-grow-1">Descrição breve do produto.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">R$ 99,90</span>
-                            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <h2 class="text-center bg-4 ">Calças</h2>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="https://via.placeholder.com/200x300" class="card-img-top" alt="Produto 3">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Produto 4</h5>
-                        <p class="card-text flex-grow-1">Descrição breve do produto.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">R$ 99,90</span>
-                            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="https://via.placeholder.com/200x300" class="card-img-top" alt="Produto 3">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Produto 4</h5>
-                        <p class="card-text flex-grow-1">Descrição breve do produto.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">R$ 99,90</span>
-                            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="https://via.placeholder.com/200x300" class="card-img-top" alt="Produto 3">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Produto 4</h5>
-                        <p class="card-text flex-grow-1">Descrição breve do produto.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">R$ 99,90</span>
-                            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card h-100 shadow-sm border-0">
-                    <img src="https://via.placeholder.com/200x300" class="card-img-top" alt="Produto 3">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Produto 4</h5>
-                        <p class="card-text flex-grow-1">Descrição breve do produto.</p>
-                        <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="fw-bold">R$ 99,90</span>
-                            <a href="#" class="btn btn-primary btn-sm">Comprar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+?>
+<section class="container my-4">
+    <!-- mostra se a consulta retornar vazio  -->
+    <?php if($linha == 0){ ?>
+        <h2 class="alert alert-danger">Não há produtos em destaques</h2>
+    <?php } ?>
+
+    <?php if($linha > 0){ ?>
+        <h2>Produtos Em Destaques</h2>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-1">
+            <?php foreach($produtos as $prod): ?>
+                <div class="col-sm-4 col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm rounded">
+                        <img src="../../images/<?=$prod['imagem_principal']?>"
+                             alt="<?=$prod['nome']?>"
+                             class="card-img-top w-100"
+                             style="object-fit: cover; height: 250px; transition: transform 0.3s;"
+                             onmouseover="this.style.transform='scale(1.05)';"
+                             onmouseout="this.style.transform='scale(1)';">
+                        <div class="card-body text-white">
+                            <h3 class="text-center text-white fw-bold mb-1">
+                                <strong><i><?=$prod['nome']?></i></strong>
+                            </h3>
+                            <p class="card-text text-start">
+                                <?=mb_strimwidth($prod['descricao_curta'],0,42,'...') ?>
+                            </p>
+                            <button class="btn btn-default disabled" role="button" style="cursor: default;">
+                                <?="R$ ".number_format($prod['valor_base'],2,',','.')?>
+                            </button>
+                            <a href="../clientes/pagina_produto.php?id=<?= $prod['id']?>" class="btn btn-terciary float-end">
+                                <span class="d-nome d-sm-inline">Saiba mais</span>
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+                        </div> <!-- fecha card-body -->
+                    </div> <!-- fecha card -->
+                </div> <!-- fecha coluna -->
+            <?php endforeach; ?>
+        </div> <!-- fecha row -->
+    <?php } ?>
+</section>
 
     <!-- RODAPÉ -->
     <footer class="text-white p-4 mt-5">
