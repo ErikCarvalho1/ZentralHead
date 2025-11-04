@@ -1,31 +1,20 @@
-<?php
-include_once "../class/db.php";
-session_start();
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasCarrinho">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">🛒 Seu Carrinho</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
 
-$total = 0;
-?>
-<h3>Carrinho</h3>
+  <div class="offcanvas-body d-flex flex-column">
+    <div id="listaCarrinho" class="flex-grow-1">
+      <p class="text-muted text-center">Seu carrinho está vazio.</p>
+    </div>
 
-<table class="table">
-<tr>
-    <th>Produto</th><th>Qtd</th><th>Preço</th><th>Total</th><th>Ações</th>
-</tr>
-<?php foreach($_SESSION['carrinho'] as $item): 
-    $subtotal = $item['preco'] * $item['quantidade'];
-    $total += $subtotal;
-?>''
-<tr>
-    <td><?= $item['nome'] ?></td>
-    <td><?= $item['quantidade'] ?></td>
-    <td>R$ <?= number_format($item['preco'], 2, ',', '.') ?></td>
-    <td>R$ <?= number_format($subtotal, 2, ',', '.') ?></td>
-    <td><a href="remover.php?id=<?= $item['id'] ?>" class="btn btn-danger btn-sm">Remover</a></td>
-</tr>
-<?php endforeach; ?>
-<tr>
-    <td colspan="3" align="right"><b>Total:</b></td>
-    <td><b>R$ <?= number_format($total, 2, ',', '.') ?></b></td>
-</tr>
-</table>
-
-<a href="finalizar.php" class="btn btn-success">Finalizar Compra</a>
+    <div class="border-top pt-3">
+      <div class="d-flex justify-content-between mb-2">
+        <strong>Total:</strong>
+        <span>R$ 0,00</span>
+      </div>
+      <button class="btn btn-success w-100">Finalizar Compra</button>
+    </div>
+  </div>
+</div>
