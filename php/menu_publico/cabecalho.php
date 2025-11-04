@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="index.php">
-            <img src="../../images/LogoZentralPreto.png" alt="Logo" height="35">
+            <img src="../../images/LogoZentralBranco.png" alt="Logo" height="35">
         </a>
 
         <!-- Botão toggle para mobile -->
@@ -16,25 +16,26 @@
         <div class="collapse navbar-collapse" id="defaultNavbar">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-3">
-                    <a href="#" class="text-decoration-none text-black">Produtos</a>
+                    <a href="#" class="text-decoration-none text-white">Produtos</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a href="#"class="text-decoration-none text-black">Categorias</a>
+                    <a href="#"class="text-decoration-none text-white">Categorias</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a href="#"class="text-decoration-none text-black">Promoções</a>
+                    <a href="#"class="text-decoration-none text-white">Promoções</a>
             </ul>
             
             <ul class="navbar-nav ms-auto">
-
-                <!-- Ícone Carrinho -->
-                <a href="#" id="openCart" class="btn me-2 text-black">
-                    <i class="bi bi-cart3 fs-5"></i>
-                </a>
+  <button class="btn text-white position-relative" 
+        data-bs-toggle="offcanvas" 
+        data-bs-target="#offcanvasCarrinho">
+  <i class="bi bi-cart"></i>
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="qtdCarrinho">0</span>
+</button>
 
 
                 <!-- Ícone Usuário -->
-                <a href="../clientes/login.php" class="btn me-2 text-black">
+                <a href="../clientes/login.php" class="btn me-2 text-white">
                     <i class="bi bi-person-circle fs-5"></i>
                 </a>
 
