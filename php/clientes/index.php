@@ -39,6 +39,9 @@
 
        <!-- promoções-->
         <?php include_once "../menu_publico/promocoes.php"?>
+
+      <!-- carrinho -->
+      <?php include_once "carrinho.php"?>
       </main>
 
     <!-- RODAPÉ -->
