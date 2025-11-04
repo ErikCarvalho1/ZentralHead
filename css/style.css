@@ -68,13 +68,13 @@
 }
 
 header nav {
-  background-color: rgb(0, 0, 0); /* Roxo translúcido */
+  background-color: rgb(255, 254, 254); /* Roxo translúcido */
   backdrop-filter: blur(10px); /* Deixa o fundo borrado por trás */
   padding: 10px 20px;
 }
 
 body {
-      background: linear-gradient(to bottom, #000000, #000000);
+      background: linear-gradient(to bottom, #ffffff, #ffffff);
       min-height: 100vh;
       margin: 0;
       font-family: Arial, sans-serif;
@@ -134,13 +134,11 @@ footer .list-unstyled a {
 }
 
 footer .list-unstyled a:hover {
-  color: white;
+  color: rgb(255, 255, 255);
 }
 .card {
-  background-color: #36303056; /* tira o fundo branco do card */
+  background-color: #ffffff; /* tira o fundo branco do card */
   box-shadow: #000;
-  transform: scale(00.3s);
-  
 }
 .card h2 {
   background-color: transparent; /* se o título tiver fundo branco */
@@ -149,6 +147,12 @@ footer .list-unstyled a:hover {
 .card button {
   background-color: #000; /* ou deixe transparente se quiser */
 }
-footer {
-  background-color: #ddd;
+nav {
+  height: 70px;
+}
+footer{
+  background-color: #000;
+}
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

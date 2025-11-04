@@ -48,16 +48,17 @@ $linha = count($produtos);
         <h2>Produtos Em Destaques</h2>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-1">
             <?php foreach($produtos as $prod): ?>
-                <div class="col-sm-4 col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm rounded">
+                <div class="mt-3 p-2 col-sm-2 col-md-3 mb-5">
+                    <div class="card h-100  shadow-sm"
+                    onmouseover="this.style.transform='scale(1.05)';"
+                    onmouseout="this.style.transform='scale(1)';">
                         <img src="../../images/<?=$prod['imagem_principal']?>"
                              alt="<?=$prod['nome']?>"
-                             class="card-img-top w-100"
-                             style="object-fit: cover; height: 250px; transition: transform 0.3s;"
-                             onmouseover="this.style.transform='scale(1.05)';"
-                             onmouseout="this.style.transform='scale(1)';">
+                             class="card-img-top  w-100"
+                             style="object-fit: cover; height: 200px; transition: transform 0.3s;"
+                            >
                         <div class="card-body text-white">
-                            <h3 class="text-center text-white fw-bold mb-1">
+                            <h3 class="text-center text-white fw-bold mb-0">
                                 <strong><i><?=$prod['nome']?></i></strong>
                             </h3>
                             <p class="card-text text-start">
