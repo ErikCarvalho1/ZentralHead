@@ -29,11 +29,12 @@ if (session_status() === PHP_SESSION_NONE) {
    
     <ul class="navbar-nav ms-auto">
       <!-- carrinho -->
-        <a href="carrinho.php" class="btn me-2 text-white">
-                    <i class="bi bi-cart3 fs-5"></i>
-                </a>
-        <li class="nav-item">
-          <span class="btn btn-danger disabled me-2" style="cursor: default;">
+    <button class="btn btn-outline-dark position-relative" 
+        data-bs-toggle="offcanvas" 
+        data-bs-target="#offcanvasCarrinho">
+  <i class="bi bi-cart"></i>
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="qtdCarrinho">0</span>
+</button>
             
   <?php
     $nomeUsuario = $_SESSION['nome_usuario'] ?? 'Visitante'; 

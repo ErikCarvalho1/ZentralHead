@@ -39,6 +39,9 @@ class Usuarios{
     public function setEmail(string $email){
         $this->email = $email;
     }
+    public function setSenha(string $senha){
+        $this->senha = $senha;
+    }
     public function getAtivo(){
        return $this->ativo;
     }
@@ -47,18 +50,18 @@ class Usuarios{
     }
 
     public function Inserir(){
-        $sql = "CALL sp_usuario_insert(:nivel_id, :nome, :email, :senha, :ativo)";
+        // use MD5(:senha) if você quer armazenar MD5 (inseguro). Recomenda-se password_hash.
+        $sql = "INSERT INTO usuarios (nome, email, senha, nivel_id, ativo) VALUES (:nome, :email, MD5(:senha), :nivel_id, :ativo)";
         $cmd = $this->pdo->prepare($sql);
-        $cmd->bindValue(":nivel_id", $this->nivelId);
-        $cmd->bindValue(":nome", $this->nome);
-        $cmd->bindValue(":email", $this->email);
-        $cmd->bindValue(":senha", $this->senha);
-        $cmd->bindValue(":ativo", $this->ativo);
-        $cmd->execute();
+        $cmd->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+        $cmd->bindValue(":email", $this->email, PDO::PARAM_STR);
+        $cmd->bindValue(":senha", $this->senha, PDO::PARAM_STR);
+        $cmd->bindValue(":nivel_id", $this->nivelId, PDO::PARAM_INT);
+        $cmd->bindValue(":ativo", $this->ativo, PDO::PARAM_INT);
+
         if($cmd->execute()){
             $this->id = $this->pdo->lastInsertId();
-            return true; 
-
+            return true;
         }
         return false;
     }
@@ -66,15 +69,17 @@ class Usuarios{
     public function Atualizar(int $idUpdate):bool{
              $id = $idUpdate;
         if(!$this->id) return false;
-         $sql = "CALL sp_usuario_update(:nivel_id, :nome, :email, :ativo)";
+         // ajustado para incluir :id no CALL (se a procedure espera id como primeiro parâmetro)
+         $sql = "CALL sp_usuario_update(:id, :nivel_id, :nome, :email, :ativo)";
          $cmd = $this->pdo->prepare($sql);
-         $cmd->bindValue("nivel_id", $this->nivelId);
+         $cmd->bindValue(":id", $this->id, PDO::PARAM_INT);
+         $cmd->bindValue(":nivel_id", $this->nivelId, PDO::PARAM_INT);
          $cmd->bindValue(":nome", $this->nome);
          $cmd->bindValue(":email", $this->email);
          $cmd->bindValue(":ativo", $this->ativo);
-         $cmd->bindValue(":id", $this ->id, PDO:: PARAM_INT);
- 
-        return $cmd ->execute();
+         $cmd->execute();
+
+         return $cmd ->execute();
     }
    
     public function listar(): array {

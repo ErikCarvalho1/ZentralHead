@@ -1,59 +1,64 @@
+<?php
+include_once '../class/usuarios.php';
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $usuario = new Usuarios();
+    $usuario->setNiveld(11); // nível padrão para clientes
+    $usuario->setNome(trim($_POST['nome'] ?? ''));
+    $usuario->setEmail(trim($_POST['email'] ?? ''));
+    $usuario->setSenha(($_POST['senha'] ?? ''));
+    $usuario->setAtivo(1);
+
+    if($usuario->Inserir()){
+        header('Location: index.php');
+        exit;
+    } else {
+        $error = 'Erro ao cadastrar usuário. Tente novamente.';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="index.html" />
   <title>Cadastro</title>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-
-  <!-- Bootstrap 5.3 -->
   <link rel="stylesheet" href="../../css/bootstrap.min.css" />
-  <!-- CSS local -->
   <link rel="stylesheet" href="../../css/style.css" />
   <script src="../../js/bootstrap.bundle.min.js" defer></script>
 </head>
-<body>
-    <body>
-        <!-- TELA LOGIN -->
+<body class="bg-light">
+  <div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card p-4" style="width: 420px;">
+      <div class="text-center mb-3">
+        <img src="../../images/LogoZentralPreto.png" width="200" alt="Logo">
+      </div>
 
-        <div class="d-flex flex-column  align-items-center vh-100 bg" id="card-cadastro">
-            <!-- Logo em cima -->
-            <img src="../../images/LogoZentralPreto.png" width="300" alt="" class="mb-2">
-      
-          <div class=" p-5 shadow " style="width: 400px; ">
-      
-            
-            <div class="input-group mb-2">
-              <span class="input-group-text"><i class="bi bi-person"></i></span>
-              <input type="text" class="form-control" placeholder="Email">
-            </div>
-            
-            <div class="input-group mb-2">
-                <span class="input-group-text"><i class="bi bi-person"></i></span>
-                <input type="text" class="form-control" placeholder="Cpf">
-              </div>
-      
-            <div class="input-group mb-2">
-              <span class="input-group-text"><i class="bi bi-lock"></i></span>
-              <input type="password" class="form-control" placeholder="Senha">
-            </div>
-            
-            <div class="input-group mb-2">
-                <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                <input type="password" class="form-control" placeholder="Senha">
-              </div>
-      
-            <button class="btn btn-outline-dark w-100 ">Cadastrar-se</button>
-            <div class=" d-flex justify-content-between mt-2">
+      <?php if(!empty($error)): ?>
+        <div class="alert alert-danger"><?php echo htmlentities($error); ?></div>
+      <?php endif; ?>
 
-            </div>
-          </div>
+      <form method="post" action="" novalidate>
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome</label>
+          <input type="text" name="nome" id="nome" class="form-control" required value="<?php echo isset($_POST['nome'])?htmlspecialchars($_POST['nome']):''; ?>">
         </div>
-        </section>
-      </body>
-      
-      </html>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">E-mail</label>
+          <input type="email" name="email" id="email" class="form-control" required value="<?php echo isset($_POST['email'])?htmlspecialchars($_POST['email']):''; ?>">
+        </div>
+
+        <div class="mb-3">
+          <label for="senha" class="form-label">Senha</label>
+          <input type="password" name="senha" id="senha" class="form-control" required>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-danger">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

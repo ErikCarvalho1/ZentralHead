@@ -68,7 +68,7 @@
 }
 
 header nav {
-  background-color: rgb(255, 254, 254); /* Roxo translúcido */
+  background-color: rgb(0, 0, 0); /* Roxo translúcido */
   backdrop-filter: blur(10px); /* Deixa o fundo borrado por trás */
   padding: 10px 20px;
 }
