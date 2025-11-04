@@ -61,10 +61,23 @@ $linha = count($produtos);
                                         onmouseover="this.style.transform='scale(1.05)';"
                                         onmouseout="this.style.transform='scale(1)';">
                                         
-                                        <img src="../../images/<?=$prod['imagem_principal']?>"
-                                             alt="<?=$prod['nome']?>"
-                                             class="card-img-top w-100"
-                                             style="object-fit: cover; height: 200px; transition: transform 0.3s;">
+                                        <div style="position: relative;">
+    <img src="../../images/<?=$prod['imagem_principal']?>"
+         alt="<?=$prod['nome']?>"
+         class="card-img-top w-100"
+         style="object-fit: cover; height: 200px; transition: transform 0.3s;">
+
+    <?php if (!empty($prod['desconto_tipo']) && !empty($prod['desconto_valor'])): ?>
+        <small class="text-danger bg-white px-2 py-1 rounded"
+               style="position: absolute; top: 10px; left: 10px; font-weight: bold;">
+            <?= ($prod['desconto_tipo'] === 'percentual')
+                ? "-".$prod['desconto_valor']."% OFF"
+                : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
+        </small>
+    <?php endif; ?>
+</div>
+
+
                                         
                                         <div class="card-body text-white">
                                             <h3 class="text-center text-white fw-bold mb-0">
