@@ -45,7 +45,9 @@ $linha = count($produtos);
                         ?>
 
                         <div class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center">
-                            <div class="card h-100" style="width: 16rem;">
+                            <div class="card h-100" style="width: 16rem;"
+                                        onmouseover="this.style.transform='scale(1.05)';"
+                                        onmouseout="this.style.transform='scale(1)';">
                                 <div class="card-img-container img-fluid" style="max-width: 100%; overflow:height: auto;">
                                     <img src="../../images/<?= $prod['imagem_principal'] ?>"
                                         alt="<?= $prod['nome'] ?>"
@@ -85,7 +87,29 @@ $linha = count($produtos);
                                             </button>
                                         <?php endif; ?>
                                     </div>
-
+                                    <div class="mt-3">
+                                        <?php if ($precoFinal < $precoOriginal): ?>
+                                            <div>
+                                                <span class="text-muted text-decoration-line-through">
+                                                    <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
+                                                </span>
+                                                <br>
+                                                <button class="btn btn-success disabled">
+                                                    <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
+                                                </button>
+                                                <br>
+                                                <small class="text-danger">
+                                                    <?= ($prod['desconto_tipo'] === 'percentual')
+                                                        ? "-".$prod['desconto_valor']."% OFF"
+                                                        : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
+                                                </small>
+                                            </div>
+                                        <?php else: ?>
+                                            <button class="btn btn-secondary disabled">
+                                                <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
+                                            </button>
+                                        <?php endif; ?>
+                                    </div>
                                     <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
                                        class="btn btn-primary mt-2">
                                         Saiba mais <i class="bi bi-eye-fill"></i>

@@ -88,7 +88,9 @@ if(!$produto){
   </div>
 </div>
 </main>
- <footer><?php include "../menu_publico/rodape.php"?> </footer>
+<footer class="text-white p-4 mt-5">
+    <?php include "../menu_publico/rodape.php"?> 
+  </footer>
  
 
 </body>
