@@ -40,8 +40,8 @@ $linha = count($produtos);
                                 $precoFinal = $precoOriginal - $prod['desconto_valor'];
                             }
                         }
-                        ?>
-                        <div class=" col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center">
+                        ?>  <a class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center" href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" >
+                        <div class=>
                            <div class="card h-100" style="width: 16rem;">
                                 <div class="card h-100 shadow-sm"
                                      onmouseover="this.style.transform='scale(1.05)';"
@@ -85,15 +85,14 @@ $linha = count($produtos);
                                                 </button>
                                             <?php endif; ?>
                                         </div>
-                                     
-                                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
-                                           class="btn btn-primary mt-2">
-                                            Saiba mais <i class="bi bi-eye-fill"></i>
-                                        </a>
+                                    
+                                      
+                                       
+                                       
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> </a>
                     <?php endforeach; ?>
                 </div>
             </div>
