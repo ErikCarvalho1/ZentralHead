@@ -13,15 +13,13 @@ $linha = count($produtos);
 <?php } ?>
 
 <?php if($linha > 0){ ?>
-    <h2 class="text-center mb-4">Produtos em Destaque</h2>
-
     <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
 
             <?php 
             $active = "active";
             // Quebra o array de produtos em grupos de 4 por slide
-            $grupos = array_chunk($produtos, 4);
+            $grupos = array_chunk($produtos, 3);
             foreach($grupos as $grupo):
             ?>
             
@@ -43,63 +41,62 @@ $linha = count($produtos);
                             }
                         }
                         ?>
-
-                        <div class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center">
-                            <div class="card h-100" style="width: 16rem;"
-                                        onmouseover="this.style.transform='scale(1.05)';"
-                                        onmouseout="this.style.transform='scale(1)';">
-                                <div class="card-img-container img-fluid" style="max-width: 100%; overflow:height: auto;">
-                                    
-                                    <img src="../../images/<?= $prod['imagem_principal'] ?>"
-                                        alt="<?= $prod['nome'] ?>"
-                                        class="card-img-top w-100 h-100"
-                                        style="object-fit: contain;">
-                                </div>
-
-                                <div class="card-body text-center">
-                                    <h5 class="card-title text-danger">
-                                        <strong><?= $prod['nome'] ?></strong>
-                                    </h5>
-
-                                    <p class="card-text text-muted">
-                                        <?= mb_strimwidth($prod['descricao_curta'], 0, 42, '...') ?>
-                                    </p>
-
-                                    <div class="mt-3">
-                                        <?php if ($precoFinal < $precoOriginal): ?>
-                                            <div>
-                                                <span class="text-muted text-decoration-line-through">
-                                                    <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
-                                                </span>
-                                                <br>
-                                                <button class="btn btn-success disabled">
-                                                    <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
-                                                </button>
-                                                <br>
-                                                <small class="text-danger">
-                                                    <?= ($prod['desconto_tipo'] === 'percentual')
-                                                        ? "-".$prod['desconto_valor']."% OFF"
-                                                        : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
-                                                </small>
-                                            </div>
-                                        <?php else: ?>
-                                            <button class="btn btn-secondary disabled">
-                                                <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
-                                            </button>
-                                        <?php endif; ?>
+                        <div class=" col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center">
+                           <div class="card h-100" style="width: 16rem;">
+                                <div class="card h-100 shadow-sm"
+                                     onmouseover="this.style.transform='scale(1.05)';"
+                                     onmouseout="this.style.transform='scale(1)';">
+                                    <div class="card-img-container img-fluid" style="max-width: 100%; overflow:height: auto;">
+                                        <img src="../../images/<?= $prod['imagem_principal'] ?>"
+                                             alt="<?= htmlspecialchars($prod['nome']) ?>"
+                                             class="card-img-top w-100 h-100"
+                                             style="object-fit: contain;">
                                     </div>
-                                 
-                                    <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
-                                       class="btn btn-primary mt-2">
-                                        Saiba mais <i class="bi bi-eye-fill"></i>
-                                    </a>
+
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title text-black">
+                                            <strong><?= $prod['nome'] ?></strong>
+                                        </h5>
+
+                                        <p class="card-text text-muted">
+                                            <?= mb_strimwidth($prod['descricao_curta'], 0, 42, '...') ?>
+                                        </p>
+
+                                        <div class="mt-3">
+                                            <?php if ($precoFinal < $precoOriginal): ?>
+                                                <div>
+                                                    <span class="text-muted text-decoration-line-through">
+                                                        <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
+                                                    </span>
+                                                    <br>
+                                                    <button class="btn btn-success disabled">
+                                                        <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
+                                                    </button>
+                                                    <br>
+                                                    <small class="text-danger">
+                                                        <?= ($prod['desconto_tipo'] === 'percentual')
+                                                            ? "-".$prod['desconto_valor']."% OFF"
+                                                            : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
+                                                    </small>
+                                                </div>
+                                            <?php else: ?>
+                                                <button class="btn btn-secondary disabled">
+                                                    <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
+                                                </button>
+                                            <?php endif; ?>
+                                        </div>
+                                     
+                                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
+                                           class="btn btn-primary mt-2">
+                                            Saiba mais <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
             </div>
-
             <?php endforeach; ?>
 
         </div>

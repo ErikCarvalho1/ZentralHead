@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../../css/bootstrap.min.css" />
     <!-- CSS local -->
     <link rel="stylesheet" href="../../css/style.css" />
- 
+
     <!-- js -->
     <script src="../../js/bootstrap.bundle.min.js" defer></script>
     <script src="../../js/inicial.js" defer></script>
@@ -47,63 +47,93 @@ $linha = count($produtos);
         <h2>Produtos Em Destaques</h2>
 
         <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <?php 
-                    $active = "active";
-                    $grupos = array_chunk($produtos, 4); // mostra 4 produtos por slide
-                    foreach($grupos as $grupo):
-                ?>
-                    <div class="carousel-item <?= $active ?>">
-                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-1">
-                            <?php foreach($grupo as $prod): ?>
-                                <div class="mt-3 p-1 col-sm-2 col-md-3 mb-5">
-                                    <div class="card h-100 shadow-sm"
-                                        onmouseover="this.style.transform='scale(1.05)';"
-                                        onmouseout="this.style.transform='scale(1)';">
-                                        
-                                        <div style="position: relative;">
-    <img src="../../images/<?=$prod['imagem_principal']?>"
-         alt="<?=$prod['nome']?>"
-         class="card-img-top w-100"
-         style="object-fit: cover; height: 200px; transition: transform 0.3s;">
+        <div class="carousel-inner">
 
-    <?php if (!empty($prod['desconto_tipo']) && !empty($prod['desconto_valor'])): ?>
-        <small class="text-danger bg-white px-2 py-1 rounded"
-               style="position: absolute; top: 10px; left: 10px; font-weight: bold;">
-            <?= ($prod['desconto_tipo'] === 'percentual')
-                ? "-".$prod['desconto_valor']."% OFF"
-                : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
-        </small>
-    <?php endif; ?>
-</div>
+            <?php 
+            $active = "active";
+            // Quebra o array de produtos em grupos de 4 por slide
+            $grupos = array_chunk($produtos, 3);
+            foreach($grupos as $grupo):
+            ?>
+            
+            <div class="carousel-item <?= $active ?>">
+                <?php $active = ""; ?>
 
+                <div class="row justify-content-center">
+                    <?php foreach($grupo as $prod): ?>
+                        <?php
+                        // Cálculo do preço final considerando desconto
+                        $precoOriginal = $prod['valor_base'];
+                        $precoFinal = $precoOriginal;
 
-                                        
-                                        <div class="card-body text-white">
-                                            <h3 class="text-center text-white fw-bold mb-0">
-                                                <strong><i><?=$prod['nome']?></i></strong>
-                                            </h3>
-                                            <p class="card-text text-start">
-                                                <?=mb_strimwidth($prod['descricao_curta'],0,42,'...') ?>
-                                            </p>
-                                            <button class="btn btn-default disabled" role="button" style="cursor: default;">
-                                                <?="R$ ".number_format($prod['valor_base'],2,',','.')?>
-                                            </button>
-                                            <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
-                                       class="btn  mt-2">
-                                        Saiba mais <i class="bi bi-eye-fill"></i>
-                                    </a>
-                                        </div> <!-- fecha card-body -->
-                                    </div> <!-- fecha card -->
-                                </div> <!-- fecha coluna -->
-                            <?php endforeach; ?>
-                        </div> <!-- fecha row -->
-                    </div> <!-- fecha carousel-item -->
-                <?php 
-                    $active = ""; // só o primeiro fica ativo
-                    endforeach; 
-                ?>
-            </div> <!-- fecha carousel-inner -->
+                        if (!empty($prod['desconto_tipo']) && $prod['desconto_valor'] > 0) {
+                            if ($prod['desconto_tipo'] === 'percentual') {
+                                $precoFinal = $precoOriginal - ($precoOriginal * $prod['desconto_valor'] / 100);
+                            } elseif ($prod['desconto_tipo'] === 'fixo') {
+                                $precoFinal = $precoOriginal - $prod['desconto_valor'];
+                            }
+                        }
+                        ?>
+                        <div class=" col-12 col-sm-6 col-md-3 mb-2 d-flex justify-content-center">
+                           <div class="card h-100" style="width: 16rem;">
+                                <div class="card h-100 shadow-sm"
+                                     onmouseover="this.style.transform='scale(1.05)';"
+                                     onmouseout="this.style.transform='scale(1)';">
+                                    <div class="card-img-container img-fluid" style="max-width: 100%; overflow:height: auto;">
+                                    
+                                        <img src="../../images/<?= $prod['imagem_principal'] ?>"
+                                             alt="<?= htmlspecialchars($prod['nome']) ?>"
+                                             class="card-img-top w-100 h-100"
+                                             style="object-fit: contain;">
+                                    </div>
+
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title text-black">
+                                            <strong><?= $prod['nome'] ?></strong>
+                                        </h5>
+
+                                        <p class="card-text text-muted">
+                                            <?= mb_strimwidth($prod['descricao_curta'], 0, 42, '...') ?>
+                                        </p>
+
+                                        <div class="mt-3">
+                                            <?php if ($precoFinal < $precoOriginal): ?>
+                                                <div>
+                                                    <span class="text-muted text-decoration-line-through">
+                                                        <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
+                                                    </span>
+                                                    <br>
+                                                    <button class="btn btn-success disabled">
+                                                        <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
+                                                    </button>
+                                                    <br>
+                                                    <small class="text-danger">
+                                                        <?= ($prod['desconto_tipo'] === 'percentual')
+                                                            ? "-".$prod['desconto_valor']."% OFF"
+                                                            : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
+                                                    </small>
+                                                </div>
+                                            <?php else: ?>
+                                                <button class="btn btn-secondary disabled">
+                                                    <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
+                                                </button>
+                                            <?php endif; ?>
+                                        </div>
+                                     
+                                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
+                                           class="btn btn-primary mt-2">
+                                            Saiba mais <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+
+        </div>
 
             <!-- Botões de navegação -->
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselProdutos" data-bs-slide="prev">
