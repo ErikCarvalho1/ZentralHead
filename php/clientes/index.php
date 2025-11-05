@@ -1,4 +1,4 @@
-  <?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
+<?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -29,21 +29,24 @@
     <!-- CONTEÚDO -->
     <main class="container my-4">
       <!-- DESTAQUE -->
-      <?php include_once "destaque.php"?>
+      <?php include_once "../menu_publico/destaque.php"?>
       <!-- PRODUTOS EM DESTAQUE -->
       <?php include_once "../menu_publico/produtos-destaques.php"?>
 
       <!-- CATEGORIAS -->
-        <?php include_once "categorias.php"?>
+        <?php include_once "../menu_publico/categorias.php"?>
 
 
        <!-- promoções-->
-        <?php include_once "promocoes.php"?>
+        <?php include_once "../menu_publico/promocoes.php"?>
+
+      <!-- carrinho -->
+      <?php include_once "carrinho.php"?>
       </main>
 
     <!-- RODAPÉ -->
     <footer class="container-fluid text-white p-4 mt-5">
-      <?php include_once "../menu_publico/rodape.php"?>
+      <?php include_once "../menu_publico/rodape.php"?> 
     </footer>
   </body>
 </html>

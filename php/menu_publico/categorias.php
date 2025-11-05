@@ -1,4 +1,4 @@
-  <section class="my-5">
+<section class="my-5">
         <h2 class="text-center mb-4">Categorias</h2>
         <div
           id="carouselExample"
@@ -11,17 +11,23 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 1</div>
+                     <a href=""><div class="d-flex justify-content-center mb-3">
+                <img src="../../images/LogoZentral.png" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+              </div></a>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 2</div>
+                     <a href=""><div class="d-flex justify-content-center mb-3">
+                <img src="../../images/LogoZentral.png" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+              </div></a>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 3</div>
+                     <a href=""><div class="d-flex justify-content-center mb-3">
+                <img src="../../images/LogoZentral.png" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+              </div></a>
                   </div>
                 </div>
               </div>
@@ -29,20 +35,28 @@
 
             <!-- Segundo slide -->
             <div class="carousel-item">
+             
               <div class="row">
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 4</div>
+                     <a href=""><div class="d-flex justify-content-center mb-3">
+                <img src="../../images/LogoZentral.png" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+              </div></a>
+                  
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 5</div>
+                     <a href=""><div class="d-flex justify-content-center mb-3">
+                <img src="../../images/LogoZentral.png" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+              </div></a>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 6</div>
+                     <a href=""><div class="d-flex justify-content-center mb-3">
+                <img src="../../images/LogoZentral.png" class="img-fluid" style="max-height: 200px; object-fit: contain;">
+              </div></a>
                   </div>
                 </div>
               </div>

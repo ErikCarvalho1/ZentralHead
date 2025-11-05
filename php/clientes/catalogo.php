@@ -1,19 +1,52 @@
-<?php 
+<!DOCTYPE html>
+<?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos Zentral</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+ <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+   
+    <!-- Bootstrap 5.3 -->
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <!-- CSS local -->
+    <link rel="stylesheet" href="../../css/style.css" />
+
+    <!-- js -->
+    <script src="../../js/bootstrap.bundle.min.js" defer></script>
+    <script src="../../js/inicial.js" defer></script>
+</head>
+<body>
+    <!-- CABEÇALHO -->
+    <header>
+        <?php include_once "cabecalho.php"; ?>
+    </header>
+
+    <!-- CONTEÚDO -->
+    <?php 
 include "../class/produtos.php";
 $produto = new Produtos();
-$produtos = $produto->listarDestaques(1); 
+$produtos = $produto->listar(1); 
+
 
 $linha = count($produtos);
+
 ?>
+<section class="container my-4">
+    <?php if($linha == 0){ ?>
+        <h2 class="alert alert-danger">Não há produtos em destaques</h2>
+    <?php } ?>
 
-<section class="my-5 container">
+    <?php if($linha > 0){ ?>
+        <h2>Produtos Em Destaques</h2>
 
-<?php if($linha == 0){ ?>
-    <h2 class="alert alert-danger text-center">Não há produtos em destaques</h2>
-<?php } ?>
-
-<?php if($linha > 0){ ?>
-    <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
 
             <?php 
@@ -40,13 +73,14 @@ $linha = count($produtos);
                                 $precoFinal = $precoOriginal - $prod['desconto_valor'];
                             }
                         }
-                        ?>  <a class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center" href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" >
-                        <div class=>
+                        ?>
+                        <div class=" col-12 col-sm-6 col-md-3 mb-2 d-flex justify-content-center">
                            <div class="card h-100" style="width: 16rem;">
                                 <div class="card h-100 shadow-sm"
                                      onmouseover="this.style.transform='scale(1.05)';"
                                      onmouseout="this.style.transform='scale(1)';">
                                     <div class="card-img-container img-fluid" style="max-width: 100%; overflow:height: auto;">
+                                    
                                         <img src="../../images/<?= $prod['imagem_principal'] ?>"
                                              alt="<?= htmlspecialchars($prod['nome']) ?>"
                                              class="card-img-top w-100 h-100"
@@ -85,14 +119,15 @@ $linha = count($produtos);
                                                 </button>
                                             <?php endif; ?>
                                         </div>
-                                    
-                                      
-                                       
-                                       
+                                     
+                                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
+                                           class="btn btn-primary mt-2">
+                                            Saiba mais <i class="bi bi-eye-fill"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div> </a>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -100,23 +135,23 @@ $linha = count($produtos);
 
         </div>
 
-        <!-- Controles -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselProdutos" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselProdutos" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-
-        <!-- Indicadores -->
-        <div class="carousel-indicators mt-3">
-            <?php for($i=0; $i<count($grupos); $i++): ?>
-                <button type="button" data-bs-target="#carouselProdutos" data-bs-slide-to="<?= $i ?>" class="<?= ($i==0?'active':'') ?>"></button>
-            <?php endfor; ?>
-        </div>
-    </div>
-
-<?php } ?>
-
+            <!-- Botões de navegação -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProdutos" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselProdutos" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div> <!-- fecha carousel -->
+    <?php } ?>
 </section>
+
+    <!-- RODAPÉ -->
+    <footer class="text-white p-4 mt-5">
+    <?php include "../menu_publico/rodape.php"?> 
+    </footer>
+
+    <!-- Bootstrap JS + Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

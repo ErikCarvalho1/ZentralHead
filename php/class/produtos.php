@@ -1,6 +1,6 @@
 <?php 
 include "db.php";
-class produtos {
+class Produtos {
 
 private $id;
 private $codBarras;
@@ -104,6 +104,32 @@ public function listar (){
     $cmd->execute();
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+  public function listarDestaques() {
+        $sql = "
+            SELECT p.*, d.tipo AS desconto_tipo, d.valor AS desconto_valor
+            FROM produtos p
+            LEFT JOIN produto_desconto pd ON p.id = pd.produto_id
+            LEFT JOIN descontos d ON d.id = pd.desconto_id
+                AND d.ativo = 1
+                AND CURDATE() BETWEEN d.data_inicio AND d.data_fim
+            WHERE p.destaques = 1
+            ORDER BY p.criado_em DESC
+        ";
+
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->execute();
+
+        return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    
+}
+public function listarPorId ($id){
+    $sql = "SELECT * FROM  produtos WHERE id = :id LIMIT 1";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+    $cmd->execute();
+    return $cmd->fetch(PDO::FETCH_ASSOC);
+}
+
 public function atualizar (){
     $sql = "CALL sp_produtos_update SET codBarras = :codBarras, descricao = :descricao, valorUnit = :valorUnit, unidade_vendas = :unidade_venda, categoria_id = :categoria_id, estoque_minimo = :estoque_minimo, classe_desconto = :classe_desconto, imagem = :imagem, data_cadastro = :data_cadastro, descontinuado = :descontinuado WHERE id = :id";
     $cmd = $this->pdo->prepare($sql);
