@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <!-- Logo -->
@@ -26,12 +27,12 @@
             </ul>
             
             <ul class="navbar-nav ms-auto">
-  <button class="btn text-white position-relative" 
-        data-bs-toggle="offcanvas" 
-        data-bs-target="#offcanvasCarrinho">
-  <i class="bi bi-cart"></i>
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="qtdCarrinho">0</span>
-</button>
+ <li class="nav-item mx-3">
+    <button class="btn nav-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#carrinhoOffcanvas">
+        <i class="bi bi-cart3"></i>
+        <span class="badge bg-danger" id="cart-count">0</span>
+    </button>
+</li>
 
 
                 <!-- Ícone Usuário -->
@@ -42,6 +43,6 @@
             </ul>
             
         </div>
+        
     </div>
 
-<!-- tetando -->

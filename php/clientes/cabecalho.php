@@ -35,7 +35,13 @@ if (session_status() === PHP_SESSION_NONE) {
             </ul>
 
             <ul class="navbar-nav ms-auto">
-                <!-- carrinho -->
+           <!-- Botão do carrinho -->
+<li class="nav-item mx-3">
+    <button class="btn nav-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#carrinhoOffcanvas">
+        <i class="bi bi-cart3"></i>
+        <span class="badge bg-danger" id="cart-count">0</span>
+    </button>
+</li>
 
 
                 <?php
@@ -59,14 +65,6 @@ if (session_status() === PHP_SESSION_NONE) {
         </div>
     </div>
 </nav>
-
-<!-- Botão do carrinho -->
-<li class="nav-item mx-3">
-    <button class="btn nav-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#carrinhoOffcanvas">
-        <i class="bi bi-cart3"></i>
-        <span class="badge bg-danger" id="cart-count">0</span>
-    </button>
-</li>
 
 <!-- Offcanvas do Carrinho -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="carrinhoOffcanvas">

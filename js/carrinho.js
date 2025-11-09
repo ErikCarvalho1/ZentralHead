@@ -41,14 +41,18 @@
             total += item.preco * item.qtd;
 
             const row = document.createElement('div');
-            row.className = 'list-group-item';
+            row.className = 'list-group-item cart-item-row d-flex align-items-start justify-content-between';
 
             row.innerHTML = `
-                <div class="d-flex align-items-center">
-                    <img src="/ZentralHead/images/${item.img}" class="cart-img me-3" alt="${escapeHtml(item.nome)}">
+                <div class="d-flex align-items-start">
+                    <img src="/ZentralHead/images/${item.img}" class="cart-img me-3" alt="${escapeHtml(item.nome)}" style="width:80px;height:auto;">
                     <div class="flex-grow-1">
-                        <div><strong>${escapeHtml(item.nome)}</strong></div>
-                        <div class="text-muted">R$ ${formatPrice(item.preco)} cada</div>
+                        <div class="cart-prod-title" style="font-weight:600;">${escapeHtml(item.nome)}</div>
+                        <div class="cart-prod-variant text-muted" style="font-size:14px;">${item.variacao || ''}</div>
+                        <div class="cart-prod-prices mt-1">
+                            ${item.preco_antigo ? `<span class="text-muted" style="text-decoration:line-through;">R$ ${formatPrice(item.preco_antigo)}</span>` : ''}
+                            <span class="cart-prod-price" style="font-weight:600; margin-left:8px;">R$ ${formatPrice(item.preco)}</span>
+                        </div>
                         <div class="d-flex align-items-center mt-2">
                             <button class="btn btn-sm btn-outline-secondary qty-decrease" data-id="${item.id}">-</button>
                             <input type="number" min="1" class="form-control form-control-sm mx-2 qty-input" 
@@ -56,8 +60,10 @@
                             <button class="btn btn-sm btn-outline-secondary qty-increase" data-id="${item.id}">+</button>
                         </div>
                     </div>
-                  
                 </div>
+                <button class="btn btn-link text-dark remove-item" data-id="${item.id}" style="font-size:22px; margin-left:10px;">
+                    &times;
+                </button>
             `;
             list.appendChild(row);
         });
