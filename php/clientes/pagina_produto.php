@@ -73,16 +73,23 @@ if(!$produto){
 
       <!-- Quantidade -->
       <div class="d-flex align-items-center mb-4">
-        <label class="me-3 fw-bold">Quantidade:</label>
-        <button class="btn btn-outline-secondary btn-sm">-</button>
-        <input type="text" value="1" class="form-control text-center mx-2" style="width:60px;">
-        <button class="btn btn-outline-secondary btn-sm">+</button>
+          <label class="me-3 fw-bold">Quantidade:</label>
+          <button class="btn btn-outline-secondary btn-sm" onclick="decrementQty()">-</button>
+          <input type="text" id="qty" value="1" class="form-control text-center mx-2" style="width:60px;">
+          <button class="btn btn-outline-secondary btn-sm" onclick="incrementQty()">+</button>
       </div>
 
       <!-- Botões -->
       <div class="d-flex gap-2">
-        <button class="btn btn-warning"> Adicionar ao carrinho </button>
-        <button class="btn btn-danger"> Comprar agora </button>
+          <button class="btn btn-warning" onclick="addToCart(<?php 
+              echo htmlspecialchars(json_encode([
+                  'id' => $produto['id'],
+                  'nome' => $produto['nome'],
+                  'preco' => floatval($produto['valor_base']),
+                  'img' => $produto['imagem_principal']
+              ])); 
+          ?>)"> Adicionar ao carrinho </button>
+          <button class="btn btn-danger"> Comprar agora </button>
       </div>
     </div>
   </div>
@@ -94,6 +101,50 @@ if(!$produto){
  
 
 </body>
+
 </html>
+
+<script>
+function incrementQty() {
+    const qtyInput = document.getElementById('qty');
+    qtyInput.value = parseInt(qtyInput.value) + 1;
+}
+
+function decrementQty() {
+    const qtyInput = document.getElementById('qty');
+    const newValue = parseInt(qtyInput.value) - 1;
+    qtyInput.value = newValue > 0 ? newValue : 1;
+}
+
+function addToCart(produto) {
+    const qty = parseInt(document.getElementById('qty').value);
+    if (qty < 1) {
+        alert('Quantidade inválida');
+        return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem('carrinho') || '[]');
+    
+    const existingItem = cart.find(item => item.id === produto.id);
+    
+    if (existingItem) {
+        existingItem.qtd += qty;
+    } else {
+        cart.push({
+            ...produto,
+            qtd: qty
+        });
+    }
+
+    localStorage.setItem('carrinho', JSON.stringify(cart));
+    
+    // Atualiza o contador do carrinho
+    const cartCount = document.getElementById('cart-count');
+    const totalItems = cart.reduce((acc, item) => acc + item.qtd, 0);
+    if (cartCount) cartCount.textContent = totalItems;
+
+    alert('Produto adicionado ao carrinho!');
+}
+</script>
 
 
