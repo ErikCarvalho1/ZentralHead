@@ -27,7 +27,7 @@
     <header>
         <?php include_once "cabecalho.php"; ?>
     </header>
-
+<h2>sassasa</h2>
     <!-- CONTEÚDO -->
     <?php 
 include "../class/produtos.php";
@@ -36,19 +36,16 @@ $produtos = $produto->listar(1);
 
 
 $linha = count($produtos);
-
 ?>
 <section class="container my-4">
-    <?php if($linha == 0){ ?>
-        <h2 class="alert alert-danger">Não há produtos em destaques</h2>
-    <?php } ?>
-
-    <?php if($linha > 0){ ?>
-        <h2>Produtos Em Destaques</h2>
-
-        <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
+<?php if($linha == 0){ ?>
+    <h2 class="alert alert-danger text-center">Não há produtos em destaques</h2>
+<?php } ?>
+<h2 class="text-center text-black mb-4">Camisas Zentral</h2>
+<?php if($linha > 0){ ?>
+    <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-
+        
             <?php 
             $active = "active";
             // Quebra o array de produtos em grupos de 4 por slide
@@ -58,8 +55,9 @@ $linha = count($produtos);
             
             <div class="carousel-item <?= $active ?>">
                 <?php $active = ""; ?>
-
+                <h2 class="text-center text-black"></h2>
                 <div class="row justify-content-center">
+                
                     <?php foreach($grupo as $prod): ?>
                         <?php
                         // Cálculo do preço final considerando desconto
@@ -73,14 +71,13 @@ $linha = count($produtos);
                                 $precoFinal = $precoOriginal - $prod['desconto_valor'];
                             }
                         }
-                        ?>
-                        <div class=" col-12 col-sm-6 col-md-3 mb-2 d-flex justify-content-center">
+                        ?>  <a class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center" href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" >
+                        <div class=>
                            <div class="card h-100" style="width: 16rem;">
                                 <div class="card h-100 shadow-sm"
                                      onmouseover="this.style.transform='scale(1.05)';"
                                      onmouseout="this.style.transform='scale(1)';">
-                                    <div class="card-img-container img-fluid" style="max-width: 100%; overflow:height: auto;">
-                                    
+                                    <div class="card-img-container img-fluid" style="max-width: 100%; height: auto; overflow: hidden;">
                                         <img src="../../images/<?= $prod['imagem_principal'] ?>"
                                              alt="<?= htmlspecialchars($prod['nome']) ?>"
                                              class="card-img-top w-100 h-100"
@@ -103,8 +100,13 @@ $linha = count($produtos);
                                                         <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
                                                     </span>
                                                     <br>
-                                                    <button class="btn btn-success disabled">
-                                                        <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
+                                               
+                                                    <button class="btn btn-success add-to-cart"
+                                                        data-id="<?= $prod['id'] ?>"
+                                                        data-nome="<?= htmlspecialchars($prod['nome']) ?>"
+                                                        data-preco="<?= $precoFinal ?>"
+                                                        data-img="<?= $prod['imagem_principal'] ?>">
+                                                        Adicionar ao carrinho
                                                     </button>
                                                     <br>
                                                     <small class="text-danger">
@@ -114,20 +116,26 @@ $linha = count($produtos);
                                                     </small>
                                                 </div>
                                             <?php else: ?>
-                                                <button class="btn btn-secondary disabled">
-                                                    <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
+                                                <button class="btn btn-secondary add-to-cart"
+                                                    data-id="<?= $prod['id'] ?>"
+                                                    data-nome="<?= htmlspecialchars($prod['nome']) ?>"
+                                                    data-preco="<?= $precoOriginal ?>"
+                                                    data-img="<?= $prod['imagem_principal'] ?>">
+                                                    Adicionar ao carrinho
                                                 </button>
+                                                     <button class="btn btn-success disabled">
+                                                        <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
+                                                    </button>
                                             <?php endif; ?>
                                         </div>
-                                     
-                                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
-                                           class="btn btn-primary mt-2">
-                                            Saiba mais <i class="bi bi-eye-fill"></i>
-                                        </a>
+                                    
+                                      
+                                       
+                                       
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> </a>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -145,7 +153,7 @@ $linha = count($produtos);
         </div> <!-- fecha carousel -->
     <?php } ?>
 </section>
-
+<h2 class="text-center text-black mb-4">Calças</h2>
     <!-- RODAPÉ -->
     <footer class="text-white p-4 mt-5">
     <?php include "../menu_publico/rodape.php"?> 
