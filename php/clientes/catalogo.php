@@ -32,7 +32,7 @@
     <?php 
 include "../class/produtos.php";
 $produto = new Produtos();
-$produtos = $produto->listar(1); 
+$produtos = $produto->listarPorDescricao($termo); 
 
 
 $linha = count($produtos);
