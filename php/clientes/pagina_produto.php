@@ -25,7 +25,7 @@ if(!$produto){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script> 
-  <title>Document</title>
+  <title>Pagina Produto</title>
 
 </head>
 <body>
@@ -54,10 +54,32 @@ if(!$produto){
       <h2><?php echo $produto['nome']; ?></h2>
 
       <!-- Avaliações -->
-      <div class="mb-2">
-        <span class="text-warning"> ★★★★☆ </span>
-        <span class="text-muted">(4.3) • 21,7 mil avaliações</span>
-      </div>
+      <?php
+$conn = getConnection();
+$sql = "SELECT AVG(nota) AS media, COUNT(*) AS total FROM avaliacoes WHERE produtos_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $produto['id']);
+$stmt->execute();
+$result = $stmt->get_result()->fetch_assoc();
+
+$media = round($result['media'] ?? 0, 1);
+$total = $result['total'] ?? 0;
+?>
+<div class="mb-2">
+  <span class="text-warning">
+    <?php
+    $estrelasCheias = floor($media);
+    $meia = ($media - $estrelasCheias >= 0.5);
+    for ($i = 1; $i <= 5; $i++) {
+        if ($i <= $estrelasCheias) echo "★";
+        elseif ($meia && $i == $estrelasCheias + 1) echo "☆";
+        else echo "☆";
+    }
+    ?>
+  </span>
+  <span class="text-muted">(<?php echo $media; ?>) • <?php echo $total; ?> avaliações</span>
+</div>
+
 
       <!-- Preço -->
      
@@ -95,6 +117,34 @@ if(!$produto){
   </div>
 </div>
 </main>
+<hr>
+<div class="mt-5">
+  <h4>Deixe sua avaliação</h4>
+
+  <form action="../class/salvar_avaliacao.php" method="POST">
+      <input type="hidden" name="produto_id" value="<?php echo $produto['id']; ?>">
+      <input type="hidden" name="usuario_id" value="<?php echo $_SESSION['usuario_id'] ?? 1; ?>"> <!-- ajustar conforme login -->
+
+      <div class="mb-3">
+          <label class="form-label fw-bold">Sua Avaliação:</label><br>
+          <div id="estrelas" class="text-warning fs-4">
+              <input type="radio" name="nota" id="estrela5" value="5"><label for="estrela5">★</label>
+              <input type="radio" name="nota" id="estrela4" value="4"><label for="estrela4">★</label>
+              <input type="radio" name="nota" id="estrela3" value="3"><label for="estrela3">★</label>
+              <input type="radio" name="nota" id="estrela2" value="2"><label for="estrela2">★</label>
+              <input type="radio" name="nota" id="estrela1" value="1"><label for="estrela1">★</label>
+          </div>
+      </div>
+
+      <div class="mb-3">
+          <label class="form-label fw-bold">Comentario:</label>
+          <textarea name="comentario" rows="3" class="form-control" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-success">Enviar reseña</button>
+  </form>
+</div>
+
 <footer class="text-white p-4 mt-5">
     <?php include "../menu_publico/rodape.php"?> 
   </footer>
