@@ -18,41 +18,30 @@ CREATE SCHEMA IF NOT EXISTS `zentralhead` DEFAULT CHARACTER SET utf8mb4 ;
 USE `zentralhead` ;
 
 -- -----------------------------------------------------
--- Table `zentralhead`.`niveis`
+-- Table `zentralhead`.`cliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`niveis` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `sigla` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-AUTO_INCREMENT = 12
-DEFAULT CHARACTER SET = utf8mb4;
-
-
--- -----------------------------------------------------
--- Table `zentralhead`.`usuarios`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`usuarios` (
+CREATE TABLE IF NOT EXISTS `zentralhead`.`cliente` (
   `id` INT(4) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(60) NOT NULL,
   `email` VARCHAR(60) NOT NULL,
   `senha` VARCHAR(32) NOT NULL,
-  `nivel_id` INT(11) NOT NULL,
   `ativo` BIT(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  INDEX `fk_usuarios_niveis1_idx` (`nivel_id` ASC) VISIBLE,
-  CONSTRAINT `fk_usuarios_niveis`
-    FOREIGN KEY (`nivel_id`)
-    REFERENCES `zentralhead`.`niveis` (`id`),
-  CONSTRAINT `fk_usuarios_niveis1`
-    FOREIGN KEY (`nivel_id`)
-    REFERENCES `zentralhead`.`niveis` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 1016
+AUTO_INCREMENT = 1023
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
+-- Table `zentralhead`.`categorias`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `zentralhead`.`categorias` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -69,7 +58,14 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
   `criado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
   `atualizado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
   `destaques` BIT(1) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
+  `categoria_id` INT(11) NULL DEFAULT NULL,
+  `categorias_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_categorias` (`categorias_id` ASC) VISIBLE,
+  CONSTRAINT `fk_categorias`
+    FOREIGN KEY (`categorias_id`)
+    REFERENCES `zentralhead`.`categorias` (`id`)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 13
 DEFAULT CHARACTER SET = utf8mb4;
@@ -91,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`avaliacoes` (
   INDEX `produtos_id` (`produtos_id` ASC) VISIBLE,
   CONSTRAINT `avaliacoes_ibfk_1`
     FOREIGN KEY (`usuarios_id`)
-    REFERENCES `zentralhead`.`usuarios` (`id`)
+    REFERENCES `zentralhead`.`cliente` (`id`)
     ON DELETE CASCADE,
   CONSTRAINT `avaliacoes_ibfk_2`
     FOREIGN KEY (`produtos_id`)
@@ -114,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`caixas` (
   INDEX `fk_Caixa_Usuarios1_idx` (`usuario_id` ASC) VISIBLE,
   CONSTRAINT `fk_Caixa_Usuarios1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `zentralhead`.`usuarios` (`id`)
+    REFERENCES `zentralhead`.`cliente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -122,9 +118,9 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
--- Table `zentralhead`.`clientes`
+-- Table `zentralhead`.`clientes_old`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `zentralhead`.`clientes` (
+CREATE TABLE IF NOT EXISTS `zentralhead`.`clientes_old` (
   `id` INT(4) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `cpf` CHAR(11) NOT NULL,
@@ -190,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`enderecos` (
   INDEX `fk_table1_clientes_idx` (`cliente_id` ASC) VISIBLE,
   CONSTRAINT `fk_table1_clientes`
     FOREIGN KEY (`cliente_id`)
-    REFERENCES `zentralhead`.`clientes` (`id`)
+    REFERENCES `zentralhead`.`clientes_old` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -216,6 +212,19 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 
 -- -----------------------------------------------------
+-- Table `zentralhead`.`niveis`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `zentralhead`.`niveis` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `sigla` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 12
+DEFAULT CHARACTER SET = utf8mb4;
+
+
+-- -----------------------------------------------------
 -- Table `zentralhead`.`pedidos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `zentralhead`.`pedidos` (
@@ -230,12 +239,12 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`pedidos` (
   INDEX `fk_Pedido_Clientes1_idx` (`cliente_id` ASC) VISIBLE,
   CONSTRAINT `fk_Pedido_Clientes1`
     FOREIGN KEY (`cliente_id`)
-    REFERENCES `zentralhead`.`clientes` (`id`)
+    REFERENCES `zentralhead`.`clientes_old` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Pedido_Usuarios1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `zentralhead`.`usuarios` (`id`)
+    REFERENCES `zentralhead`.`cliente` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

@@ -3,7 +3,6 @@ include_once '../class/usuarios.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $usuario = new Usuarios();
-    $usuario->setNiveld(11); // nível padrão para clientes
     $usuario->setNome(trim($_POST['nome'] ?? ''));
     $usuario->setEmail(trim($_POST['email'] ?? ''));
     $usuario->setSenha(($_POST['senha'] ?? ''));
