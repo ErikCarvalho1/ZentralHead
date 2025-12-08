@@ -159,4 +159,5 @@ public function listarPorDescricao (string $descricao): array {
     $cmd->execute();
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+}
 ?>
