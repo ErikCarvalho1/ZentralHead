@@ -51,12 +51,14 @@ class Usuarios{
 
     public function Inserir(){
         // use MD5(:senha) if você quer armazenar MD5 (inseguro). Recomenda-se password_hash.
-        $sql = "INSERT INTO usuarios (nome, email, senha, nivel_id, ativo) VALUES (:nome, :email, MD5(:senha), :nivel_id, :ativo)";
+
+        $sql = "INSERT INTO cliente (nome, email, senha,  ativo) VALUES (:nome, :email, MD5(:senha), :ativo)";
+
         $cmd = $this->pdo->prepare($sql);
         $cmd->bindValue(":nome", $this->nome, PDO::PARAM_STR);
         $cmd->bindValue(":email", $this->email, PDO::PARAM_STR);
         $cmd->bindValue(":senha", $this->senha, PDO::PARAM_STR);
-        $cmd->bindValue(":nivel_id", $this->nivelId, PDO::PARAM_INT);
+
         $cmd->bindValue(":ativo", $this->ativo, PDO::PARAM_INT);
 
         if($cmd->execute()){
@@ -70,10 +72,10 @@ class Usuarios{
              $id = $idUpdate;
         if(!$this->id) return false;
          // ajustado para incluir :id no CALL (se a procedure espera id como primeiro parâmetro)
-         $sql = "CALL sp_usuario_update(:id, :nivel_id, :nome, :email, :ativo)";
+         $sql = "CALL sp_usuario_update(:id, :nome, :email, :ativo)";
          $cmd = $this->pdo->prepare($sql);
          $cmd->bindValue(":id", $this->id, PDO::PARAM_INT);
-         $cmd->bindValue(":nivel_id", $this->nivelId, PDO::PARAM_INT);
+       
          $cmd->bindValue(":nome", $this->nome);
          $cmd->bindValue(":email", $this->email);
          $cmd->bindValue(":ativo", $this->ativo);
@@ -86,15 +88,16 @@ class Usuarios{
         $cmd = $this->pdo->query("select * from usuarios order by id DESC");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
-public function efetuarLogin(string $loginInformado, string $senhaInformada): array|bool {
-    $sql = "SELECT u.*, n.nome AS nome_nivel
-            FROM usuarios u
-            INNER JOIN niveis n ON n.id = u.nivel_id
-            WHERE u.email = :email 
-              AND u.senha = MD5(:senha)
-              AND u.ativo = 1
-            LIMIT 1";
-
+  //efetuarlogin
+        public function efetuarLogin(string $loginInformado, string $senhaInformada):array {
+        $sql = "select * from cliente where email = :email and senha = md5(:senha)";
+        $cmd =  $this->pdo->prepare($sql);
+        $cmd -> bindValue(":email", $loginInformado);
+         $cmd -> bindValue(":senha", $senhaInformada);
+        $cmd->execute();
+       
+            $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+            return $dados;
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(":email", $loginInformado);
     $cmd->bindValue(":senha", $senhaInformada);
