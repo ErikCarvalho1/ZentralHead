@@ -12,10 +12,11 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="card">
-                    <div class="card-body text-center">Item 1</div>
+                    <div class="card-body text-center" >Item 1</div>
                   </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" href="
+                ../clientes/categorias.php">
                   <div class="card">
                     <div class="card-body text-center">Item 2</div>
                   </div>

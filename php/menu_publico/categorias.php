@@ -11,7 +11,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="card">
-                     <a href=""><div class="d-flex justify-content-center mb-3">
+                     <a  href="../clientes/categorias.php"><div class="d-flex justify-content-center mb-3">
                 <img src="../../images/LogoZentral.png" class="img-fluid" style="max-height: 200px; object-fit: contain;">
               </div></a>
                   </div>

@@ -1,4 +1,53 @@
 <?php
+
+include "../class/categorias.php";
+$catClass = new catergorias();
+$categorias = $catClass->listar();
+?>
+
+<section class="my-5">
+    <h2 class="text-center mb-4">Categorias</h2>
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <?php 
+            $active = "active";
+            $grupos = array_chunk($categorias, 3);
+            foreach($grupos as $grupo):
+            ?>
+            <div class="carousel-item <?= $active ?>">
+                <?php $active = ""; ?>
+                <div class="row">
+                    <?php foreach($grupo as $cat): ?>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <a href="catalogo.php?categoria=<?= urlencode($cat['nome']) ?>" 
+                               class="text-decoration-none">
+                                <div class="d-flex justify-content-center mb-3 p-4">
+                                    <img src="../../images/LogoZentral.png" class="img-fluid" 
+                                         style="max-height: 200px; object-fit: contain;">
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5 class="card-title"><?= htmlspecialchars($cat['nome']) ?></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</section>
+
+<?php
 // filepath: c:\xampp\htdocs\ZentralHead\php\menu_publico\produtos-por-categoria.php
 include_once "../class/produtos.php";
 
@@ -13,7 +62,7 @@ $linha = count($produtos);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo - <?= htmlspecialchars($categoria) ?></title>
+    <title>Produtos - <?= htmlspecialchars($categoria) ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
@@ -22,10 +71,7 @@ $linha = count($produtos);
     <?php include "cabecalho.php"; ?>
 
     <main class="container my-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Catálogo - <?= htmlspecialchars($categoria) ?></h2>
-            <a href="index.php" class="btn btn-secondary btn-sm">Voltar</a>
-        </div>
+        <h2 class="mb-4">Produtos - <?= htmlspecialchars($categoria) ?></h2>
 
         <?php if($linha == 0): ?>
             <div class="alert alert-info text-center">
