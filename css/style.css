@@ -161,3 +161,24 @@ footer{
     height: 64px; 
     object-fit: contain; 
 }
+
+.estrela-avaliacao input[type="radio"] {
+  display: none;
+}
+
+.estrela-avaliacao label {
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: inline-block; /* garante que fiquem lado a lado */
+}
+
+.estrela-avaliacao label:hover,
+.estrela-avaliacao label:hover ~ label {
+  color: gold;
+}
+
+.estrela-avaliacao input[type="radio"]:checked ~ label {
+  color: gold;
+}

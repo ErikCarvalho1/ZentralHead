@@ -25,6 +25,8 @@ if(!$produto){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script> 
+    <link rel="stylesheet" href="style.css">
+
   <title>Pagina Produto</title>
 
 </head>
@@ -53,14 +55,19 @@ if(!$produto){
       <h4 class="text-muted"><?php echo $produto['categoria'] ?? "Produto em destaque"; ?></h4>
       <h2><?php echo $produto['nome']; ?></h2>
 
+
+
+
+
+      
       <!-- Avaliações -->
       <?php
 $conn = getConnection();
 $sql = "SELECT AVG(nota) AS media, COUNT(*) AS total FROM avaliacoes WHERE produtos_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $produto['id']);
+$stmt->bindValue(1, $produto['id'], PDO::PARAM_INT);
 $stmt->execute();
-$result = $stmt->get_result()->fetch_assoc();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $media = round($result['media'] ?? 0, 1);
 $total = $result['total'] ?? 0;
@@ -85,13 +92,65 @@ $total = $result['total'] ?? 0;
      
       <p class="text-muted"><?php echo $produto['valor_base']; ?></p>
 
-      <!-- Modelos / tamanhos -->
-      <div class="mb-3">
-        <label class="form-label fw-bold">Modelo:</label><br>
-        <button class="btn btn-outline-secondary btn-sm">Azul</button>
-        <button class="btn btn-outline-secondary btn-sm"> Bege</button>
-        <button class="btn btn-outline-secondary btn-sm">Rosa</button>
-      </div>
+      <?php
+$conn = getConnection();
+
+// Buscar cores disponíveis para o produto atual
+$sql = "SELECT DISTINCT c.nome 
+        FROM produto_detalhes pd
+        JOIN cores c ON pd.cor_id = c.id
+        WHERE pd.produto_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(1, $produto['id'], PDO::PARAM_INT);
+$stmt->execute();
+$cores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+
+<?php
+$conn = getConnection();
+
+// Buscar tamanhos disponíveis para o produto atual
+$sql = "SELECT DISTINCT t.nome 
+        FROM produto_detalhes pd
+        JOIN tamanhos t ON pd.tamanho_id = t.id
+        WHERE pd.produto_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(1, $produto['id'], PDO::PARAM_INT);
+$stmt->execute();
+$tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+<div class="d-flex gap-4 mb-3">
+  <!-- Cores -->
+  <div>
+    <label class="form-label fw-bold">Cor:</label><br>
+    <?php if (!empty($cores)): ?>
+        <?php foreach ($cores as $cor): ?>
+            <button class="btn btn-outline-secondary btn-sm">
+                <?php echo htmlspecialchars($cor['nome']); ?>
+            </button>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <span class="text-muted">Nenhuma cor disponível</span>
+    <?php endif; ?>
+  </div>
+
+  <!-- Tamanhos -->
+  <div>
+    <label class="form-label fw-bold">Tamanho:</label><br>
+    <?php if (!empty($tamanhos)): ?>
+        <?php foreach ($tamanhos as $tamanho): ?>
+            <button class="btn btn-outline-secondary btn-sm">
+                <?php echo htmlspecialchars($tamanho['nome']); ?>
+            </button>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <span class="text-muted">Nenhum tamanho disponível</span>
+    <?php endif; ?>
+  </div>
+</div>
+
+
 
       <!-- Quantidade -->
       <div class="d-flex align-items-center mb-4">
@@ -118,32 +177,14 @@ $total = $result['total'] ?? 0;
 </div>
 </main>
 <hr>
-<div class="mt-5">
-  <h4>Deixe sua avaliação</h4>
+<!--Avaliações-->
 
-  <form action="../class/salvar_avaliacao.php" method="POST">
-      <input type="hidden" name="produto_id" value="<?php echo $produto['id']; ?>">
-      <input type="hidden" name="usuario_id" value="<?php echo $_SESSION['usuario_id'] ?? 1; ?>"> <!-- ajustar conforme login -->
 
-      <div class="mb-3">
-          <label class="form-label fw-bold">Sua Avaliação:</label><br>
-          <div id="estrelas" class="text-warning fs-4">
-              <input type="radio" name="nota" id="estrela5" value="5"><label for="estrela5">★</label>
-              <input type="radio" name="nota" id="estrela4" value="4"><label for="estrela4">★</label>
-              <input type="radio" name="nota" id="estrela3" value="3"><label for="estrela3">★</label>
-              <input type="radio" name="nota" id="estrela2" value="2"><label for="estrela2">★</label>
-              <input type="radio" name="nota" id="estrela1" value="1"><label for="estrela1">★</label>
-          </div>
-      </div>
 
-      <div class="mb-3">
-          <label class="form-label fw-bold">Comentario:</label>
-          <textarea name="comentario" rows="3" class="form-control" required></textarea>
-      </div>
 
-      <button type="submit" class="btn btn-success">Enviar reseña</button>
-  </form>
-</div>
+
+
+
 
 <footer class="text-white p-4 mt-5">
     <?php include "../menu_publico/rodape.php"?> 

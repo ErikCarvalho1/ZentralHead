@@ -4,6 +4,7 @@ session_start();
 $id = $_GET['id'];
 $nome = $_GET['nome'];
 $preco = $_GET['preco'];
+$cor = $_GET['cor'];
 
 if(!isset($_SESSION['carrinho'])){
     $_SESSION['carrinho'] = [];
@@ -17,7 +18,9 @@ if(isset($_SESSION['carrinho'][$id])){
         'id' => $id,
         'nome' => $nome,
         'preco' => $preco,
+        'cor' =>$cor,
         'quantidade' => 1
+    
     ];
 }
 
