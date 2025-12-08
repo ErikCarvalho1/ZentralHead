@@ -51,7 +51,9 @@ class Usuarios{
 
     public function Inserir(){
         // use MD5(:senha) if você quer armazenar MD5 (inseguro). Recomenda-se password_hash.
+
         $sql = "INSERT INTO cliente (nome, email, senha,  ativo) VALUES (:nome, :email, MD5(:senha), :ativo)";
+
         $cmd = $this->pdo->prepare($sql);
         $cmd->bindValue(":nome", $this->nome, PDO::PARAM_STR);
         $cmd->bindValue(":email", $this->email, PDO::PARAM_STR);

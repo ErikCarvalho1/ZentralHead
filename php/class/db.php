@@ -2,6 +2,7 @@
 function getConnection(): PDO{//ddd
     static $pdo; 
     if ($pdo === null){ 
+
         $pdo = new  PDO("mysql:host=10.91.47.99;dbname=zentralhead",
         "root",
         "123",

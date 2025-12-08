@@ -152,5 +152,11 @@ public function excluir (int $id){
     $cmd->bindValue(":id", $id);
     $cmd->execute();
 }
+public function listarPorDescricao (string $descricao): array {
+    $sql = "SELECT * FROM produtos WHERE descricao LIKE :descricao";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":descricao", "%".$descricao."%");
+    $cmd->execute();
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
