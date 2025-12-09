@@ -23,6 +23,7 @@
   <body>
     <!-- CABEÇALHO -->
     <header>
+    
     <?php include_once "cabecalho.php"?>
     </header>
     <!-- CONTEÚDO -->
