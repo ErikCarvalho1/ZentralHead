@@ -79,7 +79,7 @@ $linha = count($produtos);
                                 <div class="card h-100 shadow-sm"
                                      onmouseover="this.style.transform='scale(1.05)';"
                                      onmouseout="this.style.transform='scale(1)';">
-                                    <div class="card-img-container img-fluid" style="max-width: 100%; overflow:height: auto;">
+                                    <div class="card-img-container img-fluid" style="max-width: 100%; >
                                     
                                         <img src="../../images/<?= $prod['imagem_principal'] ?>"
                                              alt="<?= htmlspecialchars($prod['nome']) ?>"
