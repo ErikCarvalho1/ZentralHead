@@ -148,7 +148,8 @@ footer .list-unstyled a:hover {
   background-color: #000; /* ou deixe transparente se quiser */
 }
 nav {
-  height: 70px;
+  height: 100px;
+  
 }
 footer{
   background-color: #000;
@@ -161,37 +162,70 @@ footer{
     height: 64px; 
     object-fit: contain; 
 }
-.top-carousel {
+/* ============================= */
+/* CARROSSEL FINO DO TOPO */
+/* ============================= */
+
+.top-bar-carousel {
+  position: relative;
   width: 100%;
-  height: 40px;
-  background: #000;
-  color: #fff;
+  height: 32px;
+  background: #ffffff;
   overflow: hidden;
   display: flex;
   align-items: center;
-  position: relative;
-  z-index: 9999; /* fica acima do header */
+  justify-content: center;
 }
 
-.top-track {
+/* ocultar os radios */
+.top-bar-carousel input {
+  display: none;
+}
+
+/* trilho */
+.top-bar-inner {
   display: flex;
-  animation: slideTop 12s infinite linear;
+  width: 300%;
+  transition: transform 0.3s ease-in-out;
 }
 
-.top-item {
-  min-width: 100vw;
-  text-align: center;
-  font-size: 14px;
+/* cada item */
+.top-bar-item {
+  flex: 0 0 100%;
+  color: #000000;
+  font-size: 13px;
   font-weight: bold;
-  padding: 10px 0;
+  text-align: center;
+  line-height: 32px;
 }
 
-/* ANIMAÇÃO */
-@keyframes slideTop {
-  0%   { transform: translateX(0); }
-  33%  { transform: translateX(-100vw); }
-  66%  { transform: translateX(-200vw); }
-  100% { transform: translateX(0); }
+/* movimento */
+#t1:checked ~ .top-bar-inner { transform: translateX(0); }
+#t2:checked ~ .top-bar-inner { transform: translateX(-100%); }
+#t3:checked ~ .top-bar-inner { transform: translateX(-200%); }
+
+/* setas */
+.top-bar-carousel label {
+  position: absolute;
+  top: 0;
+  height: 32px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000000;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
 }
+
+.top-prev { left: 0; }
+.top-next { right: 0; }
+
+.top-bar-carousel label:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+
 
 

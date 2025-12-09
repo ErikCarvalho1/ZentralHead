@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <script src="/ZentralHead/js/carrinho.js" defer></script>
 
 
-<nav class="navbar navbar-expand-lg  ">
+<nav class="navbar navbar-expand-lg ">
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="index.php">
