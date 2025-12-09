@@ -1,9 +1,9 @@
 /* nosso estilo css */
 
+
 @charset "utf8";
 
-/*tela principal  */
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -76,8 +76,8 @@ header nav {
 body {
       background: linear-gradient(to bottom, #ffffff, #ffffff);
       min-height: 100vh;
+      font-family: 'Inter', sans-serif;
       margin: 0;
-      font-family: Arial, sans-serif;
       color: white; 
 
 }
@@ -164,36 +164,16 @@ footer{
 }
 
 
-.estrela-avaliacao input[type="radio"] {
-  display: none;
-}
 
-.estrela-avaliacao label {
-  font-size: 2rem;
-  color: #ccc;
-  cursor: pointer;
-  transition: color 0.2s;
-  display: inline-block; /* garante que fiquem lado a lado */
-}
 
-.estrela-avaliacao label:hover,
-.estrela-avaliacao label:hover ~ label {
-  color: gold;
-}
-
-.estrela-avaliacao input[type="radio"]:checked ~ label {
-  color: gold;
-}
-=======
 .top-carousel {
-=======
+
 /* ============================= */
 /* CARROSSEL FINO DO TOPO */
 /* ============================= */
 
-.top-bar-carousel {
+
   position: relative;
->>>>>>> af7fac68485567d676b6f18edc9ebc1ffd3f3266
   width: 100%;
   height: 32px;
   background: #ffffff;
@@ -253,9 +233,4 @@ footer{
 }
 
 
-<<<<<<< HEAD
->>>>>>> deef6c012a389707c82433dcaeb139a0faf3e1e7
-=======
 
-
->>>>>>> af7fac68485567d676b6f18edc9ebc1ffd3f3266
