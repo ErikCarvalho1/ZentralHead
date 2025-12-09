@@ -4,7 +4,6 @@ include "../class/categorias.php";
 $catClass = new categorias();
 $categorias = $catClass->listar();
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,10 +19,13 @@ $categorias = $catClass->listar();
     <?php include "cabecalho.php"; ?>
 
     <!-- Header da Página -->
-    <div class="page-header">
-        <div class="container">
+    <div class="page-header ">
+        <div class="  bg-olho  "> 
+            
             <h1><i class="bi bi-tags"></i> Nossas Categorias</h1>
             <p>Explore todas as categorias de produtos disponíveis</p>
+            
+         
         </div>
     </div>
 
@@ -33,12 +35,12 @@ $categorias = $catClass->listar();
             <div class="row g-4">
                 <?php foreach($categorias as $cat): ?>
                 <div class="col-md-6 col-lg-4">
-                    <a href="../menu_publico/catalogo.php?categoria=<?= urlencode($cat['nome']) ?>" 
+                    <a href="../clientes/catalogo.php?categoria=<?= urlencode($cat['nome']) ?>" 
                        class="categoria-link">
                         <div class="card categoria-card h-100">
                             <div class="card-body d-flex flex-column align-items-center justify-content-center text-center py-5">
                                 <div class="categoria-icon">
-                                    <i class="bi bi-box-seam"></i>
+                                  <img  src="../../images/LogoZentral.png" alt="">  
                                 </div>
                                 <h5 class="categoria-title"><?= htmlspecialchars($cat['nome']) ?></h5>
                                 <p class="categoria-count">
