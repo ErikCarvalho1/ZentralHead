@@ -1,6 +1,6 @@
 <?php 
 include_once "db.php";
-class catergorias{
+class categorias{
 
  private $id;
  private $nome;
