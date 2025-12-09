@@ -1,5 +1,16 @@
 <?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
 <!DOCTYPE html>
+<body>
+<!-- CARROSSEL SUPERIOR -->
+<div id= "top-carousel" class="carousel slide" data-bs-ride="carousel">
+<div class="carousel-inner">
+   
+        <div class="top-item">FRETE GRÁTIS NAS COMPRAS ACIMA DE R$250</div>
+        <div class="top-item">PAGAMENTO SEGURO • PIX • CARTÃO</div>
+        <div class="top-item">LANÇAMENTOS TODA SEMANA</div>
+    
+</div>
+
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -24,6 +35,34 @@
   <body >
     <!-- CABEÇALHO -->
     <header>
+    <div id="carouselExample" class="carousel slide">
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <textarea></textarea>
+            </div>
+
+            <div class="carousel-item">
+                <button>ddwdw</button>
+            </div>
+
+            <div class="carousel-item">
+                <textarea></textarea>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+</header>
+
+</div>
     <?php include_once "cabecalho.php"?>
     </header>
     <!-- CONTEÚDO -->

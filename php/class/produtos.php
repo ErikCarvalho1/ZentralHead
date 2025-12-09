@@ -7,7 +7,7 @@ private $codBarras;
 private $descricao;
 private $valorUnit;
 private $unidade_Venda;
-private $categoria_Id;
+private $categorias_Id;
 private $estoque_Minimo;
 private $classe_Desconto;
 private $imagem;
@@ -46,11 +46,11 @@ public function getUnidade_Venda (){
 public function setUnidade_Venda (string $unidade_Venda){
     $this->unidade_Venda = $unidade_Venda;
 }
-public function getCategoria_Id (){
-    return $this->categoria_Id;
+public function getCategorias_Id (){
+    return $this->categorias_Id;
 }
-public function setCategoria_Id (int $categoria_Id){
-    $this->categoria_Id = $categoria_Id;
+public function setCategoria_Id (int $categorias_Id){
+    $this->categorias_Id = $categorias_Id;
 }
 public function getEstoque_Minimo (){
     return $this->estoque_Minimo;
@@ -157,6 +157,44 @@ public function listarPorDescricao (string $descricao): array {
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(":descricao", "%".$descricao."%");
     $cmd->execute();
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
+}
+public function listarPorCategoria(string $categorias): array {
+    $sql = "
+        SELECT p.*, c.nome AS categorias_nome, d.tipo AS desconto_tipo, d.valor AS desconto_valor
+        FROM produtos p
+        LEFT JOIN categorias c ON p.categorias_id = c.id
+        LEFT JOIN produto_desconto pd ON p.id = pd.produto_id
+        LEFT JOIN descontos d ON d.id = pd.desconto_id
+            AND d.ativo = 1
+            AND CURDATE() BETWEEN d.data_inicio AND d.data_fim
+        WHERE c.nome LIKE :categorias
+        ORDER BY p.criado_em DESC
+    ";
+    
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":categorias", "%".$categorias."%");
+    $cmd->execute();
+    
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
+}
+public function listarPorNomeCategoria(string $nomeCat): array {
+    $sql = "
+        SELECT p.*, c.nome AS categoria_nome, d.tipo AS desconto_tipo, d.valor AS desconto_valor
+        FROM produtos p
+        INNER JOIN categorias c ON p.categorias_Id = c.id
+        LEFT JOIN produto_desconto pd ON p.id = pd.produto_id
+        LEFT JOIN descontos d ON d.id = pd.desconto_id
+            AND d.ativo = 1
+            AND CURDATE() BETWEEN d.data_inicio AND d.data_fim
+        WHERE LOWER(c.nome) = LOWER(:categoria)
+        ORDER BY p.id DESC
+    ";
+    
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":categoria", $nomeCat);
+    $cmd->execute();
+    
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
 }

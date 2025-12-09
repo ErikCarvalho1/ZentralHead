@@ -161,6 +161,7 @@ footer{
     height: 64px; 
     object-fit: contain; 
 }
+<<<<<<< HEAD
 
 .estrela-avaliacao input[type="radio"] {
   display: none;
@@ -182,3 +183,39 @@ footer{
 .estrela-avaliacao input[type="radio"]:checked ~ label {
   color: gold;
 }
+=======
+.top-carousel {
+  width: 100%;
+  height: 40px;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 9999; /* fica acima do header */
+}
+
+.top-track {
+  display: flex;
+  animation: slideTop 12s infinite linear;
+}
+
+.top-item {
+  min-width: 100vw;
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+/* ANIMAÇÃO */
+@keyframes slideTop {
+  0%   { transform: translateX(0); }
+  33%  { transform: translateX(-100vw); }
+  66%  { transform: translateX(-200vw); }
+  100% { transform: translateX(0); }
+}
+
+
+>>>>>>> deef6c012a389707c82433dcaeb139a0faf3e1e7
