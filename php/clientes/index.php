@@ -37,8 +37,7 @@
         <?php include_once "../menu_publico/categorias.php"?>
 
 
-       <!-- promoções-->
-        <?php include_once "../menu_publico/promocoes.php"?>
+   
 
      
       </main>

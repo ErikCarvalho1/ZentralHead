@@ -25,10 +25,10 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="collapse navbar-collapse" id="defaultNavbar">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-3">
-                    <a href="catalogo.php" class="text-decoration-none text-reset">Produtos</a>
+                    <a href="produtos.php" class="text-decoration-none text-reset">Produtos</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a href="#" class="text-decoration-none text-reset">Categorias</a>
+                    <a href="categorias.php" class="text-decoration-none text-reset">Categorias</a>
                 </li>
                 <li class="nav-item mx-3">
                     <a href="#" class="text-decoration-none text-reset">Promoções</a>
