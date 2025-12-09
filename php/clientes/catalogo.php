@@ -1,157 +1,96 @@
+<?php
+// filepath: c:\xampp\htdocs\ZentralHead\php\menu_publico\produtos-por-categoria.php
+include_once "../class/produtos.php";
+
+$categoria = $_GET['categoria'] ?? 'Todos';
+$prod = new Produtos();
+$produtos = $prod->listarPorNomeCategoria($categoria);
+$linha = count($produtos);
+?>
+
 <!DOCTYPE html>
-<?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos Zentral</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
- <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-   
-    <!-- Bootstrap 5.3 -->
-    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
-    <!-- CSS local -->
-    <link rel="stylesheet" href="../../css/style.css" />
-
-    <!-- js -->
-    <script src="../../js/bootstrap.bundle.min.js" defer></script>
-    <script src="../../js/inicial.js" defer></script>
+    <title>Catálogo - <?= htmlspecialchars($categoria) ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
 <body>
-    <!-- CABEÇALHO -->
-    <header>
-        <?php include_once "cabecalho.php"; ?>
-    </header>
+    <?php include "cabecalho.php"; ?>
 
-    <!-- CONTEÚDO -->
-    <?php 
-include "../class/produtos.php";
-$produto = new Produtos();
-$produtos = $produto->listar(1); 
+    <main class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Catálogo - <?= htmlspecialchars($categoria) ?></h2>
+            <a href="index.php" class="btn btn-secondary btn-sm">Voltar</a>
+        </div>
 
-
-$linha = count($produtos);
-
-?>
-<section class="container my-4">
-    <?php if($linha == 0){ ?>
-        <h2 class="alert alert-danger">Não há produtos em destaques</h2>
-    <?php } ?>
-
-    <?php if($linha > 0){ ?>
-        <h2>Produtos Em Destaques</h2>
-
-        <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-
-            <?php 
-            $active = "active";
-            // Quebra o array de produtos em grupos de 4 por slide
-            $grupos = array_chunk($produtos, 3);
-            foreach($grupos as $grupo):
-            ?>
-            
-            <div class="carousel-item <?= $active ?>">
-                <?php $active = ""; ?>
-
-                <div class="row justify-content-center">
-                    <?php foreach($grupo as $prod): ?>
-                        <?php
-                        // Cálculo do preço final considerando desconto
-                        $precoOriginal = $prod['valor_base'];
-                        $precoFinal = $precoOriginal;
-
-                        if (!empty($prod['desconto_tipo']) && $prod['desconto_valor'] > 0) {
-                            if ($prod['desconto_tipo'] === 'percentual') {
-                                $precoFinal = $precoOriginal - ($precoOriginal * $prod['desconto_valor'] / 100);
-                            } elseif ($prod['desconto_tipo'] === 'fixo') {
-                                $precoFinal = $precoOriginal - $prod['desconto_valor'];
-                            }
+        <?php if($linha == 0): ?>
+            <div class="alert alert-info text-center">
+                Nenhum produto encontrado nesta categoria.
+            </div>
+        <?php else: ?>
+            <div class="row">
+                <?php foreach($produtos as $prod): ?>
+                    <?php
+                    $precoOriginal = $prod['valor_base'];
+                    $precoFinal = $precoOriginal;
+                    if (!empty($prod['desconto_tipo']) && $prod['desconto_valor'] > 0) {
+                        if ($prod['desconto_tipo'] === 'percentual') {
+                            $precoFinal = $precoOriginal - ($precoOriginal * $prod['desconto_valor'] / 100);
+                        } elseif ($prod['desconto_tipo'] === 'fixo') {
+                            $precoFinal = $precoOriginal - $prod['desconto_valor'];
                         }
-                        ?>
-                        <div class=" col-12 col-sm-6 col-md-3 mb-2 d-flex justify-content-center">
-                           <div class="card h-100" style="width: 16rem;">
-                                <div class="card h-100 shadow-sm"
-                                     onmouseover="this.style.transform='scale(1.05)';"
-                                     onmouseout="this.style.transform='scale(1)';">
-                                    <div class="card-img-container img-fluid" style="max-width: 100%; overflow:height: auto;">
-                                    
-                                        <img src="../../images/<?= $prod['imagem_principal'] ?>"
-                                             alt="<?= htmlspecialchars($prod['nome']) ?>"
-                                             class="card-img-top w-100 h-100"
-                                             style="object-fit: contain;">
-                                    </div>
-
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title text-black">
-                                            <strong><?= $prod['nome'] ?></strong>
-                                        </h5>
-
-                                        <p class="card-text text-muted">
-                                            <?= mb_strimwidth($prod['descricao_curta'], 0, 42, '...') ?>
-                                        </p>
-
-                                        <div class="mt-3">
-                                            <?php if ($precoFinal < $precoOriginal): ?>
-                                                <div>
-                                                    <span class="text-muted text-decoration-line-through">
-                                                        <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
-                                                    </span>
-                                                    <br>
-                                                    <button class="btn btn-success disabled">
-                                                        <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
-                                                    </button>
-                                                    <br>
-                                                    <small class="text-danger">
-                                                        <?= ($prod['desconto_tipo'] === 'percentual')
-                                                            ? "-".$prod['desconto_valor']."% OFF"
-                                                            : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
-                                                    </small>
-                                                </div>
-                                            <?php else: ?>
-                                                <button class="btn btn-secondary disabled">
-                                                    <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
-                                                </button>
-                                            <?php endif; ?>
-                                        </div>
-                                     
-                                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
-                                           class="btn btn-primary mt-2">
-                                            Saiba mais <i class="bi bi-eye-fill"></i>
-                                        </a>
+                    }
+                    ?>
+                    <div class="col-md-4 mb-4">
+                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" class="text-decoration-none">
+                            <div class="card h-100 shadow-sm" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <img src="../../images/<?= htmlspecialchars($prod['imagem_principal']) ?>" 
+                                     class="card-img-top" style="object-fit: contain; height: 300px;">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title"><?= htmlspecialchars($prod['nome']) ?></h5>
+                                    <p class="text-muted"><?= mb_strimwidth($prod['descricao_curta'], 0, 50, '...') ?></p>
+                                    <div class="mt-3">
+                                        <?php if ($precoFinal < $precoOriginal): ?>
+                                            <span class="text-decoration-line-through text-muted">
+                                                R$ <?= number_format($precoOriginal, 2, ',', '.') ?>
+                                            </span><br>
+                                            <strong class="text-success">
+                                                R$ <?= number_format($precoFinal, 2, ',', '.') ?>
+                                            </strong><br>
+                                            <small class="text-danger">
+                                                <?= ($prod['desconto_tipo'] === 'percentual')
+                                                    ? "-".$prod['desconto_valor']."% OFF"
+                                                    : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
+                                            </small>
+                                        <?php else: ?>
+                                            <strong class="text-success">
+                                                R$ <?= number_format($precoOriginal, 2, ',', '.') ?>
+                                            </strong>
+                                        <?php endif; ?>
+                                        <br>
+                                        <button class="btn btn-primary btn-sm mt-2 add-to-cart"
+                                            data-id="<?= $prod['id'] ?>"
+                                            data-nome="<?= htmlspecialchars($prod['nome']) ?>"
+                                            data-preco="<?= $precoFinal ?>"
+                                            data-img="<?= $prod['imagem_principal'] ?>">
+                                            <i class="bi bi-cart3"></i> Carrinho
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <?php endforeach; ?>
+        <?php endif; ?>
+    </main>
 
-        </div>
+    <?php include "rodape.php"; ?>
 
-            <!-- Botões de navegação -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProdutos" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselProdutos" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div> <!-- fecha carousel -->
-    <?php } ?>
-</section>
-
-    <!-- RODAPÉ -->
-    <footer class="text-white p-4 mt-5">
-    <?php include "../menu_publico/rodape.php"?> 
-    </footer>
-
-    <!-- Bootstrap JS + Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/carrinho.js" defer></script>
 </body>
 </html>
