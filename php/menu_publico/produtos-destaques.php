@@ -26,7 +26,7 @@ $linha = count($produtos);
             foreach($grupos as $grupo):
             ?>
             
-            <div class="carousel-item <?= $active ?>">
+            <div class="carousel-item my-4 mt-5 pt-3 <?= $active ?>">
                 <?php $active = ""; ?>
 
                 <div class="row justify-content-center">
