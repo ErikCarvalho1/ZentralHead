@@ -27,13 +27,7 @@
     <?php include_once "../menu_publico/promocoes.php"; ?>
   </main>
 
-<<<<<<< HEAD
-  <!-- RODAPÉ -->
-  <footer class="container-fluid text-white p-4 mt-5">
-    <?php include_once "../menu_publico/rodape.php"; ?> 
-  </footer>
-</body>
-=======
+
   <body >
     <!-- CABEÇALHO -->
     <header>
@@ -88,5 +82,5 @@
       <?php include_once "../menu_publico/rodape.php"?> 
     </footer>
   </body>
->>>>>>> d38f7d6b398cf1c0b6d1aa896409cf9659a9e877
+
 </html>

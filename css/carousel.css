@@ -1,0 +1,19 @@
+/* carousel Destaques */
+  .carousel-full-width {
+  width: 100vw;     /* ocupa 100% da largura da janela */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.carousel-faixa {
+  height: 800px;
+  overflow: hidden;
+}
+
+.carousel-faixa .carousel-item img {
+  height: 100%;
+  object-fit: cover;
+}
