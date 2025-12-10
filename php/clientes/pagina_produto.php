@@ -190,7 +190,7 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include "../menu_publico/rodape.php"?> 
   </footer>
  
-
+<!--TESTE -->
 </body>
 
 </html>
