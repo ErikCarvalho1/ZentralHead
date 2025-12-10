@@ -88,30 +88,17 @@ form-control {
 }
 
 
-.card-body {
-  background-color: rgba(255, 252, 252, 0);
-}
-
 .carousel-item img {
   width: 100vh; /* altura total da tela */
 }
 #carouselLoja {
   box-shadow: #ffffff;
 }
-.card-body .btn {
-  color: white;
-  background: #000000;
-}
 
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* evita rolagem lateral */
-}
-
-.carousel-item img {
-  width: 100vw; /* ocupa a tela toda */
-  object-fit: cover; /* cobre sem distorcer */
 }
 
 /* Estilo para links da navbar */
