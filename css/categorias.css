@@ -47,7 +47,17 @@
     margin-bottom: 0.5rem;
 }
 
-.page-header p {
+.page-header  {
     font-size: 1.1rem;
     opacity: 0.9;
+}
+
+
+
+.bg-olho {
+    background-image: url("../images/OlhoZentral.png");
+    background-repeat: no-repeat;
+background-position: center center;   /* posição da imagem */
+    background-size: 150px;              /* tamanho da imagem */
+    padding: 40px 0;                     /* aumenta área da div */
 }
