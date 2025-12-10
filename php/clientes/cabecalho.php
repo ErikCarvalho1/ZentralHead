@@ -11,7 +11,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="container-fluid">
         <!-- Logo -->
         <a class="navbar-brand" href="index.php">
-            <img src="../../images/LogoZentral.png" alt="Logo" height="30">
+            <img src="../../images/LogoZentral.png" alt="Logo" height="40">
         </a>
 
         <!-- Botão toggle para mobile -->

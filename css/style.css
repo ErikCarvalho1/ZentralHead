@@ -88,30 +88,17 @@ form-control {
 }
 
 
-.card-body {
-  background-color: rgba(255, 252, 252, 0);
-}
-
 .carousel-item img {
   width: 100vh; /* altura total da tela */
 }
 #carouselLoja {
   box-shadow: #ffffff;
 }
-.card-body .btn {
-  color: white;
-  background: #000000;
-}
 
 body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* evita rolagem lateral */
-}
-
-.carousel-item img {
-  width: 100vw; /* ocupa a tela toda */
-  object-fit: cover; /* cobre sem distorcer */
 }
 
 /* Estilo para links da navbar */
@@ -154,34 +141,68 @@ nav {
 footer{
   background-color: #000;
 }
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.cart-img { 
-    width: 64px; 
-    height: 64px; 
-    object-fit: contain; 
+
+/* ============================= */
+/* CARROSSEL FINO DO TOPO */
+/* ============================= */
+
+.top-bar-carousel {
+  position: relative;
+  width: 100%;
+  height: 32px;
+  background: #b30606;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-.estrela-avaliacao input[type="radio"] {
+/* ocultar os radios */
+.top-bar-carousel input {
   display: none;
 }
 
-.estrela-avaliacao label {
-  font-size: 2rem;
-  color: #ccc;
+/* trilho */
+.top-bar-inner {
+  display: flex;
+  width: 300%;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* cada item */
+.top-bar-item {
+  flex: 0 0 100%;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 32px;
+}
+
+/* movimento */
+#t1:checked ~ .top-bar-inner { transform: translateX(0); }
+#t2:checked ~ .top-bar-inner { transform: translateX(-100%); }
+#t3:checked ~ .top-bar-inner { transform: translateX(-200%); }
+
+/* setas */
+.top-bar-carousel label {
+  position: absolute;
+  top: 0;
+  height: 32px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f00000;
+  font-size: 20px;
   cursor: pointer;
-  transition: color 0.2s;
-  display: inline-block; /* garante que fiquem lado a lado */
+  transition: 0.2s;
 }
 
-.estrela-avaliacao label:hover,
-.estrela-avaliacao label:hover ~ label {
-  color: gold;
-}
+.top-prev { left: 0; }
+.top-next { right: 0; }
 
-.estrela-avaliacao input[type="radio"]:checked ~ label {
-  color: gold;
+.top-bar-carousel label:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 

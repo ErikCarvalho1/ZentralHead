@@ -16,7 +16,7 @@
     <!-- Bootstrap 5.3 -->
     <link rel="stylesheet" href="../../css/bootstrap.min.css" />
     <!-- CSS local -->
-    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/card-produto.css" />
 
     <!-- js -->
     <script src="../../js/bootstrap.bundle.min.js" defer></script>
@@ -44,7 +44,7 @@ $linha = count($produtos);
     <?php } ?>
 
     <?php if($linha > 0){ ?>
-        <h2>Produtos Em Destaques</h2>
+        <h2>Produtos Zentral</h2>
 
         <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -52,11 +52,11 @@ $linha = count($produtos);
             <?php 
             $active = "active";
             // Quebra o array de produtos em grupos de 4 por slide
-            $grupos = array_chunk($produtos, 3);
+            $grupos = array_chunk($produtos, 4);
             foreach($grupos as $grupo):
             ?>
             
-            <div class="carousel-item <?= $active ?>">
+            <div class="carousel-item my-4 mt-5 pt-3 <?= $active ?>">
                 <?php $active = ""; ?>
 
                 <div class="row justify-content-center">
@@ -79,12 +79,12 @@ $linha = count($produtos);
                                 <div class="card h-100 shadow-sm"
                                      onmouseover="this.style.transform='scale(1.05)';"
                                      onmouseout="this.style.transform='scale(1)';">
-                                    <div class="card-img-container img-fluid" style="max-width: 100%; >
+                                    <div class="card-img-container img-fluid" style="max-width: 100%;" >
                                     
                                         <img src="../../images/<?= $prod['imagem_principal'] ?>"
                                              alt="<?= htmlspecialchars($prod['nome']) ?>"
                                              class="card-img-top w-100 h-100"
-                                             style="object-fit: contain;">
+                                             style="object-fit: contain; max-height: 220px;">
                                     </div>
 
                                     <div class="card-body text-center">
@@ -147,7 +147,7 @@ $linha = count($produtos);
 </section>
 
     <!-- RODAPÉ -->
-    <footer class="text-white p-4 mt-5">
+    <footer>
     <?php include "../menu_publico/rodape.php"?> 
     </footer>
 

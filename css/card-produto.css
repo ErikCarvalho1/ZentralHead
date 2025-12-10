@@ -1,0 +1,15 @@
+.card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    height: 100%;
+  }
+  .card {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  }
+  .cart-img { 
+    width: 64px; 
+    height: 64px; 
+    object-fit: contain; 
+}
