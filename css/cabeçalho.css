@@ -2,5 +2,14 @@
 
 nav {
   font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
+  font-weight: 400; /* funciona, mas a fonte já é naturalmente bold */
+}
+
+nav a {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;           /* estilo da Berzerk */
+  text-transform: uppercase;     /* deixa mais profissional */
+  padding: 8px 14px;             /* conforto visual */
+  display: inline-block;
 }
