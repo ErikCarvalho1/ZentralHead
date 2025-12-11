@@ -1,16 +1,28 @@
 .card {
   transition: all 0.3s ease;
   border: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(245, 0, 0, 0.1);
+  height: 100%;
+  border-radius: 0;
+  
 }
 
+/* Hover correto */
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(255, 0, 0, 0.6);
+ 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.30) !important;
+    transform: translateY(-8px);
 }
 
-.card-img-container img {
-  width: 100%;
-  height: 200px;
-  object-fit: contain;
+
+/* Imagem do carrinho */
+.card-img-container img { 
+  width: 64px; 
+  height: 64px; 
+  object-fit: contain; 
 }
+
+section{
+  
+}
+
