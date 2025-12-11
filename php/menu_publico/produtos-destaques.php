@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="../../css/card-produto-destaque.css">
+<link rel="stylesheet" href="../../css/precoproduto.css">
+<link rel="stylesheet" href="../../css/saibamais.css">
 
 
 <?php 
@@ -63,34 +65,45 @@ $linha = count($produtos);
                                             <?= mb_strimwidth($prod['descricao_curta'], 0, 42, '...') ?>
                                         </p>
 
-                                        <div class="mt-3">
-                                            <?php if ($precoFinal < $precoOriginal): ?>
-                                                <div>
-                                                    <span class="text-muted text-decoration-line-through">
-                                                        <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
-                                                    </span>
-                                                    <br>
-                                                    <button class="btn btn-success disabled">
-                                                        <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
-                                                    </button>
-                                                    <br>
-                                                    <small class="text-danger">
-                                                        <?= ($prod['desconto_tipo'] === 'percentual')
-                                                            ? "-".$prod['desconto_valor']."% OFF"
-                                                            : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
-                                                    </small>
-                                                </div>
-                                            <?php else: ?>
-                                                <button class="btn btn-secondary disabled">
-                                                    <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
-                                                </button>
-                                            <?php endif; ?>
-                                        </div>
+                                        <div class="mt-3 price-box">
+
+<?php if ($precoFinal < $precoOriginal): ?>
+
+    <span class="price-old">
+        R$ <?= number_format($precoOriginal, 2, ',', '.') ?>
+    </span>
+
+    <span class="price-new">
+        R$ <?= number_format($precoFinal, 2, ',', '.') ?>
+    </span>
+
+    <span class="price-badge">
+        <?= ($prod['desconto_tipo'] === 'percentual')
+            ? "-".$prod['desconto_valor']."% OFF"
+            : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
+    </span>
+
+<?php else: ?>
+
+    <span class="price-normal">
+        R$ <?= number_format($precoOriginal, 2, ',', '.') ?>
+    </span>
+
+<?php endif; ?>
+
+</div>
+
                                      
+                
+
                                         <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
-                                           class="btn btn-primary mt-2">
-                                            Saiba mais <i class="bi bi-eye-fill"></i>
-                                        </a>
+   class="text-decoration-none text-dark fw-semibold d-inline-flex align-items-center gap-1">
+    <span>Saiba mais</span>
+    <i class="bi bi-arrow-right-short fs-5"></i>
+</a>
+
+
+
                                     </div>
                             </div>
                         </div>
