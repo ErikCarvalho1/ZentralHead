@@ -15,7 +15,7 @@ $linha = count($produtos);
     <?php } ?>
 
     <?php if($linha > 0){ ?>
-        <h2>Produtos Zentral</h2>
+        <h2 class="text-center"> Produtos Zentral</h2>
 
         <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -23,7 +23,7 @@ $linha = count($produtos);
             <?php 
             $active = "active";
             // Quebra o array de produtos em grupos de 4 por slide
-            $grupos = array_chunk($produtos, 4);
+            $grupos = array_chunk($produtos, 10);
             foreach($grupos as $grupo):
             ?>
             
@@ -101,14 +101,6 @@ $linha = count($produtos);
 
         </div>
 
-            <!-- Botões de navegação -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProdutos" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselProdutos" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div> <!-- fecha carousel -->
     <?php } ?>
 </section>
 <script>
