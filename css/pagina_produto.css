@@ -1,0 +1,94 @@
+/* ================================
+   FONTES
+================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bogle:wght@400;600&display=swap');
+/* OBS: "Neue Haas Grotesk" não existe no Google Fonts.
+   Use "Inter" estreita com font-stretch para simular.
+*/
+
+
+/* ================================
+   TÍTULO DO PRODUTO (estilo Bose)
+================================ */
+.produto-titulo {
+     font-family: "BBH Bogle", sans-serif;
+    font-size: 2rem;       /* ↓ menor */
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    font-stretch: 85%;     /* ↓ mais compacta igual Bose */
+    margin-bottom: 5px;
+}
+
+/* ================================
+   DESCRIÇÃO
+================================ */
+.descricao-produto {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;     /* ↓ menor */
+    line-height: 1.3;      /* ↓ menor */
+    max-width: 450px;
+    color: #444;
+    font-stretch: 85%;
+}
+
+
+/* ================================
+   FEATURES — ULTRA COMPACTO
+================================ */
+.produto-features {
+    background: #f4f4f4;
+    border-radius: 6px;
+    padding: 6px 4px;      /* ↓ menor */
+    max-height: 85px;      /* ↓ menor — igual Bose */
+    overflow: hidden;
+}
+
+.produto-features .row {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 4px;          /* ↓ gap */
+    column-gap: 0;
+}
+
+.produto-features .col {
+    flex: 0 0 50%;         /* 2 por linha */
+    max-width: 50%;
+    text-align: center;
+    padding: 2px 0;        /* ↓ padding */
+}
+
+.produto-features i {
+    font-size: 1rem;       /* ↓ ícone menor */
+}
+
+.feature-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;     /* ↓ menor */
+    line-height: 1;        /* ↓ altura */
+    margin-top: 2px;
+}
+
+
+/* ================================
+   BOTÃO “VER MAIS”
+================================ */
+#btnVerMais {
+    margin-top: 4px;
+    font-size: 0.7rem;
+    padding: 0;
+}
+.produto-features {
+    max-height: 120px;
+    overflow: hidden;
+}
+
+.produto-imagem {
+    width: 100%;
+    max-width: 600px;  /* AUMENTE para 700, 800 se quiser maior */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto; /* centraliza e cria espaço embaixo */
+    border-radius: 8px; /* opcional, fica mais bonito */
+}

@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`cliente` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 1023
+AUTO_INCREMENT = 1028
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -39,9 +39,10 @@ DEFAULT CHARACTER SET = utf8mb4;
 CREATE TABLE IF NOT EXISTS `zentralhead`.`categorias` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
+  `imagem` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -58,7 +59,6 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
   `criado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
   `atualizado_em` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
   `destaques` BIT(1) NULL DEFAULT NULL,
-  `categoria_id` INT(11) NULL DEFAULT NULL,
   `categorias_id` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_categorias` (`categorias_id` ASC) VISIBLE,
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
     REFERENCES `zentralhead`.`categorias` (`id`)
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 13
+AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8mb4;
 
 

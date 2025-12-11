@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" />
   <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/fonts.css" />
   <link rel="stylesheet" href="../../css/card-produto-destaque.css" />
   <script src="../../js/bootstrap.bundle.min.js" defer></script>
   <script src="../../js/inicial.js" defer></script>
