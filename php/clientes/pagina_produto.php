@@ -25,7 +25,10 @@ if(!$produto){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script> 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../css/pagina_produto.css">
+
+
+
 
   <title>Pagina Produto</title>
 
@@ -36,30 +39,73 @@ if(!$produto){
 <div class="container mt-5">
   <div class="row">
     <!-- Coluna da imagem -->
-    <div class="col-md-6">
+ 
 
-    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" style="width:350px; height:450px">
-      <div class="d-flex gap-2 mt-2">
-        <!-- Miniaturas (poderia vir do banco de dados futuramente) -->
+<div class="col-md-6">
+
+    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?> class=" 
+         style="width:350px; height:450px">
+
+    <div class="d-flex gap-2 mt-2">
         <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>"  
         class="img-thumbnail"  
         style="width:80px; height:80px; object-fit:cover;">
 
-        <img src="<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
-        <img src="<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
-      </div>
+        <img src="<?php echo $produto['imagem_principal']; ?>" class="imagem-produto" style="width:80px; height:80px;">
+        <img src="<?php echo $produto['imagem_principal']; ?>" class="imagem-produto" style="width:80px; height:80px;">
     </div>
 
-    <!-- Coluna de informações -->
+    <!-- FEATURES AGORA NO LUGAR CORRETO -->
+    <div class="produto-features mt-3 p-2">
+        <div class="row text-center">
+
+            <div class="col">
+                <i class="bi bi-music-note-beamed fs-3"></i>
+                <p class="feature-text">Crisp sound<br>with impressive bass</p>
+            </div>
+
+            <div class="col">
+                <i class="bi bi-bag fs-3"></i>
+                <p class="feature-text">Pocket-sized<br>portability</p>
+            </div>
+
+            <div class="col">
+                <i class="bi bi-shield-check fs-3"></i>
+                <p class="feature-text">Tiny-but-tough<br>design</p>
+            </div>
+
+            <div class="col">
+                <i class="bi bi-droplet fs-3"></i>
+                <p class="feature-text">Water & dustproof<br>(IP67)</p>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-1">
+            <button id="btnVerMais" class="btn btn-link">View more ↓</button>
+        </div>
+    </div>
+
+    <!-- MAIS DETALHES (para abrir depois) -->
+    <div id="moreFeatures" class="p-3" style="display:none;">
+        <ul>
+            <li>Battery life up to 12 hours</li>
+            <li>Bluetooth range of 30 feet</li>
+            <li>Advanced microphone isolation</li>
+        </ul>
+    </div>
+
+</div> <!-- FECHA A COLUNA ESQUERDA -->
+
+
+
+
+
+    <!-- Coluna de informações nome e preço -->
     <div class="col-md-6">
-      <h4 class="text-muted"><?php echo $produto['categoria'] ?? "Produto em destaque"; ?></h4>
-      <h2><?php echo $produto['nome']; ?></h2>
 
-
-
-
-
-      
+      <h2 class="produto-titulo"><?php echo $produto['nome']; ?></h2>
+      <h2 class="preco-produto"><?php echo $produto['valor_base']; ?></h2>
       <!-- Avaliações -->
       <?php
 $conn = getConnection();
@@ -86,13 +132,10 @@ $total = $result['total'] ?? 0;
   </span>
   <span class="text-muted">(<?php echo $media; ?>) • <?php echo $total; ?> avaliações</span>
 </div>
+      <p class="descricao-produto"><?php echo nl2br($produto['descricao']); ?></p>
+      
 
-
-      <!-- Preço -->
-     
-      <p class="text-muted"><?php echo $produto['valor_base']; ?></p>
-
-      <?php
+<?php
 $conn = getConnection();
 
 // Buscar cores disponíveis para o produto atual
@@ -162,7 +205,7 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
       <!-- Botões -->
       <div class="d-flex gap-2">
-          <button class="btn btn-warning" onclick="addToCart(<?php 
+          <button class="btn btn-dark" onclick="addToCart(<?php 
               echo htmlspecialchars(json_encode([
                   'id' => $produto['id'],
                   'nome' => $produto['nome'],
@@ -170,15 +213,12 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                   'img' => $produto['imagem_principal']
               ])); 
           ?>)"> Adicionar ao carrinho </button>
-          <button class="btn btn-danger"> Comprar agora </button>
       </div>
     </div>
   </div>
 </div>
 </main>
 <hr>
-<!--Avaliações-->
-
 
 
 
@@ -190,7 +230,7 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include "../menu_publico/rodape.php"?> 
   </footer>
  
-<!--TESTE -->
+
 </body>
 
 </html>

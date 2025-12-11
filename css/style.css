@@ -1,8 +1,12 @@
-/* nosso estilo css */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
-@charset "utf8";
 
-/*tela principal  */
+html, body {
+    font-family: "Inter", sans-serif;
+}
+
+
+
 
 
 .carousel-control-prev-icon,
@@ -76,11 +80,11 @@ header nav {
 body {
       background: linear-gradient(to bottom, #ffffff, #ffffff);
       min-height: 100vh;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       font-family: Arial, sans-serif;
       color: rgb(0, 0, 0); 
 
-}
 form-control {
   background-color: transparent !important;
   border: none !important;
@@ -146,7 +150,7 @@ footer{
 /* CARROSSEL FINO DO TOPO */
 /* ============================= */
 
-.top-bar-carousel {
+
   position: relative;
   width: 100%;
   height: 32px;
