@@ -183,30 +183,4 @@ footer{
   line-height: 32px;
 }
 
-/* movimento */
-#t1:checked ~ .top-bar-inner { transform: translateX(0); }
-#t2:checked ~ .top-bar-inner { transform: translateX(-100%); }
-#t3:checked ~ .top-bar-inner { transform: translateX(-200%); }
-
-/* setas */
-.top-bar-carousel label {
-  position: absolute;
-  top: 0;
-  height: 32px;
-  width: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #f00000;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.top-prev { left: 0; }
-.top-next { right: 0; }
-
-.top-bar-carousel label:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
 

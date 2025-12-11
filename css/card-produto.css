@@ -1,15 +1,22 @@
 .card {
-    transition: all 0.3s ease;
-    border: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    height: 100%;
-  }
-  .card {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  }
-  .cart-img { 
-    width: 64px; 
-    height: 64px; 
-    object-fit: contain; 
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 2px 8px rgba(245, 0, 0, 0.1);
+  border-radius: 0;
+  height: 100%;
+  
+}
+
+/* Hover correto */
+.card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.30) !important;
+    transform: translateY(-8px);
+}
+
+
+/* Imagem do carrinho */
+.card-img-container img { 
+  width: 64px; 
+  height: 64px; 
+  object-fit: contain; 
 }

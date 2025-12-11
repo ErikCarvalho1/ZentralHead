@@ -44,7 +44,7 @@ $linha = count($produtos);
     <?php } ?>
 
     <?php if($linha > 0){ ?>
-        <h2>Produtos Zentral</h2>
+        <h2 class="text-center">Produtos Zentral</h2>
 
         <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -74,17 +74,13 @@ $linha = count($produtos);
                             }
                         }
                         ?>
-                        <div class=" col-12 col-sm-6 col-md-3 mb-2 d-flex justify-content-center">
-                           <div class="card h-100" style="width: 16rem;">
-                                <div class="card h-100 shadow-sm"
-                                     onmouseover="this.style.transform='scale(1.05)';"
-                                     onmouseout="this.style.transform='scale(1)';">
-                                    <div class="card-img-container img-fluid" style="max-width: 100%;" >
-                                    
+                       <div class="col-12 col-sm-6 col-md-3 mb-2 d-flex justify-content-center">
+                            <div class="card h-100 shadow-sm">
+                                    <div class="card-img-container img-fluid" >
                                         <img src="../../images/<?= $prod['imagem_principal'] ?>"
-                                             alt="<?= htmlspecialchars($prod['nome']) ?>"
+                                             alt="<
                                              class="card-img-top w-100 h-100"
-                                             style="object-fit: contain; max-height: 220px;">
+                                            >
                                     </div>
 
                                     <div class="card-body text-center">
@@ -125,7 +121,6 @@ $linha = count($produtos);
                                             Saiba mais <i class="bi bi-eye-fill"></i>
                                         </a>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -140,7 +135,7 @@ $linha = count($produtos);
                 <span class="carousel-control-prev-icon"></span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselProdutos" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
+ ?= htmlspecialchars($prod['nome']) ?>"               <span class="carousel-control-next-icon"></span>
             </button>
         </div> <!-- fecha carousel -->
     <?php } ?>
