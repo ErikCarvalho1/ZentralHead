@@ -1,9 +1,13 @@
-/* nosso estilo css */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 
-@charset "utf8";
+html, body {
+    font-family: "Inter", sans-serif;
+}
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
+
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -78,9 +82,10 @@ body {
       min-height: 100vh;
       font-family: 'Inter', sans-serif;
       margin: 0;
-      color: white; 
+      color: white;    
+    }
+   
 
-}
 form-control {
   background-color: transparent !important;
   border: none !important;
