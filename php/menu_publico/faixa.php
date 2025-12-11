@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../../css/faixa.css">
 <div class="top-bar-carousel">
 
 <input type="radio" name="topSlide" id="t1" checked>
