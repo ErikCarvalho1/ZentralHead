@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="../../css/card-produto-destaque.css">
+
+
 <?php 
 include "../class/produtos.php";
 $produto = new Produtos();
@@ -6,23 +9,21 @@ $produtos = $produto->listarDestaques(1);
 $linha = count($produtos);
 ?>
 
-<section class="my-5 container">
+<section class="container my-4">
+    <?php if($linha == 0){ ?>
+        <h2 class="alert alert-danger">Não há produtos em destaques</h2>
+    <?php } ?>
 
-<!-- Área do Carrinho -->
+    <?php if($linha > 0){ ?>
+        <h2>Produtos Zentral</h2>
 
-
-<?php if($linha == 0){ ?>
-    <h2 class="alert alert-danger text-center">Não há produtos em destaques</h2>
-<?php } ?>
-
-<?php if($linha > 0){ ?>
-    <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
 
             <?php 
             $active = "active";
             // Quebra o array de produtos em grupos de 4 por slide
-            $grupos = array_chunk($produtos, 3);
+            $grupos = array_chunk($produtos, 4);
             foreach($grupos as $grupo):
             ?>
             
@@ -43,17 +44,14 @@ $linha = count($produtos);
                                 $precoFinal = $precoOriginal - $prod['desconto_valor'];
                             }
                         }
-                        ?>  <a class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center" href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" >
-                        <div class=>
-                           <div class="card h-100" style="width: 16rem;">
-                                <div class="card h-100 shadow-sm"
-                                     onmouseover="this.style.transform='scale(1.05)';"
-                                     onmouseout="this.style.transform='scale(1)';">
-                                    <div class="card-img-container img-fluid" style="max-width: 100%; height: auto; overflow: hidden;">
+                        ?>
+                        <div class="col-12 col-sm-6 col-md-3 mb-2 d-flex justify-content-center">
+                            <div class="card h-100 shadow-sm">
+                                    <div class="card-img-container img-fluid" >
                                         <img src="../../images/<?= $prod['imagem_principal'] ?>"
                                              alt="<?= htmlspecialchars($prod['nome']) ?>"
                                              class="card-img-top w-100 h-100"
-                                             style="object-fit: contain;">
+                                            >
                                     </div>
 
                                     <div class="card-body text-center">
@@ -72,13 +70,8 @@ $linha = count($produtos);
                                                         <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
                                                     </span>
                                                     <br>
-                                               
-                                                    <button class="btn btn-success add-to-cart"
-                                                        data-id="<?= $prod['id'] ?>"
-                                                        data-nome="<?= htmlspecialchars($prod['nome']) ?>"
-                                                        data-preco="<?= $precoFinal ?>"
-                                                        data-img="<?= $prod['imagem_principal'] ?>">
-                                                        Adicionar ao carrinho
+                                                    <button class="btn btn-success disabled">
+                                                        <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
                                                     </button>
                                                     <br>
                                                     <small class="text-danger">
@@ -88,26 +81,19 @@ $linha = count($produtos);
                                                     </small>
                                                 </div>
                                             <?php else: ?>
-                                                <button class="btn btn-secondary add-to-cart"
-                                                    data-id="<?= $prod['id'] ?>"
-                                                    data-nome="<?= htmlspecialchars($prod['nome']) ?>"
-                                                    data-preco="<?= $precoOriginal ?>"
-                                                    data-img="<?= $prod['imagem_principal'] ?>">
-                                                    Adicionar ao carrinho
+                                                <button class="btn btn-secondary disabled">
+                                                    <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
                                                 </button>
-                                                     <button class="btn btn-success disabled">
-                                                        <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
-                                                    </button>
                                             <?php endif; ?>
                                         </div>
-                                    
-                                      
-                                       
-                                       
+                                     
+                                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
+                                           class="btn btn-primary mt-2">
+                                            Saiba mais <i class="bi bi-eye-fill"></i>
+                                        </a>
                                     </div>
-                                </div>
                             </div>
-                        </div> </a>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -115,27 +101,16 @@ $linha = count($produtos);
 
         </div>
 
-        <!-- Controles -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselProdutos" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselProdutos" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-
-        <!-- Indicadores -->
-        <div class="carousel-indicators mt-3">
-            <?php for($i=0; $i<count($grupos); $i++): ?>
-                <button type="button" data-bs-target="#carouselProdutos" data-bs-slide-to="<?= $i ?>" class="<?= ($i==0?'active':'') ?>"></button>
-            <?php endfor; ?>    
-        </div>
-    </div>
-
-<?php } ?>
-
+            <!-- Botões de navegação -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselProdutos" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselProdutos" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div> <!-- fecha carousel -->
+    <?php } ?>
 </section>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     function atualizarCarrinho() {
@@ -147,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
         carrinho.forEach(item => {
             total += item.preco * item.qtd;
             const li = document.createElement('li');
-            li.innerHTML = `<img src="../../images/${item.img}" width="32" height="32" style="object-fit:contain;"> 
+            li.innerHTML = `<img src="../../images/${item.img}" width="32" height="32"> 
                 ${item.nome} x${item.qtd} - R$ ${item.preco.toLocaleString('pt-BR', {minimumFractionDigits:2})}`;
             lista.appendChild(li);
         });
