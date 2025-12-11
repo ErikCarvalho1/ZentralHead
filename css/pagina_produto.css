@@ -2,7 +2,7 @@
    FONTES
 ================================ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bogle:wght@400;600&display=swap');
 /* OBS: "Neue Haas Grotesk" não existe no Google Fonts.
    Use "Inter" estreita com font-stretch para simular.
 */
@@ -12,7 +12,7 @@
    TÍTULO DO PRODUTO (estilo Bose)
 ================================ */
 .produto-titulo {
-    font-family: 'Inter', sans-serif;
+     font-family: "BBH Bogle", sans-serif;
     font-size: 2rem;       /* ↓ menor */
     font-weight: 600;
     letter-spacing: -0.5px;

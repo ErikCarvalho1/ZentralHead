@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 <script src="/ZentralHead/js/carrinho.js" defer></script>
-
+<link rel="stylesheet" href="../../css/cabeçalho.css">
 
 <nav class="navbar navbar-expand-lg ">
     <div class="container-fluid">
@@ -22,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <!-- Menu -->
 
-        <div class="collapse navbar-collapse" id="defaultNavbar">
+        <div class="a collapse navbar-collapse" id="defaultNavbar">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-3">
                     <a href="produtos.php" class="text-decoration-none text-reset">Produtos</a>
