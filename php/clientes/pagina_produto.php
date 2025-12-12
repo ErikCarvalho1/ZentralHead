@@ -7,7 +7,7 @@ if (!isset($_GET['id'])){
 
 $id =(int) $_GET['id'];
 
-$prod = new produtos();
+$prod = new Produtos();
 $produto = $prod->listarPorId($id);
 
 if(!$produto){
@@ -79,27 +79,10 @@ if(!$produto){
 
       <p class="descricao-produto"><?php echo nl2br($produto['descricao']); ?></p>
 
-
-<!-- ================== CORES ===================== -->
-<?php $prod = new Produtos();
+      <?php
 $cores = $prod->listarCores($produto['id']);
-
-foreach ($cores as $cor) {
-    echo "{$cor['nome']}";
-}
-?>
-
-
-<!-- ================== TAMANHOS ===================== -->
- 
-<?php $prod = new Produtos();
 $tamanhos = $prod->listarTamanhos($produto['id']);
-
-foreach ($tamanhos as $tamanho) {
-    echo "{$tamanho['nome']}";
-}
 ?>
-
 
 <div class="d-flex gap-4 mb-3">
   <div>
@@ -128,6 +111,7 @@ foreach ($tamanhos as $tamanho) {
     <?php endif; ?>
   </div>
 </div>
+
 
       <!-- QUANTIDADE -->
       <div class="d-flex align-items-center mb-4">
