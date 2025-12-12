@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="../../css/card-produto-destaque.css">
 <link rel="stylesheet" href="../../css/precoproduto.css">
-<link rel="stylesheet" href="../../css/saibamais.css">
+<link rel="stylesheet" href="../../css/card.produto-destaque.css">
+
+
 
 
 <?php 
@@ -25,7 +27,7 @@ $linha = count($produtos);
             <?php 
             $active = "active";
             // Quebra o array de produtos em grupos de 4 por slide
-            $grupos = array_chunk($produtos, 10);
+            $grupos = array_chunk($produtos, 20);
             foreach($grupos as $grupo):
             ?>
             
@@ -47,7 +49,8 @@ $linha = count($produtos);
                             }
                         }
                         ?>
-                        <div class="col-12 col-sm-6 col-md-3 mb-2 d-flex justify-content-center">
+                        <div class="col-12 col-sm-6 col-md-3 mb-5 d-flex justify-content-center">
+                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" class="text-decoration-none text-dark">
                             <div class="card h-100 shadow-sm">
                                     <div class="card-img-container img-fluid" >
                                         <img src="../../images/<?= $prod['imagem_principal'] ?>"
@@ -88,19 +91,13 @@ $linha = count($produtos);
     <span class="price-normal">
         R$ <?= number_format($precoOriginal, 2, ',', '.') ?>
     </span>
-
 <?php endif; ?>
-
+</a>
 </div>
 
-                                     
-                
+                        
 
-                                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
-   class="text-decoration-none text-dark fw-semibold d-inline-flex align-items-center gap-1">
-    <span>Saiba mais</span>
-    <i class="bi bi-arrow-right-short fs-5"></i>
-</a>
+
 
 
 

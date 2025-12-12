@@ -75,12 +75,13 @@ $linha = count($produtos);
                         }
                         ?>
                        <div class="col-12 col-sm-6 col-md-3 mb-2 d-flex justify-content-center">
+                       <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" class="text-decoration-none text-dark">
                             <div class="card h-100 shadow-sm">
+                            
                                     <div class="card-img-container img-fluid" >
                                         <img src="../../images/<?= $prod['imagem_principal'] ?>"
-                                             alt="<
-                                             class="card-img-top w-100 h-100"
-                                            >
+                                            alt class="card-img-top w-100 h-100">
+                                            
                                     </div>
 
                                     <div class="card-body text-center">
@@ -114,12 +115,8 @@ $linha = count($produtos);
                                                     <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
                                                 </button>
                                             <?php endif; ?>
+                                            </a>
                                         </div>
-                                     
-                                        <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" 
-                                           class="btn btn-primary mt-2">
-                                            Saiba mais <i class="bi bi-eye-fill"></i>
-                                        </a>
                                     </div>
                             </div>
                         </div>
