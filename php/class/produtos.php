@@ -197,5 +197,37 @@ public function listarPorNomeCategoria(string $nomeCat): array {
     
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+
+public function listarCores(int $id): array {
+    $sql = "SELECT DISTINCT c.nome
+            FROM produto_detalhes pd
+            JOIN cores c ON pd.cor_id = c.id
+            WHERE pd.produto_id = :id";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+    $cmd->execute();
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+
+public function listarTamanhos(int $id): array {
+    $sql = "SELECT DISTINCT t.nome
+            FROM produto_detalhes pd
+            JOIN tamanhos t ON pd.tamanho_id = t.id
+            WHERE pd.produto_id = :id";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+    $cmd->execute();
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
+}
+
+
+
+
+
+
+
 ?>
