@@ -74,7 +74,7 @@ html, body {
 header nav {
   background-color: rgb(255, 255, 255); /* Roxo translúcido */
   backdrop-filter: blur(10px); /* Deixa o fundo borrado por trás */
-  padding: 10px 20px;
+  
 }
 
 body {

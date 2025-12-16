@@ -28,7 +28,7 @@ class categorias{
         $this->sigla = $sigla;
     }
     public function insert (){
-        $sql = "call sp_categoria_insert (nome, sigla) VALUES (:nome, :sigla)";
+        $sql = "call sp_categoria_insert (nome,imagem) VALUES (:nome, :sigla)";
         $cmd = $this->pdo-> prepare($sql);
         $cmd->bindValue(":nome", $this->nome);
         $cmd->bindValue(":sigla", $this->sigla);
@@ -36,7 +36,7 @@ class categorias{
 
     }
     public function update($id){
-        $sql = "CALL sp_categoria_upadate SET nome = :nome, sigla = :sigla WHERE id = :id";
+        $sql = "CALL sp_categoria_upadate SET nome = :nome,imagem = :sigla WHERE id = :id";
         $cmd = $this->pdo-> prepare($sql);
         $cmd->bindValue(":nome", $this->nome);
         $cmd->bindValue(":sigla", $this->sigla);

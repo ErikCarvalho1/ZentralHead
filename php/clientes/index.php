@@ -15,13 +15,13 @@
 </head>
 <body>
   <!-- CABEÇALHO -->
-  <header>
+  <header class="">
     <?php include_once "../menu_publico/faixa.php";?>
     <?php include_once "cabecalho.php"; ?>
   </header>
 
   <!-- CONTEÚDO -->
-  <main class="container my-4">
+  <main class="container mt-2m-0 p-0">
     
     <?php include_once "../menu_publico/destaque.php"; ?>
     <?php include_once "../menu_publico/produtos-destaques.php"; ?>
