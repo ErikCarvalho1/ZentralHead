@@ -89,7 +89,7 @@ public function insert(){
     $cmd->bindValue(":descricao", $this->descricao);
     $cmd->bindValue(":valorUnit", $this->valorUnit);
     $cmd->bindValue(":unidade_venda", $this->unidade_Venda);
-    $cmd->bindValue(":categoria_id", $this->categoria_Id);
+    $cmd->bindValue(":categoria_id", $this->categorias_Id);
     $cmd->bindValue(":estoque_minimo", $this->estoque_Minimo);
     $cmd->bindValue(":classe_desconto", $this->classe_Desconto);
     $cmd->bindValue(":imagem", $this->imagem);
@@ -137,7 +137,7 @@ public function atualizar (){
     $cmd->bindValue(":descricao", $this->descricao);
     $cmd->bindValue(":valorUnit", $this->valorUnit);
     $cmd->bindValue(":unidade_venda", $this->unidade_Venda);
-    $cmd->bindValue(":categoria_id", $this->categoria_Id);
+    $cmd->bindValue(":categoria_id", $this->categorias_Id);
     $cmd->bindValue(":estoque_minimo", $this->estoque_Minimo);
     $cmd->bindValue(":classe_desconto", $this->classe_Desconto);
     $cmd->bindValue(":imagem", $this->imagem);
@@ -197,27 +197,14 @@ public function listarPorNomeCategoria(string $nomeCat): array {
     
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
-
-public function listarCores(int $id): array {
-    $sql = "SELECT DISTINCT c.nome
-            FROM produto_detalhes pd
-            JOIN cores c ON pd.cor_id = c.id
-            WHERE pd.produto_id = :id";
+public function listarPorCategoriaId(int $categorias_Id): array {
+    $sql = "SELECT * FROM produtos WHERE categorias_id = :catId ORDER BY id DESC";
     $cmd = $this->pdo->prepare($sql);
-    $cmd->bindValue(':id', $id, PDO::PARAM_INT);
+    $cmd->bindValue(":catId", $categorias_Id, PDO::PARAM_INT);
     $cmd->execute();
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
-
-public function listarTamanhos(int $id): array {
-    $sql = "SELECT DISTINCT t.nome
-            FROM produto_detalhes pd
-            JOIN tamanhos t ON pd.tamanho_id = t.id
-            WHERE pd.produto_id = :id";
-    $cmd = $this->pdo->prepare($sql);
-    $cmd->bindValue(':id', $id, PDO::PARAM_INT);
-    $cmd->execute();
-    return $cmd->fetchAll(PDO::FETCH_ASSOC);
+    
 }
 
 

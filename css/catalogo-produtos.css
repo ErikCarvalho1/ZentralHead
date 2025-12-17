@@ -4,8 +4,8 @@ body {
 
 /* ===== BANNER ===== */
 .banner-categoria {
-    width: 100%;
-    height: 280px;
+  width: 100%;
+    height: 100%;
     background-color: #111;
     background-size: cover;
     background-position: center;
@@ -37,6 +37,7 @@ body {
     transition: transform .3s ease, box-shadow .3s ease;
     overflow: hidden;
     background-color: #fff;
+     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .product-card:hover {
@@ -70,14 +71,14 @@ body {
 /* ===== PREÇOS ===== */
 .price-original {
     font-size: 0.9rem;
-    color: #999;
+    color: #000000;
     text-decoration: line-through;
 }
 
 .price-final {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #198754;
+    color: #000000;
 }
 
 /* ===== BOTÃO ===== */
@@ -85,3 +86,7 @@ body {
     border-radius: 20px;
     padding: 6px 18px;
 }
+.btn-sm{
+        color: #ffffff; ;
+        background-color: rgb(111, 0, 255)  ;
+    }
