@@ -58,7 +58,7 @@ $linha = count($produtos);
                             </p> <?php if ($precoFinal < $precoOriginal): ?> <div class="price-original"> R$
                                 <?= number_format($precoOriginal, 2, ',', '.') ?> </div> <?php endif; ?> <div
                                 class="price-final"> R$ <?= number_format($precoFinal, 2, ',', '.') ?> </div> <button
-                                class="btn btn-primary btn-sm mt-3 btn-cart add-to-cart" data-id="<?= $prod['id'] ?>"
+                                class="btn  btn-sm mt-3 btn-cart add-to-cart" data-id="<?= $prod['id'] ?>"
                                 data-nome="<?= htmlspecialchars($prod['nome']) ?>" data-preco="<?= $precoFinal ?>"
                                 data-img="<?= $prod['imagem_principal'] ?>"> <i class="bi bi-cart3"></i> Adicionar
                             </button>

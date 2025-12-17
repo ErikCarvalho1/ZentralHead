@@ -71,14 +71,14 @@ body {
 /* ===== PREÇOS ===== */
 .price-original {
     font-size: 0.9rem;
-    color: #999;
+    color: #000000;
     text-decoration: line-through;
 }
 
 .price-final {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #198754;
+    color: #000000;
 }
 
 /* ===== BOTÃO ===== */
@@ -86,3 +86,7 @@ body {
     border-radius: 20px;
     padding: 6px 18px;
 }
+.btn-sm{
+        color: #ffffff; ;
+        background-color: rgb(111, 0, 255)  ;
+    }
