@@ -9,11 +9,12 @@
 }
 
 .carousel-faixa {
-  height: 650px;
+  height:700px;
   overflow: hidden;
 }
 
 .carousel-faixa .carousel-item img {
   height: 100%;
+  width: 100%;
   object-fit: cover;
 }
