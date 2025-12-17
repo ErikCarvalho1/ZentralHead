@@ -5,6 +5,7 @@ class categorias {
     private $id;
     private $nome;
     private $imagem;
+    private $banner;
     private $pdo;
 
     public function __construct(){
@@ -23,33 +24,48 @@ class categorias {
         $this->nome = $nome; 
     }
 
-    public function getSigla(){
+    public function getImagem(){
         return $this->imagem;
     }
 
-    public function setSigla(string $imagem){
+    public function setImagem(string $imagem){
         $this->imagem = $imagem;
     }
 
+    public function getBanner(){
+        return $this->banner;
+    }
+
+    public function setBanner(string $banner){
+        $this->banner = $banner;
+    }
+
+    // INSERT com banner
     public function insert(){
-        $sql = "CALL sp_categoria_insert(:nome, :imagem)";
+        $sql = "INSERT INTO categorias (nome, imagem, banner)
+                VALUES (:nome, :imagem, :banner)";
         $cmd = $this->pdo->prepare($sql);
         $cmd->bindValue(":nome", $this->nome);
         $cmd->bindValue(":imagem", $this->imagem);
+        $cmd->bindValue(":banner", $this->banner);
         $cmd->execute();
     }
 
+    // UPDATE com banner
     public function update($id){
-        $sql = "CALL sp_categoria_update(:id, :nome, :imagem)";
+        $sql = "UPDATE categorias 
+                SET nome = :nome, imagem = :imagem, banner = :banner
+                WHERE id = :id";
         $cmd = $this->pdo->prepare($sql);
         $cmd->bindValue(":id", $id);
         $cmd->bindValue(":nome", $this->nome);
         $cmd->bindValue(":imagem", $this->imagem);
+        $cmd->bindValue(":banner", $this->banner);
         $cmd->execute();
     }
 
     public function delete($id){
-        $sql = "CALL sp_categoria_delete(:id)";
+        $sql = "DELETE FROM categorias WHERE id = :id";
         $cmd = $this->pdo->prepare($sql);
         $cmd->bindValue(":id", $id);
         $cmd->execute();
@@ -62,14 +78,13 @@ class categorias {
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ✅ Nova função para pegar categoria pelo ID
-public function listarPorId(int $id) {
-    $sql = "SELECT * FROM categorias WHERE id = :id";
-    $cmd = $this->pdo->prepare($sql);
-    $cmd->bindValue(":id", $id, PDO::PARAM_INT);
-    $cmd->execute();
-    return $cmd->fetch(PDO::FETCH_ASSOC); // retorna apenas uma categoria
-}
-
+    // ✅ Buscar categoria por ID (com banner)
+    public function listarPorId(int $id){
+        $sql = "SELECT * FROM categorias WHERE id = :id";
+        $cmd = $this->pdo->prepare($sql);
+        $cmd->bindValue(":id", $id, PDO::PARAM_INT);
+        $cmd->execute();
+        return $cmd->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>
