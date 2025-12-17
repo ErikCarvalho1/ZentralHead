@@ -18,16 +18,16 @@ $categorias = $catClass->listar();
 
     <!-- CSS da página -->
     <link href="../../css/categorias.css" rel="stylesheet">
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
 </head>
 <body>
-
+<?php include "../menu_publico/faixa.php"?>
 <?php include "cabecalho.php"; ?>
- <div class="page-header ">
-       
-    </div>
-    
+<div class="page-header">
+
+</div>
 <!-- Conteúdo Principal -->
 <main class="container my-5">
     <?php if(count($categorias) > 0): ?>
@@ -35,21 +35,20 @@ $categorias = $catClass->listar();
             <?php foreach($categorias as $cat): ?>
                 <div class="col-md-6 col-lg-4">
                     <a 
-                        href="../clientes/catalogo.php?categoria=<?= urlencode($cat['nome']) ?>" 
+                        href="../clientes/catalogo.php?categoria_id=<?= $cat['id'] ?>" 
                         class="text-decoration-none"
                     >
                         <div class="card categoria-card h-100 overflow-hidden d-flex flex-column justify-content-end align-items-center text-center">
 
-                            <!-- Imagem ocupando o card inteiro/ A imagem tem que ter 380px × 280px por padrão -->
+                            <!-- Imagem ocupando o card inteiro -->
                             <img 
                                 src="../../images/<?= htmlspecialchars($cat['imagem']) ?>"  
                                 alt="<?= htmlspecialchars($cat['nome']) ?>"
                                 class="card-img-top categoria-img"
                             >
-
-                           
-                       
-
+                            <div class="card-body">
+                                <h5 class="card-title"><?= htmlspecialchars($cat['nome']) ?></h5>
+                            </div>
                         </div>
                     </a>
                 </div>
