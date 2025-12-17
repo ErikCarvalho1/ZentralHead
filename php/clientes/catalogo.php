@@ -35,7 +35,7 @@ $linha = count($produtos);
 <body> <?php include "cabecalho.php"; ?>
 <?php if ($categoria): ?>
 <div class="banner-categoria">
-    <img src="../../images/<?= htmlspecialchars($categoria['banner']) ?>" alt="<?= htmlspecialchars($categoria['nome']) ?>">
+    <img src="../../images/<?= htmlspecialchars($categoria['banner']) ?>" >
 </div>
 <?php endif; ?>
 

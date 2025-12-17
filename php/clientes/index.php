@@ -29,5 +29,9 @@
  
   </main>
 
+  <!-- RODAPÉ -->
+   <footer><?php include_once "../menu_publico/rodape.php"; ?></footer>
+  
+
 
 
