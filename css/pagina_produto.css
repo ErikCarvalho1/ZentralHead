@@ -34,41 +34,6 @@
 }
 
 
-/* ================================
-   FEATURES — ULTRA COMPACTO
-================================ */
-.produto-features {
-    background: #f4f4f4;
-    border-radius: 6px;
-    padding: 6px 4px;      /* ↓ menor */
-    max-height: 85px;      /* ↓ menor — igual Bose */
-    overflow: hidden;
-}
-
-.produto-features .row {
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 4px;          /* ↓ gap */
-    column-gap: 0;
-}
-
-.produto-features .col {
-    flex: 0 0 50%;         /* 2 por linha */
-    max-width: 50%;
-    text-align: center;
-    padding: 2px 0;        /* ↓ padding */
-}
-
-.produto-features i {
-    font-size: 1rem;       /* ↓ ícone menor */
-}
-
-.feature-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;     /* ↓ menor */
-    line-height: 1;        /* ↓ altura */
-    margin-top: 2px;
-}
 
 
 /* ================================

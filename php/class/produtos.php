@@ -206,4 +206,15 @@ public function listarPorCategoriaId(int $categorias_Id): array {
 }
     
 }
+
+
+
+}
+
+
+
+
+
+
+
 ?>

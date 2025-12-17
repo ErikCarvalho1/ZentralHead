@@ -1,14 +1,13 @@
 <?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
-<?php include "../class/produtos.php";
-
-
-if (!isset($_GET['id'])){     //!isset verifica se a variavel não existe
+<?php include "../class/produtos.php";?>
+<?php 
+if (!isset($_GET['id'])){
     die ("Produro não encontrado");
 }
 
 $id =(int) $_GET['id'];
 
-$prod = new produtos();
+$prod = new Produtos();
 $produto = $prod->listarPorId($id);
 
 if(!$produto){
@@ -27,144 +26,65 @@ if(!$produto){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script> 
     <link rel="stylesheet" href="../../css/pagina_produto.css">
 
-
-
-
   <title>Pagina Produto</title>
 
 </head>
 <body>
-   <nav><?php include "cabecalho.php"; ?></nav> <main>
+   <nav><?php include "cabecalho.php"; ?></nav> 
+<main>
 
 <div class="container mt-5">
-  <div class="row">
-    <!-- Coluna da imagem -->
- 
-
+  <div class="row align-items-start">
+<!-- COLUNA ESQUERDA — IMAGENS DO PRODUTO -->
 <div class="col-md-6">
 
-    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?> class=" 
-         style="width:350px; height:450px">
+  <!-- IMAGEM PRINCIPAL -->
+  <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" 
+       class="img-fluid"
+       style="width:100%; max-width:450px; height:auto; border-radius:12px;">
 
-    <div class="d-flex gap-2 mt-2">
-        <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>"  
-        class="img-thumbnail"  
-        style="width:80px; height:80px; object-fit:cover;">
-
-        <img src="<?php echo $produto['imagem_principal']; ?>" class="imagem-produto" style="width:80px; height:80px;">
-        <img src="<?php echo $produto['imagem_principal']; ?>" class="imagem-produto" style="width:80px; height:80px;">
-    </div>
-
-    <!-- FEATURES AGORA NO LUGAR CORRETO -->
-    <div class="produto-features mt-3 p-2">
-        <div class="row text-center">
-
-            <div class="col">
-                <i class="bi bi-music-note-beamed fs-3"></i>
-                <p class="feature-text">Crisp sound<br>with impressive bass</p>
-            </div>
-
-            <div class="col">
-                <i class="bi bi-bag fs-3"></i>
-                <p class="feature-text">Pocket-sized<br>portability</p>
-            </div>
-
-            <div class="col">
-                <i class="bi bi-shield-check fs-3"></i>
-                <p class="feature-text">Tiny-but-tough<br>design</p>
-            </div>
-
-            <div class="col">
-                <i class="bi bi-droplet fs-3"></i>
-                <p class="feature-text">Water & dustproof<br>(IP67)</p>
-            </div>
-
-        </div>
-
-        <div class="text-center mt-1">
-            <button id="btnVerMais" class="btn btn-link">View more ↓</button>
-        </div>
-    </div>
-
-    <!-- MAIS DETALHES (para abrir depois) -->
-    <div id="moreFeatures" class="p-3" style="display:none;">
-        <ul>
-            <li>Battery life up to 12 hours</li>
-            <li>Bluetooth range of 30 feet</li>
-            <li>Advanced microphone isolation</li>
-        </ul>
-    </div>
-
-</div> <!-- FECHA A COLUNA ESQUERDA -->
+  <!-- MINIATURAS -->
+  <div class="d-flex gap-2 mt-3">
+    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
+    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
+    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
+  </div>
 
 
+</div>
+<!-- FECHA COLUNA ESQUERDA -->
 
 
+    <!-- COLUNA DIREITA — INFORMAÇÕES DO PRODUTO -->
 
-    <!-- Coluna de informações nome e preço -->
     <div class="col-md-6">
 
       <h2 class="produto-titulo"><?php echo $produto['nome']; ?></h2>
       <h2 class="preco-produto"><?php echo $produto['valor_base']; ?></h2>
-      <!-- Avaliações -->
-      <?php
-$conn = getConnection();
-$sql = "SELECT AVG(nota) AS media, COUNT(*) AS total FROM avaliacoes WHERE produtos_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(1, $produto['id'], PDO::PARAM_INT);
-$stmt->execute();
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$media = round($result['media'] ?? 0, 1);
-$total = $result['total'] ?? 0;
-?>
-<div class="mb-2">
-  <span class="text-warning">
-    <?php
-    $estrelasCheias = floor($media);
-    $meia = ($media - $estrelasCheias >= 0.5);
-    for ($i = 1; $i <= 5; $i++) {
-        if ($i <= $estrelasCheias) echo "★";
-        elseif ($meia && $i == $estrelasCheias + 1) echo "☆";
-        else echo "☆";
-    }
-    ?>
-  </span>
-  <span class="text-muted">(<?php echo $media; ?>) • <?php echo $total; ?> avaliações</span>
-</div>
+  
+<!-- ESTRELAS-->
+
+<div class="mt-2">
+    <span class="text-dark">
+      <i class="bi bi-star-fill"></i>
+      <i class="bi bi-star-fill"></i>
+      <i class="bi bi-star-fill"></i>
+      <i class="bi bi-star-fill"></i>
+      <i class="bi bi-star-fill"></i>
+    </span>
+    <span class="text-muted">(5,0) • 250 avaliações</span>
+  </div>
+
+
       <p class="descricao-produto"><?php echo nl2br($produto['descricao']); ?></p>
-      
 
-<?php
-$conn = getConnection();
-
-// Buscar cores disponíveis para o produto atual
-$sql = "SELECT DISTINCT c.nome 
-        FROM produto_detalhes pd
-        JOIN cores c ON pd.cor_id = c.id
-        WHERE pd.produto_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(1, $produto['id'], PDO::PARAM_INT);
-$stmt->execute();
-$cores = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      <?php
+$cores = $prod->listarCores($produto['id']);
+$tamanhos = $prod->listarTamanhos($produto['id']);
 ?>
 
-
-<?php
-$conn = getConnection();
-
-// Buscar tamanhos disponíveis para o produto atual
-$sql = "SELECT DISTINCT t.nome 
-        FROM produto_detalhes pd
-        JOIN tamanhos t ON pd.tamanho_id = t.id
-        WHERE pd.produto_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(1, $produto['id'], PDO::PARAM_INT);
-$stmt->execute();
-$tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 <div class="d-flex gap-4 mb-3">
-  <!-- Cores -->
   <div>
     <label class="form-label fw-bold">Cor:</label><br>
     <?php if (!empty($cores)): ?>
@@ -178,7 +98,6 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
   </div>
 
-  <!-- Tamanhos -->
   <div>
     <label class="form-label fw-bold">Tamanho:</label><br>
     <?php if (!empty($tamanhos)): ?>
@@ -194,8 +113,7 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 
-
-      <!-- Quantidade -->
+      <!-- QUANTIDADE -->
       <div class="d-flex align-items-center mb-4">
           <label class="me-3 fw-bold">Quantidade:</label>
           <button class="btn btn-outline-secondary btn-sm" onclick="decrementQty()">-</button>
@@ -203,7 +121,7 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <button class="btn btn-outline-secondary btn-sm" onclick="incrementQty()">+</button>
       </div>
 
-      <!-- Botões -->
+      <!-- BOTÃO ADICIONAR AO CARRINHO -->
       <div class="d-flex gap-2">
           <button class="btn btn-dark" onclick="addToCart(<?php 
               echo htmlspecialchars(json_encode([
@@ -214,22 +132,17 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
               ])); 
           ?>)"> Adicionar ao carrinho </button>
       </div>
-    </div>
+    </div> <!-- FECHA COLUNA DIREITA -->
+
   </div>
 </div>
+
 </main>
 <hr>
 
-
-
-
-
-
-
 <footer class="text-white p-4 mt-5">
     <?php include "../menu_publico/rodape.php"?> 
-  </footer>
- 
+</footer>
 
 </body>
 
@@ -249,33 +162,30 @@ function decrementQty() {
 
 function addToCart(produto) {
     const qty = parseInt(document.getElementById('qty').value);
+
     if (qty < 1) {
         alert('Quantidade inválida');
         return;
     }
 
     let cart = JSON.parse(localStorage.getItem('carrinho') || '[]');
-    
     const existingItem = cart.find(item => item.id === produto.id);
-    
+
     if (existingItem) {
         existingItem.qtd += qty;
     } else {
-        cart.push({
-            ...produto,
-            qtd: qty
-        });
+        cart.push({ ...produto, qtd: qty });
     }
 
     localStorage.setItem('carrinho', JSON.stringify(cart));
-    
-    // Atualiza o contador do carrinho
+
     const cartCount = document.getElementById('cart-count');
-    const totalItems = cart.reduce((acc, item) => acc + item.qtd, 0);
-    if (cartCount) cartCount.textContent = totalItems;
+
+    if (cartCount) {
+        const totalItems = cart.reduce((acc, item) => acc + item.qtd, 0);
+        cartCount.textContent = totalItems;
+    }
 
     alert('Produto adicionado ao carrinho!');
 }
 </script>
-
-
