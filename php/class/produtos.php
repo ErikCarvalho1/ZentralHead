@@ -202,19 +202,42 @@ public function listarPorCategoriaId(int $categorias_Id): array {
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(":catId", $categorias_Id, PDO::PARAM_INT);
     $cmd->execute();
+   
+   
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+public function listarCores(int $idProduto): array {
+    $sql = "
+        SELECT c.id, c.nome
+        FROM produto_detalhes pd
+        INNER JOIN cores c ON pd.cor_id = c.id
+        WHERE pd.produto_id = :produto_id
+        GROUP BY c.id, c.nome
+        ORDER BY c.nome ASC
+    ";
     
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":produto_id", $idProduto, PDO::PARAM_INT);
+    $cmd->execute();
+    
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
+}
+public function listarTamanhos(int $idProduto): array {
+    $sql = "
+        SELECT t.id, t.nome
+        FROM produto_detalhes pd
+        INNER JOIN tamanhos t ON pd.tamanho_id = t.id
+        WHERE pd.produto_id = :produto_id
+        GROUP BY t.id, t.nome
+        ORDER BY t.nome ASC
+    ";
+    
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":produto_id", $idProduto, PDO::PARAM_INT);
+    $cmd->execute();
+    
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
 
-
-
-
-
-
-
-
-
-
-
+}
 ?>
