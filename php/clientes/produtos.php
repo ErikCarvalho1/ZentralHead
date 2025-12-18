@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
+ <?php 
+include "../class/produtos.php";
+$produto = new Produtos();
+$produtos = $produto->listar(1); 
+
+
+$linha = count($produtos);
+ 
+?>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -25,19 +34,16 @@
 <body>
     <!-- CABEÇALHO -->
     <header>
+        <?php include "../menu_publico/faixa.php"; ?>
         <?php include_once "cabecalho.php"; ?>
+        <div class=" banner">
+
+</div>
     </header>
 
     <!-- CONTEÚDO -->
-    <?php 
-include "../class/produtos.php";
-$produto = new Produtos();
-$produtos = $produto->listar(1); 
+   
 
-
-$linha = count($produtos);
-
-?>
 <section class="container my-5">
 
 <?php if ($linha == 0): ?>
@@ -102,7 +108,7 @@ $linha = count($produtos);
                             R$ <?= number_format($precoFinal, 2, ',', '.') ?>
                         </div>
 
-                        <span class="btn btn-outline-primary btn-sm mt-3">
+                        <span class="btn btn-outline btn-sm mt-3">
                             Ver produto <i class="bi bi-eye-fill"></i>
                         </span>
                     </div>

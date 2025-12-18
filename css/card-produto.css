@@ -1,94 +1,96 @@
-/* ================================
-   FONTES
-================================ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=BBH+Bogle:wght@400;600&display=swap');
-/* OBS: "Neue Haas Grotesk" não existe no Google Fonts.
-   Use "Inter" estreita com font-stretch para simular.
-*/
-
-
-/* ================================
-   TÍTULO DO PRODUTO (estilo Bose)
-================================ */
-.produto-titulo {
-     font-family: "BBH Bogle", sans-serif;
-    font-size: 2rem;       /* ↓ menor */
-    font-weight: 600;
-    letter-spacing: -0.5px;
-    line-height: 1;
-    font-stretch: 85%;     /* ↓ mais compacta igual Bose */
-    margin-bottom: 5px;
-}
-
-/* ================================
-   DESCRIÇÃO
-================================ */
-.descricao-produto {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;     /* ↓ menor */
-    line-height: 1.3;      /* ↓ menor */
-    max-width: 450px;
-    color: #444;
-    font-stretch: 85%;
-}
-
-
-/* ================================
-   FEATURES — ULTRA COMPACTO
-================================ */
-.produto-features {
-    background: #f4f4f4;
-    border-radius: 6px;
-    padding: 6px 4px;      /* ↓ menor */
-    max-height: 85px;      /* ↓ menor — igual Bose */
+/* CARD DO PRODUTO */
+.product-card {
+    border: none;
+    border-radius: 12px;
     overflow: hidden;
+    position: relative;
+    height: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform .3s ease;
 }
 
-.produto-features .row {
+.product-card:hover {
+    transform: translateY(-4px);
+}
+
+/* IMAGEM */
+/* CONTAINER DA IMAGEM */
+.card-img-wrapper {
+    height: 280px;
     display: flex;
-    flex-wrap: wrap;
-    row-gap: 4px;          /* ↓ gap */
-    column-gap: 0;
-}
-
-.produto-features .col {
-    flex: 0 0 50%;         /* 2 por linha */
-    max-width: 50%;
-    text-align: center;
-    padding: 2px 0;        /* ↓ padding */
-}
-
-.produto-features i {
-    font-size: 1rem;       /* ↓ ícone menor */
-}
-
-.feature-text {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.7rem;     /* ↓ menor */
-    line-height: 1;        /* ↓ altura */
-    margin-top: 2px;
-}
-
-
-/* ================================
-   BOTÃO “VER MAIS”
-================================ */
-#btnVerMais {
-    margin-top: 4px;
-    font-size: 0.7rem;
-    padding: 0;
-}
-.produto-features {
-    max-height: 120px;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+    background-color: #fff;
 }
 
-.produto-imagem {
-    width: 100%;
-    max-width: 600px;  /* AUMENTE para 700, 800 se quiser maior */
-    height: auto;
-    display: block;
-    margin: 0 auto 20px auto; /* centraliza e cria espaço embaixo */
-    border-radius: 8px; /* opcional, fica mais bonito */
+.product-img {
+    max-width: 100%;
+    max-height: 100%;
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.05);
+}
+
+
+/* OVERLAY */
+.product-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.15)
+    );
+    z-index: 1;
+}
+
+/* DESCONTO */
+.badge-discount {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 3;
+    font-size: .8rem;
+}
+
+/* CORPO */
+.card-body {
+    position: relative;
+    z-index: 2;
+    background-color: #fff;
+    padding: 1rem;
+}
+
+/* TEXTO */
+.card-body h6 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.price-original {
+    text-decoration: line-through;
+    font-size: .85rem;
+    color: #999;
+}
+
+.price-final {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #000000;
+}
+.banner {
+    background-image: url("../images/Categorias.png");
+     background-repeat: no-repeat;
+     background-position: center center; 
+      background-size: 100%;              /* tamanho da imagem */
+      height: 400px;
+}
+.btn-outline {
+        border-radius: 20px;
+    padding: 6px 18px;
+     color: #ffffff; ;
+        background-color: rgb(111, 0, 255)  ;
 }

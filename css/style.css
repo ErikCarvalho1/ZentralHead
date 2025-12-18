@@ -138,10 +138,7 @@ footer .list-unstyled a:hover {
 .card button {
   background-color: #000; /* ou deixe transparente se quiser */
 }
-nav {
-  height: 100px;
-  
-}
+
 footer{
   background-color: #000;
 }
@@ -149,17 +146,7 @@ footer{
 /* ============================= */
 /* CARROSSEL FINO DO TOPO */
 /* ============================= */
-{
 
-  position: relative;
-  width: 100%;
-  height: 32px;
-  background: #b30606;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* ocultar os radios */
 .top-bar-carousel input {

@@ -21,7 +21,7 @@
   </header>
 
   <!-- CONTEÚDO -->
-  <main class="container mt-2m-0 p-0">
+  <main class="container">
     
     <?php include_once "../menu_publico/destaque.php"; ?>
     <?php include_once "../menu_publico/produtos-destaques.php"; ?>
