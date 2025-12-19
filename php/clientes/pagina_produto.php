@@ -80,8 +80,7 @@ if(!$produto){
       <p class="descricao-produto"><?php echo nl2br($produto['descricao']); ?></p>
 
       <?php
-$cores = $prod->listarCores($produto['id']);
-$tamanhos = $prod->listarTamanhos($produto['id']);
+
 ?>
 
 <div class="d-flex gap-4 mb-3">
