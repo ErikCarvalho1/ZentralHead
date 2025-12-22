@@ -1,6 +1,4 @@
-
 <?php
-
 session_start();
 
 require_once "../class/pedidos.php";
@@ -15,19 +13,20 @@ if (empty($_SESSION['carrinho'])) {
 }
 
 /* ==========================
-   2️⃣ CLIENTE
-   👉 OPÇÃO TEMPORÁRIA (TESTES)
-   ⚠️ GARANTA QUE ESSE ID EXISTE NA TABELA cliente
+   2️⃣ VALIDAR CLIENTE
 ========================== */
-$cliente_id = $_SESSION['cliente_id'] ?? 1028;
 
-/*
-👉 QUANDO TIVER LOGIN FUNCIONANDO, USE ISSO:
+// ⚠️ TEMPORÁRIO PARA TESTES
 if (!isset($_SESSION['cliente_id'])) {
+    // REMOVA isso quando o login estiver 100%
+    $_SESSION['cliente_id'] = 1028;
+}
+
+$cliente_id = $_SESSION['cliente_id'];
+
+if (!$cliente_id) {
     die("Cliente não autenticado.");
 }
-$cliente_id = $_SESSION['cliente_id'];
-*/
 
 /* ==========================
    3️⃣ DADOS DO FORMULÁRIO
@@ -44,15 +43,14 @@ try {
     /* ==========================
        4️⃣ CRIAR PEDIDO
     ========================== */
-    $pedido = new pedidos();
-    $pedido_id = $pedido->criarPedido($cliente_id);
+ $pedido = new pedidos();
+$pedido->setCliente_id($cliente_id);
+$pedido->setStatus('A');
 
-    if (!$pedido_id) {
-        throw new Exception("Erro ao criar pedido.");
-    }
+$pedido_id = $pedido->criarPedido();
 
     /* ==========================
-       5️⃣ INSERIR ITENS
+       5️⃣ INSERIR ITENS DO PEDIDO    
     ========================== */
     $itemPedido = new itempedido();
 
@@ -75,7 +73,7 @@ try {
     }
 
     /* ==========================
-       6️⃣ PAGAMENTO
+       6️⃣ REGISTRAR PAGAMENTO
     ========================== */
     $pagamento = new pagamentos();
     $pagamento->inserir(
@@ -110,7 +108,7 @@ try {
         <strong>#<?= $pedido_id ?></strong>
     </p>
 
-    <a href="/ZentralHead" class="btn btn-primary mt-4">
+    <a href="index.php" class="btn btn-primary mt-4">
         Voltar para a loja
     </a>
 </div>

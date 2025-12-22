@@ -35,18 +35,17 @@ class pagamentos {
         $this->codigo_transacao = $codigo;
     }
 
-    public function inserir() {
-        $sql = "INSERT INTO pagamentos
-                (pedido_id, forma_pagamento, valor, status, codigo_transacao)
-                VALUES
-                (:pedido_id, :forma, :valor, :status, :codigo)";
+public function inserir($pedido_id, $forma_pagamento, $valor) {
 
-        $cmd = $this->pdo->prepare($sql);
-        $cmd->bindValue(":pedido_id", $this->pedido_id);
-        $cmd->bindValue(":forma", $this->forma_pagamento);
-        $cmd->bindValue(":valor", $this->valor);
-        $cmd->bindValue(":status", $this->status);
-        $cmd->bindValue(":codigo", $this->codigo_transacao);
-        $cmd->execute();
-    }
+    $sql = "INSERT INTO pagamentos 
+            (pedido_id, forma_pagamento, valor)
+            VALUES 
+            (:pedido_id, :forma_pagamento, :valor)";
+
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":pedido_id", $pedido_id, PDO::PARAM_INT);
+    $cmd->bindValue(":forma_pagamento", $forma_pagamento);
+    $cmd->bindValue(":valor", $valor);
+    $cmd->execute();
+}
 }

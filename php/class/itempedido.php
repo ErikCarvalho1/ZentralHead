@@ -49,17 +49,18 @@ class Itempedido {
     public function getPreco() {
         return $this->preco;
     }
+public function inserir($pedido_id, $produto_id, $quantidade, $preco) {
 
-    public function inserir() {
-        $sql = "INSERT INTO itens_pedido
-                (pedido_id, produto_id, quantidade, preco)
-                VALUES (:pedido_id, :produto_id, :quantidade, :preco)";
+    $sql = "INSERT INTO itens_pedido 
+            (pedido_id, produto_id, quantidade, preco)
+            VALUES 
+            (:pedido_id, :produto_id, :quantidade, :preco)";
 
-        $cmd = $this->pdo->prepare($sql);
-        $cmd->bindValue(":pedido_id", $this->pedido_id);
-        $cmd->bindValue(":produto_id", $this->produto_id);
-        $cmd->bindValue(":quantidade", $this->quantidade);
-        $cmd->bindValue(":preco", $this->preco);
-        $cmd->execute();
-    }
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":pedido_id", $pedido_id, PDO::PARAM_INT);
+    $cmd->bindValue(":produto_id", $produto_id, PDO::PARAM_INT);
+    $cmd->bindValue(":quantidade", $quantidade, PDO::PARAM_INT);
+    $cmd->bindValue(":preco", $preco);
+    $cmd->execute();
+}
 }

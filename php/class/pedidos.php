@@ -80,12 +80,11 @@ public function criarPedido() {
 
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(":cliente_id", $this->cliente_id);
-    $cmd->bindValue(":status", $this->status);
+    $cmd->bindValue(":status", $this->status ?? 'A');
     $cmd->execute();
 
     return $this->pdo->lastInsertId();
 }
-
 
 // Atualiza o status do pedido
 public function atualizarStatus(int $id) {
