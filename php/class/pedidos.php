@@ -98,6 +98,25 @@ public function atualizarStatus(int $id) {
     $cmd->bindValue(":id", $id);
     $cmd->execute();
 }
+public function buscarPorId($id)
+{
+    $sql = "SELECT p.*, c.email AS email_cliente
+            FROM pedidos p
+            JOIN clientes c ON c.id = p.cliente_id
+            WHERE p.id = ?";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+public function marcarComoPago($pedido_id)
+{
+    if (!$pedido_id) return false;
+
+    $sql = "UPDATE pedidos SET status = 'pago' WHERE id = ?";
+    $stmt = $this->pdo->prepare($sql);
+    return $stmt->execute([$pedido_id]);
+}
+
 }
 
 ?>

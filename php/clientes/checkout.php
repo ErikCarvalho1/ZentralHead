@@ -1,8 +1,11 @@
 <?php
 session_start();
 
-/* 🔒 Segurança: carrinho precisa existir */
-if (!isset($_SESSION['carrinho']) || !is_array($_SESSION['carrinho']) || count($_SESSION['carrinho']) === 0) {
+if (
+    !isset($_SESSION['carrinho']) ||
+    !is_array($_SESSION['carrinho']) ||
+    count($_SESSION['carrinho']) === 0
+) {
     echo "<div style='padding:40px;text-align:center'>";
     echo "<h2>Carrinho vazio</h2>";
     echo "<a href='/ZentralHead/index.php'>Voltar à loja</a>";
@@ -24,7 +27,6 @@ $total = 0;
 <div class="container mt-5 mb-5">
     <h2 class="mb-4">Finalizar Compra</h2>
 
-    <!-- RESUMO DO PEDIDO -->
     <h4>Resumo do Pedido</h4>
 
     <table class="table table-bordered align-middle">
@@ -57,12 +59,9 @@ $total = 0;
         </tfoot>
     </table>
 
-    <!-- FORMULÁRIO -->
     <form method="post" action="processa_checkout.php">
-
         <input type="hidden" name="total" value="<?= $total ?>">
 
-        <!-- ENDEREÇO -->
         <h4 class="mt-4">Endereço de Entrega</h4>
 
         <div class="row">
@@ -79,7 +78,6 @@ $total = 0;
         <input class="form-control mb-2" name="estado" placeholder="Estado" required>
         <input class="form-control mb-3" name="cep" placeholder="CEP" required>
 
-        <!-- PAGAMENTO -->
         <h4>Pagamento</h4>
 
         <select name="forma_pagamento" class="form-control mb-4" required>

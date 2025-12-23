@@ -48,4 +48,35 @@ public function inserir($pedido_id, $forma_pagamento, $valor) {
     $cmd->bindValue(":valor", $valor);
     $cmd->execute();
 }
+public function confirmarPagamento($pedido_id, $codigo_transacao = null) {
+
+    // 1 - Atualiza pagamento
+    $sql = "UPDATE pagamentos
+            SET status = 'pago',
+                codigo_transacao = :codigo
+            WHERE pedido_id = :pedido_id";
+
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":codigo", $codigo_transacao);
+    $cmd->bindValue(":pedido_id", $pedido_id);
+    $cmd->execute();
+
+    // 2 - Atualiza pedido
+    $sql = "UPDATE pedidos
+            SET status = 'P'
+            WHERE id = :pedido_id";
+
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":pedido_id", $pedido_id);
+    $cmd->execute();
+}
+public function atualizarStatusPorCodigo($codigo_transacao, $status)
+{
+    $sql = "UPDATE pagamentos 
+            SET status = ? 
+            WHERE codigo_transacao = ?";
+    $stmt = $this->pdo->prepare($sql);
+    return $stmt->execute([$status, $codigo_transacao]);
+}
+
 }
