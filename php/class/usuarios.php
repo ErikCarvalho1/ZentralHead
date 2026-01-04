@@ -93,7 +93,7 @@ class Usuarios{
         $sql = "select * from cliente where email = :email and senha = md5(:senha)";
         $cmd =  $this->pdo->prepare($sql);
         $cmd -> bindValue(":email", $loginInformado);
-        $cmd -> bindValue(":senha", $senhaInformada);
+         $cmd -> bindValue(":senha", $senhaInformada);
         $cmd->execute();
        
             $dados = $cmd->fetch(PDO::FETCH_ASSOC);
