@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap');
 
 nav {
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 400; /* funciona, mas a fonte já é naturalmente bold */
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+  color: #111;
 }
 
-nav a {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 20px;
-  letter-spacing: 1px;           /* estilo da Berzerk */
-  text-transform: uppercase;     /* deixa mais profissional */
-  padding: 8px 14px;             /* conforto visual */
-  display: inline-block;
-}
+
+
+
+

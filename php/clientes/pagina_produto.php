@@ -41,7 +41,7 @@ if(!$produto){
   <!-- IMAGEM PRINCIPAL -->
   <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" 
        class="img-fluid"
-       style="width:100%; max-width:450px; height:auto; border-radius:12px;">
+     >
 
   <!-- MINIATURAS -->
   <div class="d-flex gap-2 mt-3">
@@ -60,7 +60,8 @@ if(!$produto){
     <div class="col-md-6">
 
       <h2 class="produto-titulo"><?php echo $produto['nome']; ?></h2>
-      <h2 class="preco-produto"><?php echo $produto['valor_base']; ?></h2>
+     <h2 class="preco-produto"> R$ <?php echo number_format($produto['valor_base'], 2, ',', '.'); ?></h2>
+
 
   
 <!-- ESTRELAS-->
@@ -75,7 +76,6 @@ if(!$produto){
     </span>
     <span class="text-muted">(5,0) • 250 avaliações</span>
   </div>
-
 
       <p class="descricao-produto"><?php echo nl2br($produto['descricao']); ?></p>
 
@@ -140,7 +140,42 @@ $tamanhos = $prod->listarTamanhos($produto['id']);
 </main>
 <hr>
 
-<footer class="text-white p-4 mt-5">
+
+
+
+<section class="produto-detalhes">
+  <div class="container">
+    <h3 class="detalhes-titulo">Detalhes do produto</h3>
+
+    <div class="detalhes-grid">
+      <div class="detalhe-item">
+        <span class="detalhe-label">Material</span>
+        <span class="detalhe-valor">Tecido respirável + solado emborrachado</span>
+      </div>
+
+      <div class="detalhe-item">
+        <span class="detalhe-label">Indicação</span>
+        <span class="detalhe-valor">Uso diário / urbano</span>
+      </div>
+
+      <div class="detalhe-item">
+        <span class="detalhe-label">Modelagem</span>
+        <span class="detalhe-valor">Regular</span>
+      </div>
+
+      <div class="detalhe-item">
+        <span class="detalhe-label">Origem</span>
+        <span class="detalhe-valor">Nacional</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<footer class="text-white  mt-5">
     <?php include "../menu_publico/rodape.php"?> 
 </footer>
 
