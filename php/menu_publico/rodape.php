@@ -9,8 +9,12 @@
           <li><a href="#" class="text-white -50 text-decoration-none d-block mb-2">Rastrear Pedido</a></li>
           <li><a href="#" class="text-white -50 text-decoration-none d-block mb-2">Frete e Entrega</a></li>
           <li><a href="#" class="text-white -50 text-decoration-none d-block mb-2">Trocas e Devoluções</a></li>
-          <li><a href="#" class="text-white -50 text-decoration-none d-block mb-2">Política de Privacidade</a></li>
-        </ul>
+          <li>
+          <a href="politica-privacidade.php" class="text-white text-decoration-none d-block mb-2">
+          Política de Privacidade
+          </a>
+        </li>
+        
       </div>
 
       <!-- Coluna newsletter -->
