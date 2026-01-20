@@ -35,18 +35,32 @@ class pagamentos {
         $this->codigo_transacao = $codigo;
     }
 
-public function inserir($pedido_id, $forma_pagamento, $valor) {
+/**
+ * Inserir novo pagamento.
+ *
+ * @param int $pedido_id
+ * @param string $forma_pagamento
+ * @param float $valor
+ * @param string $status (opcional) default 'pendente'
+ * @param string|null $codigo_transacao (opcional)
+ * @return int|null ID do pagamento inserido
+ */
+public function inserir($pedido_id, $forma_pagamento, $valor, $status = 'pendente', $codigo_transacao = null) {
 
     $sql = "INSERT INTO pagamentos 
-            (pedido_id, forma_pagamento, valor)
+            (pedido_id, forma_pagamento, valor, status, codigo_transacao)
             VALUES 
-            (:pedido_id, :forma_pagamento, :valor)";
+            (:pedido_id, :forma_pagamento, :valor, :status, :codigo)";
 
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(":pedido_id", $pedido_id, PDO::PARAM_INT);
     $cmd->bindValue(":forma_pagamento", $forma_pagamento);
     $cmd->bindValue(":valor", $valor);
+    $cmd->bindValue(":status", $status);
+    $cmd->bindValue(":codigo", $codigo_transacao);
     $cmd->execute();
+
+    return (int) $this->pdo->lastInsertId();
 }
 public function confirmarPagamento($pedido_id, $codigo_transacao = null) {
 

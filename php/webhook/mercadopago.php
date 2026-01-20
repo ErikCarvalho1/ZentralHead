@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../config/mercadopago.php';
-require_once __DIR__ . '/../config/conexao.php';
+require_once __DIR__ . '/../class/db.php';
 
 // Sempre responder 200
 http_response_code(200);
