@@ -204,6 +204,36 @@ public function listarPorCategoriaId(int $categorias_Id): array {
     $cmd->execute();
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+
+public function obterMediaAvaliacoes(int $produtoId): float {
+    $sql = "
+        SELECT ROUND(AVG(CAST(nota AS DECIMAL(3,2))), 2) as media
+        FROM avaliacoes
+        WHERE produto_id = :produto_id
+    ";
+    
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":produto_id", $produtoId, PDO::PARAM_INT);
+    $cmd->execute();
+    
+    $resultado = $cmd->fetch(PDO::FETCH_ASSOC);
+    return $resultado['media'] ? floatval($resultado['media']) : 0;
+}
+
+public function obterContagemAvaliacoes(int $produtoId): int {
+    $sql = "
+        SELECT COUNT(*) as total
+        FROM avaliacoes
+        WHERE produto_id = :produto_id
+    ";
+    
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":produto_id", $produtoId, PDO::PARAM_INT);
+    $cmd->execute();
+    
+    $resultado = $cmd->fetch(PDO::FETCH_ASSOC);
+    return intval($resultado['total']);
+}
     
 }
 

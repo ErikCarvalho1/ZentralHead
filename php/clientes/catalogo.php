@@ -1,9 +1,11 @@
 <?php
 include "../class/produtos.php";
 include "../class/categorias.php";
+include "../class/avaliacoes.php";
 
 $produto = new Produtos();
 $catClass = new categorias();
+$avaliacao = new Avaliacoes();
 
 // Pega a categoria da URL
 $categoriaId = isset($_GET['categoria_id']) ? intval($_GET['categoria_id']) : 0;
@@ -43,7 +45,21 @@ $linha = count($produtos);
         <!-- ===== PRODUTOS ===== --> <?php if ($linha == 0): ?> <div class="alert alert-warning text-center"> Nenhum
             produto encontrado nesta categoria. </div> <?php else: ?> <div class="row g-4">
             <?php foreach ($produtos as $prod): ?>
-            <?php $precoOriginal = $prod['valor_base']; $precoFinal = $precoOriginal; if (!empty($prod['desconto_tipo']) && $prod['desconto_valor'] > 0) { if ($prod['desconto_tipo'] === 'percentual') { $precoFinal -= ($precoOriginal * $prod['desconto_valor'] / 100); } elseif ($prod['desconto_tipo'] === 'fixo') { $precoFinal -= $prod['desconto_valor']; } } ?>
+            <?php 
+            $precoOriginal = $prod['valor_base']; 
+            $precoFinal = $precoOriginal; 
+            if (!empty($prod['desconto_tipo']) && $prod['desconto_valor'] > 0) { 
+                if ($prod['desconto_tipo'] === 'percentual') { 
+                    $precoFinal -= ($precoOriginal * $prod['desconto_valor'] / 100); 
+                } elseif ($prod['desconto_tipo'] === 'fixo') { 
+                    $precoFinal -= $prod['desconto_valor']; 
+                } 
+            }
+            
+            // Obter avaliações do produto
+            $mediaAvaliacoes = $produto->obterMediaAvaliacoes($prod['id']);
+            $totalAvaliacoes = $produto->obterContagemAvaliacoes($prod['id']);
+            ?>
             <div class="col-sm-6 col-md-4 col-lg-3"> <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>"
                     class="text-decoration-none text-dark">
                     <div class="card product-card h-100 position-relative"> <?php if ($precoFinal < $precoOriginal): ?>
@@ -55,7 +71,30 @@ $linha = count($produtos);
                         <div class="card-body text-center">
                             <h6 class="fw-semibold"><?= htmlspecialchars($prod['nome']) ?></h6>
                             <p class="text-muted small"> <?= mb_strimwidth($prod['descricao_curta'], 0, 55, '...') ?>
-                            </p> <?php if ($precoFinal < $precoOriginal): ?> <div class="price-original"> R$
+                            </p>
+                            
+                            <!-- Avaliações -->
+                            <?php if ($totalAvaliacoes > 0): ?>
+                            <div class="mb-2">
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    <div class="stars">
+                                        <?php 
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            if ($i <= round($mediaAvaliacoes)) {
+                                                echo '<i class="bi bi-star-fill text-warning"></i>';
+                                            } else {
+                                                echo '<i class="bi bi-star text-warning"></i>';
+                                            }
+                                        }
+                                        ?>
+                                    </div>
+                                    <small class="text-muted">(<?= $totalAvaliacoes ?> avaliações)</small>
+                                </div>
+                                <small class="text-muted"><?= number_format($mediaAvaliacoes, 1, ',', '.') ?></small>
+                            </div>
+                            <?php endif; ?>
+                            
+                            <?php if ($precoFinal < $precoOriginal): ?> <div class="price-original"> R$
                                 <?= number_format($precoOriginal, 2, ',', '.') ?> </div> <?php endif; ?> <div
                                 class="price-final"> R$ <?= number_format($precoFinal, 2, ',', '.') ?> </div> <button
                                 class="btn  btn-sm mt-3 btn-cart add-to-cart" data-id="<?= $prod['id'] ?>"
