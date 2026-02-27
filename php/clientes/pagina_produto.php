@@ -10,6 +10,10 @@ $id =(int) $_GET['id'];
 $prod = new Produtos();
 $produto = $prod->listarPorId($id);
 
+// obter média e total de avaliações para o produto
+$mediaAvaliacoes = $prod->obterMediaAvaliacoes($id);
+$totalAvaliacoes = $prod->obterContagemAvaliacoes($id);
+
 if(!$produto){
     die("produto não encontrado");
 }
@@ -66,14 +70,24 @@ if(!$produto){
 <!-- ESTRELAS-->
 
 <div class="mt-2">
+    <?php
+    // calculo de estrelas preenchidas/meia/ vazias com base na média
+    $fullStars = (int) floor($mediaAvaliacoes);
+    $halfStar  = ($mediaAvaliacoes - $fullStars) >= 0.5 ? 1 : 0;
+    $emptyStars = 5 - $fullStars - $halfStar;
+    ?>
     <span class="text-dark">
-      <i class="bi bi-star-fill"></i>
-      <i class="bi bi-star-fill"></i>
-      <i class="bi bi-star-fill"></i>
-      <i class="bi bi-star-fill"></i>
-      <i class="bi bi-star-fill"></i>
+        <?php for ($i = 0; $i < $fullStars; $i++): ?>
+            <i class="bi bi-star-fill"></i>
+        <?php endfor; ?>
+        <?php if ($halfStar): ?>
+            <i class="bi bi-star-half"></i>
+        <?php endif; ?>
+        <?php for ($i = 0; $i < $emptyStars; $i++): ?>
+            <i class="bi bi-star"></i>
+        <?php endfor; ?>
     </span>
-    <span class="text-muted">(5,0) • 250 avaliações</span>
+    <span class="text-muted">(<?= number_format($mediaAvaliacoes, 1, ',', '.') ?>) • <?= $totalAvaliacoes ?> avaliações</span>
   </div>
 
 
