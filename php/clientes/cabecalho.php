@@ -37,17 +37,13 @@ if (session_status() === PHP_SESSION_NONE) {
             <ul class="navbar-nav ms-auto">
            <!-- Botão do carrinho -->
 <li class="nav-item mx-3">
-    <button class="btn nav-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#carrinhoOffcanvas">
+    <button class="btn nav-link " type="button" data-bs-toggle="offcanvas" data-bs-target="#carrinhoOffcanvas">
         <i class="bi bi-cart3"></i>
         <span class="badge bg-danger" id="cart-count">0</span>
     </button>
 </li>
 
 
-                <?php
-    $nomeUsuario = $_SESSION['nome_usuario'] ?? 'Visitante'; 
-  ?>
-                Olá, <?= htmlspecialchars($nomeUsuario) ?>!
                 </span>
                 </li>
 
@@ -67,7 +63,7 @@ if (session_status() === PHP_SESSION_NONE) {
 </nav>
 
 <!-- Offcanvas do Carrinho -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="carrinhoOffcanvas">
+<div class="offcanvas offcanvas-end " tabindex="-1" id="carrinhoOffcanvas">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title">Meu Carrinho</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>

@@ -48,10 +48,10 @@ $linha = count($produtos);
 
                     <!-- IMAGEM -->
                    
-                        <img src="../../images/<?= htmlspecialchars($prod['imagem_principal']) ?>"
-                             class="product-img"
-                             alt="<?= htmlspecialchars($prod['nome']) ?>">
-               
+                         <img 
+                        src="data:image/jpeg;base64,<?= base64_encode($prod['imagem_principal']) ?>"
+                        class="product-img"
+                        alt="<?= htmlspecialchars($prod['nome']) ?>"> 
 
                     <!-- CORPO -->
                     <div class="card-body text-center">

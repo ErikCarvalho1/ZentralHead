@@ -1,5 +1,6 @@
 <?php 
-include_once "db.php";
+require_once "db.php";
+
 
 class categorias {
     private $id;
@@ -40,7 +41,7 @@ class categorias {
         $this->banner = $banner;
     }
 
-    // INSERT com banner
+ 
     public function insert(){
         $sql = "INSERT INTO categorias (nome, imagem, banner)
                 VALUES (:nome, :imagem, :banner)";
@@ -51,7 +52,6 @@ class categorias {
         $cmd->execute();
     }
 
-    // UPDATE com banner
     public function update($id){
         $sql = "UPDATE categorias 
                 SET nome = :nome, imagem = :imagem, banner = :banner
@@ -78,7 +78,7 @@ class categorias {
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ✅ Buscar categoria por ID (com banner)
+
     public function listarPorId(int $id){
         $sql = "SELECT * FROM categorias WHERE id = :id";
         $cmd = $this->pdo->prepare($sql);

@@ -66,7 +66,7 @@ $linha = count($produtos);
                         <span class="badge bg-danger badge-discount">
                             <?= ($prod['desconto_tipo'] === 'percentual') ? "-{$prod['desconto_valor']}%" : "-R$ " . number_format($prod['desconto_valor'], 2, ',', '.') ?>
                         </span> <?php endif; ?> <img
-                            src="../../images/<?= htmlspecialchars($prod['imagem_principal']) ?>"
+                            src="data:image/jpeg;base64,<?= base64_encode($prod['imagem_principal'])?>"
                             class="card-img-top product-img" alt="<?= htmlspecialchars($prod['nome']) ?>">
                         <div class="card-body text-center">
                             <h6 class="fw-semibold"><?= htmlspecialchars($prod['nome']) ?></h6>
@@ -99,7 +99,7 @@ $linha = count($produtos);
                                 class="price-final"> R$ <?= number_format($precoFinal, 2, ',', '.') ?> </div> <button
                                 class="btn  btn-sm mt-3 btn-cart add-to-cart" data-id="<?= $prod['id'] ?>"
                                 data-nome="<?= htmlspecialchars($prod['nome']) ?>" data-preco="<?= $precoFinal ?>"
-                                data-img="<?= $prod['imagem_principal'] ?>"> <i class="bi bi-cart3"></i> Adicionar
+                                > <i class="bi bi-cart3"></i> Adicionar
                             </button>
                         </div>
                     </div>

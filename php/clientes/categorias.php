@@ -42,10 +42,11 @@ $categorias = $catClass->listar();
 
                             <!-- Imagem ocupando o card inteiro -->
                             <img 
-                                src="../../images/<?= htmlspecialchars($cat['imagem']) ?>"  
+                                src="data:image/jpeg;base64,<?= base64_encode($cat['imagem']) ?>"
                                 alt="<?= htmlspecialchars($cat['nome']) ?>"
                                 class="card-img-top categoria-img"
                             >
+                            
                             <div class="card-body">
                                 <h5 class="card-title"><?= htmlspecialchars($cat['nome']) ?></h5>
                             </div>

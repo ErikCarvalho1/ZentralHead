@@ -39,15 +39,15 @@ if(!$produto){
 <div class="col-md-6">
 
   <!-- IMAGEM PRINCIPAL -->
-  <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" 
+  <img   src="data:image/jpeg;base64,<?= base64_encode($produto['imagem_principal']) ?>" 
        class="img-fluid"
        style="width:100%; max-width:450px; height:auto; border-radius:12px;">
 
   <!-- MINIATURAS -->
   <div class="d-flex gap-2 mt-3">
-    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
-    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
-    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
+    <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem_principal']) ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
+    <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem_principal']) ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
+  
   </div>
 
 

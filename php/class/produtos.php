@@ -1,5 +1,5 @@
 <?php 
-include "db.php";
+require_once "db.php";
 class Produtos {
 
 private $id;
@@ -209,11 +209,11 @@ public function obterMediaAvaliacoes(int $produtoId): float {
     $sql = "
         SELECT ROUND(AVG(CAST(nota AS DECIMAL(3,2))), 2) as media
         FROM avaliacoes
-        WHERE produto_id = :produto_id
+        WHERE produtos_id = :produtos_id
     ";
     
     $cmd = $this->pdo->prepare($sql);
-    $cmd->bindValue(":produto_id", $produtoId, PDO::PARAM_INT);
+    $cmd->bindValue(":produtos_id", $produtoId, PDO::PARAM_INT);
     $cmd->execute();
     
     $resultado = $cmd->fetch(PDO::FETCH_ASSOC);
@@ -224,11 +224,11 @@ public function obterContagemAvaliacoes(int $produtoId): int {
     $sql = "
         SELECT COUNT(*) as total
         FROM avaliacoes
-        WHERE produto_id = :produto_id
+        WHERE produtos_id = :produtos_id
     ";
     
     $cmd = $this->pdo->prepare($sql);
-    $cmd->bindValue(":produto_id", $produtoId, PDO::PARAM_INT);
+    $cmd->bindValue(":produtos_id", $produtoId, PDO::PARAM_INT);
     $cmd->execute();
     
     $resultado = $cmd->fetch(PDO::FETCH_ASSOC);
