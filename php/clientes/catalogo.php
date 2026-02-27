@@ -34,7 +34,10 @@ $linha = count($produtos);
     <link rel="stylesheet" href="../../css/catalogo-produtos.css">
 </head>
 
-<body> <?php include "cabecalho.php"; ?>
+<body> 
+    
+    <?php include_once "../menu_publico/faixa.php";?>
+<?php include "cabecalho.php"; ?>
 <?php if ($categoria): ?>
 <div class="banner-categoria">
     <img src="../../images/<?= htmlspecialchars($categoria['banner']) ?>" >

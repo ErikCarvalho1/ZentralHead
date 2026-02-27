@@ -34,7 +34,11 @@ if(!$produto){
 
 </head>
 <body>
-   <nav><?php include "cabecalho.php"; ?></nav> 
+
+   <nav>
+    <?php include_once "../menu_publico/faixa.php";?>
+    <?php include "cabecalho.php"; ?>
+</nav> 
 <main>
 
 <div class="container mt-5">
@@ -148,14 +152,13 @@ if(!$produto){
     </div> <!-- FECHA COLUNA DIREITA -->
 
   </div>
-</div>
+    </div>
+    </main>
+    <hr>
 
-</main>
-<hr>
-
-<footer class="text-white p-4 mt-5">
-    <?php include "../menu_publico/rodape.php"?> 
-</footer>
+   <footer class="text-white">
+      <?php include_once "../menu_publico/rodape.php"?>
+    </footer>
 
 </body>
 
