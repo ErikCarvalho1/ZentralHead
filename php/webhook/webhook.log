@@ -1,0 +1,108 @@
+2025-12-23 23:46:21
+HEADERS:
+Array
+(
+    [Host] => cloth-mills-hewlett-defend.trycloudflare.com
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    [Accept] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+    [Accept-Encoding] => gzip
+    [Accept-Language] => pt-BR,pt;q=0.9
+    [Cache-Control] => max-age=0
+    [Cdn-Loop] => cloudflare; loops=1; subreqs=1
+    [Cf-Connecting-Ip] => 2804:1b3:a642:49d1:296c:9964:46c3:d0fa
+    [Cf-Ew-Via] => 15
+    [Cf-Ipcountry] => BR
+    [Cf-Ray] => 9b2b650b017bffa8-GRU
+    [Cf-Visitor] => {"scheme":"https"}
+    [Cf-Warp-Tag-Id] => 8d5ada4f-f5e2-4761-a395-eb358bfeb229
+    [Cf-Worker] => trycloudflare.com
+    [Connection] => keep-alive
+    [Cookie] => zentralhead=ja134f56u6akunbgvsh5hr3kf9; PHPSESSID=b5o8kr9cdtmv1l9o4e66na8c92
+    [Priority] => u=0, i
+    [Sec-Ch-Ua] => "Brave";v="143", "Chromium";v="143", "Not A(Brand";v="24"
+    [Sec-Ch-Ua-Mobile] => ?0
+    [Sec-Ch-Ua-Platform] => "Windows"
+    [Sec-Fetch-Dest] => document
+    [Sec-Fetch-Mode] => navigate
+    [Sec-Fetch-Site] => none
+    [Sec-Fetch-User] => ?1
+    [Sec-Gpc] => 1
+    [Upgrade-Insecure-Requests] => 1
+    [X-Forwarded-For] => 2804:1b3:a642:49d1:296c:9964:46c3:d0fa
+    [X-Forwarded-Proto] => https
+)
+BODY:
+
+
+2025-12-23 23:46:21
+HEADERS:
+Array
+(
+    [Host] => cloth-mills-hewlett-defend.trycloudflare.com
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    [Accept] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+    [Accept-Encoding] => gzip
+    [Accept-Language] => pt-BR,pt;q=0.9
+    [Cache-Control] => max-age=0
+    [Cdn-Loop] => cloudflare; loops=1; subreqs=1
+    [Cf-Connecting-Ip] => 2804:1b3:a642:49d1:296c:9964:46c3:d0fa
+    [Cf-Ew-Via] => 15
+    [Cf-Ipcountry] => BR
+    [Cf-Ray] => 9b2b651024f8ffa8-GRU
+    [Cf-Visitor] => {"scheme":"https"}
+    [Cf-Warp-Tag-Id] => 8d5ada4f-f5e2-4761-a395-eb358bfeb229
+    [Cf-Worker] => trycloudflare.com
+    [Connection] => keep-alive
+    [Cookie] => zentralhead=ja134f56u6akunbgvsh5hr3kf9; PHPSESSID=b5o8kr9cdtmv1l9o4e66na8c92
+    [Priority] => u=0, i
+    [Sec-Ch-Ua] => "Brave";v="143", "Chromium";v="143", "Not A(Brand";v="24"
+    [Sec-Ch-Ua-Mobile] => ?0
+    [Sec-Ch-Ua-Platform] => "Windows"
+    [Sec-Fetch-Dest] => document
+    [Sec-Fetch-Mode] => navigate
+    [Sec-Fetch-Site] => none
+    [Sec-Fetch-User] => ?1
+    [Sec-Gpc] => 1
+    [Upgrade-Insecure-Requests] => 1
+    [X-Forwarded-For] => 2804:1b3:a642:49d1:296c:9964:46c3:d0fa
+    [X-Forwarded-Proto] => https
+)
+BODY:
+
+
+2025-12-23 23:46:22
+HEADERS:
+Array
+(
+    [Host] => cloth-mills-hewlett-defend.trycloudflare.com
+    [User-Agent] => Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+    [Accept] => text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8
+    [Accept-Encoding] => gzip
+    [Accept-Language] => pt-BR,pt;q=0.9
+    [Cache-Control] => max-age=0
+    [Cdn-Loop] => cloudflare; loops=1; subreqs=1
+    [Cf-Connecting-Ip] => 2804:1b3:a642:49d1:296c:9964:46c3:d0fa
+    [Cf-Ew-Via] => 15
+    [Cf-Ipcountry] => BR
+    [Cf-Ray] => 9b2b651276b9ffa8-GRU
+    [Cf-Visitor] => {"scheme":"https"}
+    [Cf-Warp-Tag-Id] => 8d5ada4f-f5e2-4761-a395-eb358bfeb229
+    [Cf-Worker] => trycloudflare.com
+    [Connection] => keep-alive
+    [Cookie] => zentralhead=ja134f56u6akunbgvsh5hr3kf9; PHPSESSID=b5o8kr9cdtmv1l9o4e66na8c92
+    [Priority] => u=0, i
+    [Sec-Ch-Ua] => "Brave";v="143", "Chromium";v="143", "Not A(Brand";v="24"
+    [Sec-Ch-Ua-Mobile] => ?0
+    [Sec-Ch-Ua-Platform] => "Windows"
+    [Sec-Fetch-Dest] => document
+    [Sec-Fetch-Mode] => navigate
+    [Sec-Fetch-Site] => none
+    [Sec-Fetch-User] => ?1
+    [Sec-Gpc] => 1
+    [Upgrade-Insecure-Requests] => 1
+    [X-Forwarded-For] => 2804:1b3:a642:49d1:296c:9964:46c3:d0fa
+    [X-Forwarded-Proto] => https
+)
+BODY:
+
+

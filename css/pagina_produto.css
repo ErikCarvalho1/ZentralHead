@@ -1,0 +1,59 @@
+/* ================================
+   FONTES
+================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bogle:wght@400;600&display=swap');
+/* OBS: "Neue Haas Grotesk" não existe no Google Fonts.
+   Use "Inter" estreita com font-stretch para simular.
+*/
+
+
+/* ================================
+   TÍTULO DO PRODUTO (estilo Bose)
+================================ */
+.produto-titulo {
+     font-family: "BBH Bogle", sans-serif;
+    font-size: 2rem;       /* ↓ menor */
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    font-stretch: 85%;     /* ↓ mais compacta igual Bose */
+    margin-bottom: 5px;
+}
+
+/* ================================
+   DESCRIÇÃO
+================================ */
+.descricao-produto {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;     /* ↓ menor */
+    line-height: 1.3;      /* ↓ menor */
+    max-width: 450px;
+    color: #444;
+    font-stretch: 85%;
+}
+
+
+
+
+/* ================================
+   BOTÃO “VER MAIS”
+================================ */
+#btnVerMais {
+    margin-top: 4px;
+    font-size: 0.7rem;
+    padding: 0;
+}
+.produto-features {
+    max-height: 120px;
+    overflow: hidden;
+}
+
+.produto-imagem {
+    width: 100%;
+    max-width: 600px;  /* AUMENTE para 700, 800 se quiser maior */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px auto; /* centraliza e cria espaço embaixo */
+    border-radius: 8px; /* opcional, fica mais bonito */
+}

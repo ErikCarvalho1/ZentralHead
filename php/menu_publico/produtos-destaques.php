@@ -2,180 +2,87 @@
 include "../class/produtos.php";
 $produto = new Produtos();
 $produtos = $produto->listarDestaques(1); 
-
 $linha = count($produtos);
 ?>
 
-<section class="my-5 container">
+<link rel="stylesheet" href="../../css/catalogo-produtos.css">
 
-<!-- Área do Carrinho -->
+<section class="container my-5">
 
+<?php if ($linha == 0): ?>
+    <div class="alert alert-danger text-center">
+        Não há produtos em destaque
+    </div>
+<?php else: ?>
 
-<?php if($linha == 0){ ?>
-    <h2 class="alert alert-danger text-center">Não há produtos em destaques</h2>
-<?php } ?>
+    <h2 class="text-center fw-semibold mb-4">Produtos Zentral</h2>
 
-<?php if($linha > 0){ ?>
-    <div id="carouselProdutos" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+    <div class="row g-4">
 
-            <?php 
-            $active = "active";
-            // Quebra o array de produtos em grupos de 4 por slide
-            $grupos = array_chunk($produtos, 3);
-            foreach($grupos as $grupo):
-            ?>
-            
-            <div class="carousel-item <?= $active ?>">
-                <?php $active = ""; ?>
+    <?php foreach ($produtos as $prod): ?>
+        <?php
+        $precoOriginal = $prod['valor_base'];
+        $precoFinal = $precoOriginal;
 
-                <div class="row justify-content-center">
-                    <?php foreach($grupo as $prod): ?>
-                        <?php
-                        // Cálculo do preço final considerando desconto
-                        $precoOriginal = $prod['valor_base'];
-                        $precoFinal = $precoOriginal;
+        if (!empty($prod['desconto_tipo']) && $prod['desconto_valor'] > 0) {
+            if ($prod['desconto_tipo'] === 'percentual') {
+                $precoFinal -= ($precoOriginal * $prod['desconto_valor'] / 100);
+            } elseif ($prod['desconto_tipo'] === 'fixo') {
+                $precoFinal -= $prod['desconto_valor'];
+            }
+        }
+        ?>
 
-                        if (!empty($prod['desconto_tipo']) && $prod['desconto_valor'] > 0) {
-                            if ($prod['desconto_tipo'] === 'percentual') {
-                                $precoFinal = $precoOriginal - ($precoOriginal * $prod['desconto_valor'] / 100);
-                            } elseif ($prod['desconto_tipo'] === 'fixo') {
-                                $precoFinal = $precoOriginal - $prod['desconto_valor'];
-                            }
-                        }
-                        ?>  <a class="col-12 col-sm-6 col-md-3 mb-4 d-flex justify-content-center" href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" >
-                        <div class=>
-                           <div class="card h-100" style="width: 16rem;">
-                                <div class="card h-100 shadow-sm"
-                                     onmouseover="this.style.transform='scale(1.05)';"
-                                     onmouseout="this.style.transform='scale(1)';">
-                                    <div class="card-img-container img-fluid" style="max-width: 100%; height: auto; overflow: hidden;">
-                                        <img src="../../images/<?= $prod['imagem_principal'] ?>"
-                                             alt="<?= htmlspecialchars($prod['nome']) ?>"
-                                             class="card-img-top w-100 h-100"
-                                             style="object-fit: contain;">
-                                    </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <a href="../clientes/pagina_produto.php?id=<?= $prod['id'] ?>" class="text-decoration-none text-dark">
 
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title text-black">
-                                            <strong><?= $prod['nome'] ?></strong>
-                                        </h5>
+                <div class="card product-card h-100 position-relative">
 
-                                        <p class="card-text text-muted">
-                                            <?= mb_strimwidth($prod['descricao_curta'], 0, 42, '...') ?>
-                                        </p>
+                    <?php if ($precoFinal < $precoOriginal): ?>
+                        <span class="badge bg-danger badge-discount">
+                            <?= ($prod['desconto_tipo'] === 'percentual')
+                                ? "-{$prod['desconto_valor']}%"
+                                : "-R$ " . number_format($prod['desconto_valor'], 2, ',', '.') ?>
+                        </span>
+                    <?php endif; ?>
 
-                                        <div class="mt-3">
-                                            <?php if ($precoFinal < $precoOriginal): ?>
-                                                <div>
-                                                    <span class="text-muted text-decoration-line-through">
-                                                        <?= "R$ ".number_format($precoOriginal, 2, ',', '.') ?>
-                                                    </span>
-                                                    <br>
-                                               
-                                                    <button class="btn btn-success add-to-cart"
-                                                        data-id="<?= $prod['id'] ?>"
-                                                        data-nome="<?= htmlspecialchars($prod['nome']) ?>"
-                                                        data-preco="<?= $precoFinal ?>"
-                                                        data-img="<?= $prod['imagem_principal'] ?>">
-                                                        Adicionar ao carrinho
-                                                    </button>
-                                                    <br>
-                                                    <small class="text-danger">
-                                                        <?= ($prod['desconto_tipo'] === 'percentual')
-                                                            ? "-".$prod['desconto_valor']."% OFF"
-                                                            : "-R$ ".number_format($prod['desconto_valor'], 2, ',', '.') ?>
-                                                    </small>
-                                                </div>
-                                            <?php else: ?>
-                                                <button class="btn btn-secondary add-to-cart"
-                                                    data-id="<?= $prod['id'] ?>"
-                                                    data-nome="<?= htmlspecialchars($prod['nome']) ?>"
-                                                    data-preco="<?= $precoOriginal ?>"
-                                                    data-img="<?= $prod['imagem_principal'] ?>">
-                                                    Adicionar ao carrinho
-                                                </button>
-                                                     <button class="btn btn-success disabled">
-                                                        <?= "R$ ".number_format($precoFinal, 2, ',', '.') ?>
-                                                    </button>
-                                            <?php endif; ?>
-                                        </div>
-                                    
-                                      
-                                       
-                                       
-                                    </div>
-                                </div>
+                    <!-- IMAGEM -->
+                   
+                         <img 
+                        src="data:image/jpeg;base64,<?= base64_encode($prod['imagem_principal']) ?>"
+                        class="product-img"
+                        alt="<?= htmlspecialchars($prod['nome']) ?>"> 
+
+                    <!-- CORPO -->
+                    <div class="card-body text-center">
+                        <h6 class="fw-semibold"><?= htmlspecialchars($prod['nome']) ?></h6>
+
+                        <p class="text-muted small">
+                            <?= mb_strimwidth($prod['descricao_curta'], 0, 55, '...') ?>
+                        </p>
+
+                        <?php if ($precoFinal < $precoOriginal): ?>
+                            <div class="price-original">
+                                R$ <?= number_format($precoOriginal, 2, ',', '.') ?>
                             </div>
-                        </div> </a>
-                    <?php endforeach; ?>
+                        <?php endif; ?>
+
+                        <div class="price-final">
+                            R$ <?= number_format($precoFinal, 2, ',', '.') ?>
+                        </div>
+
+                        <span class="btn btn-outline-primary btn-sm mt-3">
+                            Ver produto <i class="bi bi-eye-fill"></i>
+                        </span>
+                    </div>
+
                 </div>
-            </div>
-            <?php endforeach; ?>
 
+            </a>
         </div>
 
-        <!-- Controles -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselProdutos" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselProdutos" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-
-        <!-- Indicadores -->
-        <div class="carousel-indicators mt-3">
-            <?php for($i=0; $i<count($grupos); $i++): ?>
-                <button type="button" data-bs-target="#carouselProdutos" data-bs-slide-to="<?= $i ?>" class="<?= ($i==0?'active':'') ?>"></button>
-            <?php endfor; ?>    
-        </div>
+    <?php endforeach; ?>
     </div>
 
-<?php } ?>
-
+<?php endif; ?>
 </section>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    function atualizarCarrinho() {
-        const carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
-        const lista = document.getElementById('carrinho-lista');
-        const totalSpan = document.getElementById('carrinho-total');
-        lista.innerHTML = '';
-        let total = 0;
-        carrinho.forEach(item => {
-            total += item.preco * item.qtd;
-            const li = document.createElement('li');
-            li.innerHTML = `<img src="../../images/${item.img}" width="32" height="32" style="object-fit:contain;"> 
-                ${item.nome} x${item.qtd} - R$ ${item.preco.toLocaleString('pt-BR', {minimumFractionDigits:2})}`;
-            lista.appendChild(li);
-        });
-        totalSpan.textContent = total.toLocaleString('pt-BR', {minimumFractionDigits:2});
-    }
-
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const id = this.dataset.id;
-            const nome = this.dataset.nome;
-            const preco = parseFloat(this.dataset.preco);
-            const img = this.dataset.img;
-            let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
-            const idx = carrinho.findIndex(item => item.id == id);
-            if (idx > -1) {
-                carrinho[idx].qtd += 1;
-            } else {
-                carrinho.push({id, nome, preco, img, qtd: 1});
-            }
-            localStorage.setItem('carrinho', JSON.stringify(carrinho));
-            atualizarCarrinho();
-
-            // Redireciona para a página de carrinho em clientes (mostra o carrinho atualizado)
-            window.location.href = '../clientes/carrinho.php';
-        });
-    });
-
-    atualizarCarrinho();
-});
-</script>

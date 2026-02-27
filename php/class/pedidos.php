@@ -1,10 +1,9 @@
 <?php 
-include_once "db.php";  
+require_once "db.php";
 
-class pedidos {
+class Pedidos {
 
     private $id;
-    private $usuario_id;
     private $cliente_id;
     private $data;
     private $status;
@@ -17,12 +16,8 @@ class pedidos {
     public function getId(){
         return $this->id;
     }
-    public function setUsuario_id(int $usuario_id){
-        $this->usuario_id = $usuario_id;
-    }
-    public function getUsuario_id() {
-        return $this->usuario_id;
-    }
+
+ 
     public function setCliente_id(int $cliente_id){
         $this->cliente_id = $cliente_id;
     }
@@ -50,7 +45,6 @@ class pedidos {
     public function Inserir(){
         $sql = "CALL sp_pedido_insert(:usuario_id, :cliente_id, :data, :status, :pedidos)";
         $cmd = $this->pdo->prepare($sql);
-        $cmd->bindValue(":usuario_id", $this->usuario_id);
         $cmd->bindValue(":cliente_id", $this->cliente_id);
         $cmd->bindValue(":data", $this->data);
         $cmd->bindValue(":status", $this->status);
@@ -72,7 +66,6 @@ class pedidos {
     public function atualizar(int $id){
     $sql = "CALL sp_pedido_update(:usuario_id, :cliente_id, :data, :status, :pedidos) WHERE id = :id";
     $cmd = $this->pdo->prepare($sql);
-    $cmd->bindValue(":usuario_id", $this->usuario_id);
     $cmd->bindValue(":cliente_id", $this->cliente_id);
     $cmd->bindValue(":data", $this->data);
     $cmd->bindValue(":status", $this->status);
@@ -80,6 +73,50 @@ class pedidos {
     $cmd->bindValue(":id", $id);
     $cmd->execute();
 }
+public function criarPedido() {
+
+    $sql = "INSERT INTO pedidos (cliente_id, status)
+            VALUES (:cliente_id, :status)";
+
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":cliente_id", $this->cliente_id);
+    $cmd->bindValue(":status", $this->status ?? 'A');
+    $cmd->execute();
+
+    return $this->pdo->lastInsertId();
+}
+
+// Atualiza o status do pedido
+public function atualizarStatus(int $id) {
+
+    $sql = "UPDATE pedidos
+            SET status = :status
+            WHERE id = :id";
+
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":status", $this->status);
+    $cmd->bindValue(":id", $id);
+    $cmd->execute();
+}
+public function buscarPorId($id)
+{
+    $sql = "SELECT p.*, c.email AS email_cliente
+            FROM pedidos p
+            JOIN clientes c ON c.id = p.cliente_id
+            WHERE p.id = ?";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+public function marcarComoPago($pedido_id)
+{
+    if (!$pedido_id) return false;
+
+    $sql = "UPDATE pedidos SET status = 'pago' WHERE id = ?";
+    $stmt = $this->pdo->prepare($sql);
+    return $stmt->execute([$pedido_id]);
+}
+
 }
 
 ?>

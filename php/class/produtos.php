@@ -1,5 +1,5 @@
 <?php 
-include "db.php";
+require_once "db.php";
 class Produtos {
 
 private $id;
@@ -89,7 +89,7 @@ public function insert(){
     $cmd->bindValue(":descricao", $this->descricao);
     $cmd->bindValue(":valorUnit", $this->valorUnit);
     $cmd->bindValue(":unidade_venda", $this->unidade_Venda);
-    $cmd->bindValue(":categoria_id", $this->categoria_Id);
+    $cmd->bindValue(":categoria_id", $this->categorias_Id);
     $cmd->bindValue(":estoque_minimo", $this->estoque_Minimo);
     $cmd->bindValue(":classe_desconto", $this->classe_Desconto);
     $cmd->bindValue(":imagem", $this->imagem);
@@ -137,7 +137,7 @@ public function atualizar (){
     $cmd->bindValue(":descricao", $this->descricao);
     $cmd->bindValue(":valorUnit", $this->valorUnit);
     $cmd->bindValue(":unidade_venda", $this->unidade_Venda);
-    $cmd->bindValue(":categoria_id", $this->categoria_Id);
+    $cmd->bindValue(":categoria_id", $this->categorias_Id);
     $cmd->bindValue(":estoque_minimo", $this->estoque_Minimo);
     $cmd->bindValue(":classe_desconto", $this->classe_Desconto);
     $cmd->bindValue(":imagem", $this->imagem);
@@ -197,5 +197,50 @@ public function listarPorNomeCategoria(string $nomeCat): array {
     
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+public function listarPorCategoriaId(int $categorias_Id): array {
+    $sql = "SELECT * FROM produtos WHERE categorias_id = :catId ORDER BY id DESC";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":catId", $categorias_Id, PDO::PARAM_INT);
+    $cmd->execute();
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+public function obterMediaAvaliacoes(int $produtoId): float {
+    $sql = "
+        SELECT ROUND(AVG(CAST(nota AS DECIMAL(3,2))), 2) as media
+        FROM avaliacoes
+        WHERE produtos_id = :produtos_id
+    ";
+    
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":produtos_id", $produtoId, PDO::PARAM_INT);
+    $cmd->execute();
+    
+    $resultado = $cmd->fetch(PDO::FETCH_ASSOC);
+    return $resultado['media'] ? floatval($resultado['media']) : 0;
+}
+
+public function obterContagemAvaliacoes(int $produtoId): int {
+    $sql = "
+        SELECT COUNT(*) as total
+        FROM avaliacoes
+        WHERE produtos_id = :produtos_id
+    ";
+    
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":produtos_id", $produtoId, PDO::PARAM_INT);
+    $cmd->execute();
+    
+    $resultado = $cmd->fetch(PDO::FETCH_ASSOC);
+    return intval($resultado['total']);
+}
+}
+
+
+
+
+
+
+
+
+
 ?>

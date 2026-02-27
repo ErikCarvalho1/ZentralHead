@@ -101,3 +101,55 @@ Este projeto é de uso **educacional e livre para modificações**, desde que ma
 - 📦 Integração com gateways de pagamento (ex: Pix, Cartão).  
 - 🔔 Sistema de notificações em tempo real.  
 - 📊 Dashboard de vendas e relatórios gráficos.  
+
+---
+
+## 💳 Pagamentos com Mercado Pago (Cartão)
+
+Esta integração adiciona processamento de cartão via API `/v1/payments` do Mercado Pago.
+
+Resumo rápido:
+- Frontend gera `token` do cartão com `mercadopago.js` usando `MP_PUBLIC_KEY`.
+- Backend usa `MP_ACCESS_TOKEN` para chamar `/v1/payments` enviando `transaction_amount`, `token`, `installments`, `payment_method_id` e `payer.email`.
+- É usado `X-Idempotency-Key` para evitar cobranças duplicadas.
+
+Como configurar:
+1. Abra `php/config/mercadopago.php` e preencha:
+    - `MP_ACCESS_TOKEN` (server token)
+    - `MP_PUBLIC_KEY` (publishable key para o frontend)
+    - `MP_DEBUG = true` para desenvolvimento/local
+
+Testes locais (mock):
+- O backend possui modo mock (somente quando `MP_DEBUG === true`). Para simular um pagamento aprovado:
+
+```bash
+curl.exe -i -X POST "http://localhost/ZentralHead/php/clientes/processa_checkout.php?test_cart=1&mock_mp=1&mock_status=approved" \
+   -d "forma_pagamento=cartao" \
+   -d "total=1.00" \
+   -d "token=FAKE_TOKEN" \
+   -d "payment_method_id=visa" \
+   -d "installments=1" \
+   -d "email=cliente@teste.com"
+```
+
+`mock_status` pode ser `approved`, `pending` ou `rejected`.
+
+Testes com token real (sandbox):
+1. Defina `MP_PUBLIC_KEY` com sua chave de testes.
+2. Acesse `/php/clientes/checkout.php`, selecione `Cartão` e preencha os dados de teste (ex.: `4111 1111 1111 1111`, `12/30`, `123`).
+3. O formulário será tokenizado no browser e enviado para `processa_checkout.php`.
+
+Logs e depuração:
+- Erros das chamadas à API são gravados em `php/config/log_mp_error.txt` quando `MP_DEBUG=true`.
+
+Banco de dados:
+- Pagamentos são salvos na tabela `pagamentos` com os campos `pedido_id`, `forma_pagamento`, `valor`, `status`, `codigo_transacao`.
+
+Arquivos alterados/adiicionados:
+- `php/config/mercadopago.php` (nova constante `MP_PUBLIC_KEY`)
+- `php/clientes/checkout.php` (tokenização + campos cartão)
+- `php/clientes/processa_checkout.php` (processamento /v1/payments, mock, validações)
+- `php/class/pagamentos.php` (inserir status e codigo_transacao)
+- `php/clientes/pedido_sucesso.php` e `php/clientes/pedido_erro.php` (páginas simples)
+
+Se quiser, posso adicionar instruções passo-a-passo para criar chaves sandbox no painel do Mercado Pago.

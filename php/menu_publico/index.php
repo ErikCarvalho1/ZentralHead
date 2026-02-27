@@ -8,7 +8,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
-   
+
     <!-- Bootstrap 5.3 -->
     <link rel="stylesheet" href="../../css/bootstrap.min.css" />
     <!-- CSS local -->
@@ -23,7 +23,7 @@
   <body>
     <!-- CABEÇALHO -->
     <header>
-    
+    <?php include_once "faixa.php"?>
     <?php include_once "cabecalho.php"?>
     </header>
     <!-- CONTEÚDO -->
@@ -33,12 +33,10 @@
       <!-- PRODUTOS EM DESTAQUE -->
       <?php include_once "produtos-destaques.php"?>
 
-      <!-- CATEGORIAS -->
-        <?php include_once "categorias.php"?>
+  
 
 
-       <!-- promoções-->
-        <?php include_once "promocoes.php"?>
+    
       </main>
 
     <!-- RODAPÉ -->
