@@ -43,7 +43,9 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`categorias` (
   `banner` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
+
 AUTO_INCREMENT = 12
+
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -68,7 +70,9 @@ CREATE TABLE IF NOT EXISTS `zentralhead`.`produtos` (
     REFERENCES `zentralhead`.`categorias` (`id`)
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+
 AUTO_INCREMENT = 37
+
 DEFAULT CHARACTER SET = utf8mb4;
 
 
