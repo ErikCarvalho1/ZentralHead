@@ -39,6 +39,7 @@ if(!$produto){
     <?php include_once "../menu_publico/faixa.php";?>
     <?php include "cabecalho.php"; ?>
 </nav> 
+<hr>
 <main>
 
 <div class="container mt-5">
@@ -154,8 +155,7 @@ if(!$produto){
   </div>
     </div>
     </main>
-    <hr>
-
+    
    <footer class="text-white">
       <?php include_once "../menu_publico/rodape.php"?>
     </footer>
