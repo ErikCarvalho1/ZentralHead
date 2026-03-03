@@ -141,14 +141,14 @@ if(!$produto){
 
       <!-- BOTÃO ADICIONAR AO CARRINHO -->
       <div class="d-flex gap-2">
-          <button class="btn btn-dark" onclick="addToCart(<?php 
-              echo htmlspecialchars(json_encode([
-                  'id' => $produto['id'],
-                  'nome' => $produto['nome'],
-                  'preco' => floatval($produto['valor_base']),
-                  'img' => $produto['imagem_principal']
-              ])); 
-          ?>)"> Adicionar ao carrinho </button>
+          <button class="btn btn-dark"
+onclick='addToCart(<?= json_encode([
+    "id" => $produto["id"],
+    "nome" => $produto["nome"],
+    "preco" => floatval($produto["valor_base"])
+]) ?>)'>
+Adicionar ao carrinho
+</button>
       </div>
     </div> <!-- FECHA COLUNA DIREITA -->
 
@@ -185,23 +185,34 @@ function addToCart(produto) {
     }
 
     let cart = JSON.parse(localStorage.getItem('carrinho') || '[]');
-    const existingItem = cart.find(item => item.id === produto.id);
+
+    const existingItem = cart.find(item => item.id == produto.id);
 
     if (existingItem) {
         existingItem.qtd += qty;
     } else {
-        cart.push({ ...produto, qtd: qty });
+        cart.push({
+            id: produto.id,
+            nome: produto.nome,
+            preco: parseFloat(produto.preco),
+            qtd: qty
+        });
     }
 
     localStorage.setItem('carrinho', JSON.stringify(cart));
 
+    atualizarContador();
+
+    alert('Produto adicionado ao carrinho!');
+}
+
+function atualizarContador() {
+    let cart = JSON.parse(localStorage.getItem('carrinho') || '[]');
     const cartCount = document.getElementById('cart-count');
 
     if (cartCount) {
         const totalItems = cart.reduce((acc, item) => acc + item.qtd, 0);
         cartCount.textContent = totalItems;
     }
-
-    alert('Produto adicionado ao carrinho!');
 }
 </script>
