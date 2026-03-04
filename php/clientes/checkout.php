@@ -22,109 +22,131 @@ $total = 0;
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
 
-<div class="container mt-5 mb-5">
-    <h2 class="mb-4">Finalizar Compra</h2>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="mb-4"><i class="bi bi-bag-check"></i> Finalizar Compra</h2>
 
-    <h4>Resumo do Pedido</h4>
-
-    <table class="table table-bordered align-middle">
-        <thead class="table-light">
-            <tr>
-                <th>Produto</th>
-                <th width="80">Qtd</th>
-                <th width="120">Preço</th>
-                <th width="120">Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php foreach($_SESSION['carrinho'] as $item): 
-            $subtotal = $item['preco'] * $item['qtd'];
-            $total += $subtotal;
-        ?>
-            <tr>
-                <td><?= htmlspecialchars($item['nome']) ?></td>
-                <td><?= (int)$item['qtd'] ?></td>
-                <td>R$ <?= number_format($item['preco'], 2, ',', '.') ?></td>
-                <td>R$ <?= number_format($subtotal, 2, ',', '.') ?></td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-        <tfoot class="table-light">
-            <tr>
-                <th colspan="3" class="text-end">Total</th>
-                <th>R$ <?= number_format($total, 2, ',', '.') ?></th>
-            </tr>
-        </tfoot>
-    </table>
-
-    <form id="form-checkout" method="post" action="processa_checkout.php">
-        <input type="hidden" name="total" value="<?= $total ?>">
-        <input type="hidden" name="token" id="card_token">
-        <input type="hidden" name="payment_method_id" id="payment_method_id">
-
-        <h4 class="mt-4">Endereço de Entrega</h4>
-
-        <div class="row">
-            <div class="col-md-8">
-                <input class="form-control mb-2" name="rua" placeholder="Rua" required>
+            <!-- RESUMO DO PEDIDO -->
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="bi bi-box"></i> Resumo do Pedido</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Produto</th>
+                                    <th width="80" class="text-center">Qtd</th>
+                                    <th width="100" class="text-end">Preço</th>
+                                    <th width="100" class="text-end">Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach($_SESSION['carrinho'] as $item): 
+                                $subtotal = $item['preco'] * $item['qtd'];
+                                $total += $subtotal;
+                            ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($item['nome']) ?></td>
+                                    <td class="text-center"><?= (int)$item['qtd'] ?></td>
+                                    <td class="text-end">R$ <?= number_format($item['preco'], 2, ',', '.') ?></td>
+                                    <td class="text-end fw-bold">R$ <?= number_format($subtotal, 2, ',', '.') ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="border-top pt-3 mt-3">
+                        <div class="d-flex justify-content-between">
+                            <h6>Total:</h6>
+                            <h6 class="fw-bold text-primary">R$ <?= number_format($total, 2, ',', '.') ?></h6>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-                <input class="form-control mb-2" name="numero" placeholder="Número" required>
-            </div>
+
+            <form id="form-checkout" method="post" action="processa_checkout.php">
+                <input type="hidden" name="total" value="<?= $total ?>">
+                <input type="hidden" name="token" id="card_token">
+                <input type="hidden" name="payment_method_id" id="payment_method_id">
+
+                <!-- ENDEREÇO -->
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="bi bi-geo-alt"></i> Endereço de Entrega</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label class="form-label">Rua</label>
+                                <input class="form-control" name="rua" placeholder="Rua" required>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Número</label>
+                                <input class="form-control" name="numero" placeholder="Número" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Bairro</label>
+                            <input class="form-control" name="bairro" placeholder="Bairro" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label class="form-label">Cidade</label>
+                                <input class="form-control" name="cidade" placeholder="Cidade" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Estado</label>
+                                <input class="form-control" name="estado" placeholder="SP" maxlength="2" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">CEP</label>
+                                <input class="form-control" name="cep" placeholder="12345-678" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONTATO -->
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="bi bi-envelope"></i> Dados de Contato</h5>
+                    </div>
+                    <div class="card-body">
+                        <label class="form-label">E-mail</label>
+                        <input class="form-control" type="email" name="email" placeholder="seu.email@exemplo.com" required>
+                    </div>
+                </div>
+
+                <!-- PAGAMENTO -->
+                <div class="card mb-4">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0"><i class="bi bi-credit-card"></i> Forma de Pagamento</h5>
+                    </div>
+                    <div class="card-body">
+                        <select id="forma_pagamento" name="forma_pagamento" class="form-select" required>
+                            <option value="">Selecione o método de pagamento</option>
+                            <option value="pix">PIX</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-lg w-100">
+                    <i class="bi bi-check-circle"></i> Finalizar Pedido
+                </button>
+            </form>
         </div>
-
-        <input class="form-control mb-2" name="bairro" placeholder="Bairro" required>
-        <input class="form-control mb-2" name="cidade" placeholder="Cidade" required>
-        <input class="form-control mb-2" name="estado" placeholder="Estado" required>
-        <input class="form-control mb-3" name="cep" placeholder="CEP" required>
-
-        <h4>Pagamento</h4>
-
-        <select id="forma_pagamento" name="forma_pagamento" class="form-control mb-4" required>
-            <option value="">Selecione</option>
-            <option value="pix">PIX</option>
-            <option value="cartao">Cartão</option>
-            <option value="boleto">Boleto</option>
-        </select>
-
-        <!-- Campos do cartão (aparecem somente quando selecionar Cartão) -->
-        <div id="cartao_fields" style="display:none;">
-            <input class="form-control mb-2" id="card_number" placeholder="Número do cartão" maxlength="24">
-            <input class="form-control mb-2" id="card_holder" placeholder="Nome (como no cartão)">
-            <div class="row">
-                <div class="col-md-4">
-                    <input class="form-control mb-2" id="card_expiration" placeholder="MM/YY" maxlength="5">
-                </div>
-                <div class="col-md-4">
-                    <input class="form-control mb-2" id="card_cvv" placeholder="CVV" maxlength="4">
-                </div>
-                <div class="col-md-4">
-                    <input class="form-control mb-2" id="card_installments" placeholder="Parcelas" value="1">
-                </div>
-            </div>
-            <input class="form-control mb-2" id="payer_email" name="email" placeholder="E-mail do pagador">
-            <div class="row">
-                <div class="col-md-6">
-                    <input class="form-control mb-2" id="payer_doc" placeholder="CPF do pagador (somente números)" maxlength="14">
-                </div>
-                <div class="col-md-6">
-                    <select class="form-control mb-2" id="payer_doc_type">
-                        <option value="CPF">CPF</option>
-                        <option value="CNPJ">CNPJ</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <button class="btn btn-success btn-lg w-100">
-            Finalizar Pedido
-        </button>
-    </form>
+    </div>
 </div>
 
 <?php if(defined('MP_PUBLIC_KEY') && MP_PUBLIC_KEY): ?>
@@ -132,105 +154,11 @@ $total = 0;
     <script>
         Mercadopago.setPublishableKey('<?= MP_PUBLIC_KEY ?>');
     </script>
-<?php else: ?>
-    <!-- MP_PUBLIC_KEY não configurada. Configure em php/config/mercadopago.php -->
 <?php endif; ?>
 
-<script>
-// Mostrar/ocultar campos do cartão
-const select = document.getElementById('forma_pagamento');
-const cardFields = document.getElementById('cartao_fields');
-select.addEventListener('change', ()=>{
-    if(select.value === 'cartao' || select.value === 'card') cardFields.style.display = '';
-    else cardFields.style.display = 'none';
-});
-
-// Interceptar submit para tokenizar quando usar cartão
-const form = document.getElementById('form-checkout');
-form.addEventListener('submit', function(e){
-    if (select.value !== 'cartao' && select.value !== 'card') return true;
-
-    e.preventDefault();
-
-    // Validação simples de e-mail
-    const email = document.getElementById('payer_email').value.trim();
-    if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) {
-        alert('E-mail inválido');
-        return false;
-    }
-
-    // Garantir que a biblioteca do Mercado Pago esteja disponível
-    if (typeof Mercadopago === 'undefined' || !Mercadopago.createToken) {
-        alert('MercadoPago.js não carregado. Verifique MP_PUBLIC_KEY.');
-        return false;
-    }
-
-    const cardNumber = document.getElementById('card_number').value.replace(/\s+/g, '');
-
-    // Obter payment_method_id pelo BIN
-    Mercadopago.getPaymentMethod({"bin": cardNumber.substring(0,6)}, function(status, response){
-        if (status !== 200 && status !== 201) {
-            console.error('Erro ao obter payment method:', status, response);
-            alert('Não foi possível identificar a bandeira do cartão');
-            return;
-        }
-
-        const paymentMethodId = (response && response[0] && response[0].id) ? response[0].id : null;
-        if (!paymentMethodId) {
-            console.error('Payment method não identificado:', response);
-            alert('Não foi possível identificar a bandeira do cartão');
-            return;
-        }
-
-        // Ler documento do pagador
-        const idType = document.getElementById('payer_doc_type').value || 'CPF';
-        const idNumber = (document.getElementById('payer_doc').value || '').replace(/\D/g, '');
-        if (!idNumber) {
-            alert('Informe o CPF/CNPJ do pagador');
-            return;
-        }
-
-        // Criar token do cartão
-        var tokenPayload = {
-            cardNumber: cardNumber,
-            cardholderName: document.getElementById('card_holder').value,
-            cardExpirationMonth: (document.getElementById('card_expiration').value.split('/')[0]||'').replace(/[^0-9]/g,''),
-            cardExpirationYear: (document.getElementById('card_expiration').value.split('/')[1]||'').replace(/[^0-9]/g,''),
-            securityCode: document.getElementById('card_cvv').value,
-            identificationType: idType,
-            identificationNumber: idNumber,
-            // Campos alternativos que algumas versões do SDK/API aceitam
-            docType: idType,
-            docNumber: idNumber
-        };
-        console.log('tokenPayload:', tokenPayload);
-        Mercadopago.createToken(tokenPayload, function(status2, response2){
-            console.log('createToken status:', status2, response2);
-            if (status2 !== 200 && status2 !== 201) {
-                var msg = 'Erro ao tokenizar o cartão.';
-                try {
-                    if (response2 && response2.cause && response2.cause.length) {
-                        msg += '\n' + response2.cause.map(function(c){ return c.description || c.code || JSON.stringify(c); }).join('\n');
-                    } else if (response2 && response2.message) {
-                        msg += '\n' + response2.message;
-                    } else {
-                        msg += '\nCódigo: ' + status2;
-                    }
-                } catch(e) {}
-                alert(msg);
-                return;
-            }
-
-            const token = response2.id;
-            document.getElementById('card_token').value = token;
-            document.getElementById('payment_method_id').value = paymentMethodId;
-
-            // Submeter o form com os campos ocultos preenchidos
-            form.submit();
-        });
-    });
-});
-</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
 
 </body>
 </html>
