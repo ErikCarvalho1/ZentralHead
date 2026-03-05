@@ -4,6 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 /* ================================
    TÍTULO DO PRODUTO (estilo Bose)
@@ -17,7 +18,7 @@ body {
 }
 
 :root {
-    --roxo-principal: #7c4dff;
+    --roxo-principal: #030303;
     --roxo-escuro: #5e35b1;
     --roxo-claro: #a259ff;
     --amarelo-estrela: #ffc107;
@@ -40,11 +41,11 @@ body {
    DESCRIÇÃO
 ================================ */
 .descricao-produto {
-    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-family: 'Poppins', 'Inter', Arial, Helvetica, sans-serif;
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
     max-width: 600px;
-    color: #555;
+    color: #444;
     font-weight: 400;
     margin-bottom: 18px;
     background: #f3eaff;
@@ -106,7 +107,7 @@ body {
 .btn-adicionar-carrinho:hover {
     background: var(--roxo-escuro);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(124,77,255,0.35);
+    box-shadow: 0 6px 16px rgba(235, 235, 235, 0.35);
     color: #fff;
 }
 

@@ -151,31 +151,7 @@ Adicionar ao carrinho
 </button>
       </div>
 
-      <!-- CARDS INFORMATIVOS -->
-      <div class="mt-4">
-          <div class="info-card">
-              <div class="info-card-icon">🚚</div>
-              <div class="info-card-content">
-                  <h4>Frete Grátis</h4>
-                  <p>Acima de R$ 100</p>
-              </div>
-          </div>
-          <div class="info-card">
-              <div class="info-card-icon">✓</div>
-              <div class="info-card-content">
-                  <h4>Garantia</h4>
-                  <p>12 meses de cobertura</p>
-              </div>
-          </div>
-          <div class="info-card">
-              <div class="info-card-icon">↩️</div>
-              <div class="info-card-content">
-                  <h4>Devolução</h4>
-                  <p>30 dias sem justificativa</p>
-              </div>
-          </div>
-      </div>
-    </div> <!-- FECHA COLUNA DIREITA -->
+      
 
   </div>
     </div>
