@@ -69,7 +69,7 @@ if(!$produto){
     <div class="col-md-6">
 
       <h2 class="produto-titulo"><?php echo $produto['nome']; ?></h2>
-      <h2 class="preco-produto"><?php echo $produto['valor_base']; ?></h2>
+      <h2 class="preco-produto">R$ <?php echo number_format($produto['valor_base'], 2, ',', '.'); ?></h2>
 
   
 <!-- ESTRELAS-->
@@ -81,7 +81,7 @@ if(!$produto){
     $halfStar  = ($mediaAvaliacoes - $fullStars) >= 0.5 ? 1 : 0;
     $emptyStars = 5 - $fullStars - $halfStar;
     ?>
-    <span class="text-dark">
+    <span class="avaliacao-estrelas">
         <?php for ($i = 0; $i < $fullStars; $i++): ?>
             <i class="bi bi-star-fill"></i>
         <?php endfor; ?>
@@ -140,8 +140,8 @@ if(!$produto){
       </div>
 
       <!-- BOTÃO ADICIONAR AO CARRINHO -->
-      <div class="d-flex gap-2">
-          <button class="btn btn-dark"
+      <div class="d-flex gap-2 mb-4">
+          <button class="btn btn-adicionar-carrinho"
 onclick='addToCart(<?= json_encode([
     "id" => $produto["id"],
     "nome" => $produto["nome"],
@@ -150,12 +150,37 @@ onclick='addToCart(<?= json_encode([
 Adicionar ao carrinho
 </button>
       </div>
+
+      <!-- CARDS INFORMATIVOS -->
+      <div class="mt-4">
+          <div class="info-card">
+              <div class="info-card-icon">🚚</div>
+              <div class="info-card-content">
+                  <h4>Frete Grátis</h4>
+                  <p>Acima de R$ 100</p>
+              </div>
+          </div>
+          <div class="info-card">
+              <div class="info-card-icon">✓</div>
+              <div class="info-card-content">
+                  <h4>Garantia</h4>
+                  <p>12 meses de cobertura</p>
+              </div>
+          </div>
+          <div class="info-card">
+              <div class="info-card-icon">↩️</div>
+              <div class="info-card-content">
+                  <h4>Devolução</h4>
+                  <p>30 dias sem justificativa</p>
+              </div>
+          </div>
+      </div>
     </div> <!-- FECHA COLUNA DIREITA -->
 
   </div>
     </div>
     </main>
-    
+    <hr>
    <footer class="text-white">
       <?php include_once "../menu_publico/rodape.php"?>
     </footer>

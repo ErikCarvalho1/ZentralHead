@@ -1,54 +1,162 @@
 /* ================================
    FONTES
 ================================ */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap');
 
 /* ================================
    TÍTULO DO PRODUTO (estilo Bose)
 ================================ */
+body {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --roxo-principal: #7c4dff;
+    --roxo-escuro: #5e35b1;
+    --roxo-claro: #a259ff;
+    --amarelo-estrela: #ffc107;
+}
+
 .produto-titulo {
-    font-family: 'Anton', sans-serif;
-    font-size: 2rem;
+    font-family: 'Anton', Arial, Helvetica, sans-serif;
+    font-size: 2.2rem;
     font-weight: 700;
     letter-spacing: -0.5px;
-    line-height: 1;
-    margin-bottom: 5px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    color: #000;
+    text-shadow: 0 2px 8px rgba(124,77,255,0.08);
+    border-bottom: 2px solid var(--roxo-claro);
+    padding-bottom: 8px;
 }
 
 /* ================================
    DESCRIÇÃO
 ================================ */
 .descricao-produto {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    line-height: 1.3;
-    max-width: 450px;
-    color: #444;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 600px;
+    color: #555;
     font-weight: 400;
+    margin-bottom: 18px;
+    background: #f3eaff;
+    border-left: 4px solid var(--roxo-principal);
+    padding: 12px 18px;
+    border-radius: 8px;
 }
-
-
-
 
 /* ================================
    BOTÃO “VER MAIS”
 ================================ */
 #btnVerMais {
-    margin-top: 4px;
-    font-size: 0.7rem;
-    padding: 0;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    padding: 6px 16px;
+    background: var(--roxo-principal);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#btnVerMais:hover {
+    background: var(--roxo-escuro);
 }
 .produto-features {
-    max-height: 120px;
-    overflow: hidden;
+    max-height: 180px;
+    overflow-y: auto;
+    background: transparent;
+    padding: 10px;
+    border-radius: 6px;
 }
 
 .produto-imagem {
     width: 100%;
-    max-width: 600px;  /* AUMENTE para 700, 800 se quiser maior */
+    max-width: 700px;
     height: auto;
     display: block;
-    margin: 0 auto 20px auto; /* centraliza e cria espaço embaixo */
-    border-radius: 8px; /* opcional, fica mais bonito */
+    margin: 0 auto 24px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+
+/* ================================
+   BOTÃO ADICIONAR AO CARRINHO
+================================ */
+.btn-adicionar-carrinho {
+    background: var(--roxo-principal);
+    color: #fff;
+    border: none;
+    padding: 12px 32px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(124,77,255,0.25);
+}
+
+.btn-adicionar-carrinho:hover {
+    background: var(--roxo-escuro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(124,77,255,0.35);
+    color: #fff;
+}
+
+/* ================================
+   CARDS INFORMATIVOS
+================================ */
+.info-card {
+    background: #f3eaff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--roxo-principal);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.info-card-icon {
+    font-size: 1.8rem;
+    color: var(--roxo-principal);
+    min-width: 40px;
+}
+
+.info-card-content h4 {
+    margin: 0;
+    color: var(--roxo-escuro);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.info-card-content p {
+    margin: 4px 0 0 0;
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* ================================
+   ESTRELAS DE AVALIAÇÃO
+================================ */
+.avaliacao-estrelas {
+    display: inline-block;
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+.avaliacao-estrelas .bi-star-fill,
+.avaliacao-estrelas .bi-star-half {
+    color: var(--amarelo-estrela) !important;
+}
+
+.avaliacao-estrelas .bi-star {
+    color: #ddd !important;
 }
