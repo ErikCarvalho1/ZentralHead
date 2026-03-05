@@ -40,7 +40,7 @@ $linha = count($produtos);
 <?php include "cabecalho.php"; ?>
 <?php if ($categoria): ?>
 <div class="banner-categoria">
-    <img src="../../images/<?= htmlspecialchars($categoria['banner']) ?>" >
+    <img src="data:image/jpeg;base64,<?= base64_encode($categoria['banner'])?>" >
 </div>
 <?php endif; ?>
 

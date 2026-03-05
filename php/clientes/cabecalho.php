@@ -38,7 +38,7 @@ if (session_status() === PHP_SESSION_NONE) {
            <!-- Botão do carrinho -->
 <li class="nav-item mx-3">
     <button class="btn nav-link " type="button" data-bs-toggle="offcanvas" data-bs-target="#carrinhoOffcanvas">
-        <i class="bi bi-cart3"></i>
+        <i class="bi bi-cart3 text-dark"></i>
         <span class="badge bg-danger" id="cart-count">0</span>
     </button>
 </li>
@@ -49,12 +49,12 @@ if (session_status() === PHP_SESSION_NONE) {
 
                 <li class="nav-item">
                     <a class="nav-link" href="../clientes/index.php">
-                        <i class="bi bi-house"></i>
+                        <i class="bi bi-house text-dark"></i>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">
-                        <i class="bi bi-box-arrow-right"></i>
+                        <i class="bi bi-box-arrow-right text-dark"></i>
                     </a>
                 </li>
             </ul>

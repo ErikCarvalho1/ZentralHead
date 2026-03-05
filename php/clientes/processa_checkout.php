@@ -80,50 +80,16 @@ try {
     }
 
     /* ==========================
-       6️⃣ PIX - MERCADO PAGO
+       6️⃣ PIX - FICTÍCIO (TESTE)
     ========================== */
     if ($forma_pagamento === 'pix') {
 
-        $payload = [
-            'transaction_amount' => round($total, 2),
-            'description' => "Pedido #{$pedido_id}",
-            'payment_method_id' => 'pix',
-            'external_reference' => (string) $pedido_id,
-            'payer' => [
-                'email' => 'cliente@teste.com'
-            ]
-        ];
-
-        $json = json_encode($payload, JSON_UNESCAPED_UNICODE);
-
-        if ($json === false) {
-            throw new Exception('Falha ao gerar JSON');
-        }
-
-        // 🔑 OBRIGATÓRIO
-        $idempotencyKey = uniqid('pix_', true);
-
-        $ch = curl_init('https://api.mercadopago.com/v1/payments');
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_HTTPHEADER => [
-                'Authorization: Bearer ' . MP_ACCESS_TOKEN,
-                'Content-Type: application/json',
-                'X-Idempotency-Key: ' . $idempotencyKey
-            ],
-            CURLOPT_POSTFIELDS => $json
-        ]);
-
-        $response = curl_exec($ch);
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-
-        $pix = json_decode($response, true);
-
-        if ($httpCode !== 201 || !isset($pix['id'])) {
-            throw new Exception('Erro Mercado Pago: ' . $response);
-        }
+        // 🎯 GERAR PIX FICTÍCIO
+        $pix_chave = 'pix_' . uniqid() . '_' . $pedido_id;
+        $pix_copia_cola = '00020126360014br.gov.bcb.pix0136' . md5($pix_chave) . '52040000530398654061' . number_format($total, 2, '', '') . '5303986540510.005802BR5913TESTE6009TESTUSER62410503***63041D3D';
+        
+        // Gerar QR Code em base64 (usando um placeholder para teste)
+        $qr_code_base64 = base64_encode($pix_copia_cola);
 
         /* ==========================
            7️⃣ SALVAR PAGAMENTO
@@ -134,7 +100,7 @@ try {
             'pix',
             $total,
             'pendente',
-            (string) $pix['id']
+            $pix_chave
         );
 
         /* ==========================
@@ -142,8 +108,8 @@ try {
         ========================== */
         unset($_SESSION['carrinho']);
 
-        $_SESSION['pix_qr']    = $pix['point_of_interaction']['transaction_data']['qr_code_base64'];
-        $_SESSION['pix_copia'] = $pix['point_of_interaction']['transaction_data']['qr_code'];
+        $_SESSION['pix_qr']    = $qr_code_base64;
+        $_SESSION['pix_copia'] = $pix_copia_cola;
         $_SESSION['pedido_id'] = $pedido_id;
 
         header('Location: aguardando_pix.php');
