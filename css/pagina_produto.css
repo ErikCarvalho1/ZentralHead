@@ -161,3 +161,27 @@ body {
 .avaliacao-estrelas .bi-star {
     color: #ddd !important;
 }
+
+/* estilos de desconto e preços (copiados de card-produto.css) */
+.badge-discount {
+    font-size: .9rem;
+    vertical-align: middle;
+    margin-right: 8px;
+    display: inline-block;
+    padding: 0.35em 0.6em;
+    /* ensure the badge stands out alongside the price */
+    line-height: 1;
+}
+
+.price-original {
+    text-decoration: line-through;
+    font-size: .9rem;
+    color: #999;
+    margin-right: 6px;
+}
+
+.price-final {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000;
+}
