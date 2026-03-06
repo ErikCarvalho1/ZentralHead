@@ -89,22 +89,22 @@ class Usuarios{
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
   //efetuarlogin
-        public function efetuarLogin(string $loginInformado, string $senhaInformada):array {
-        $sql = "select * from cliente where email = :email and senha = md5(:senha)";
-        $cmd =  $this->pdo->prepare($sql);
-        $cmd -> bindValue(":email", $loginInformado);
-         $cmd -> bindValue(":senha", $senhaInformada);
-        $cmd->execute();
-       
-            $dados = $cmd->fetch(PDO::FETCH_ASSOC);
-            return $dados;
+      public function efetuarLogin(string $loginInformado, string $senhaInformada): array
+{
+    $sql = "SELECT * FROM cliente WHERE email = :email AND senha = md5(:senha)";
+    
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(":email", $loginInformado);
     $cmd->bindValue(":senha", $senhaInformada);
     $cmd->execute();
 
     $dados = $cmd->fetch(PDO::FETCH_ASSOC);
-    return $dados ?: false; 
+
+    if (!$dados) {
+        return []; // retorna array vazio se não encontrar
+    }
+
+    return $dados;
 }
 }
 

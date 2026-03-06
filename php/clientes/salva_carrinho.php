@@ -9,7 +9,7 @@ if (!isset($dados['carrinho']) || !is_array($dados['carrinho'])) {
     exit;
 }
 
-// 🔥 SOBRESCREVE qualquer carrinho anterior (mock ou velho)
+//  SOBRESCREVE qualquer carrinho anterior (mock ou velho)
 $_SESSION['carrinho'] = $dados['carrinho'];
 
 echo json_encode(['ok' => true]);

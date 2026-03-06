@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- custom login styles -->
     <style>
       body.login-page {
-        background: linear-gradient(135deg, #161222ff 0%, #a259ff 100%);
+        background: linear-gradient(135deg, #161222ff 0%, #6316c9ff 100%);
         min-height: 100vh;
         display: flex;
         align-items: center;
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
 
       .btn-gradient {
-        background: linear-gradient(135deg, #7c4dff 0%, #a259ff 100%);
+        background: linear-gradient(135deg, #6431f1ff 0%, #764faaff 100%);
         color: #fff;
         border: none;
         border-radius: 8px;

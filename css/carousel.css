@@ -13,6 +13,18 @@
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .carousel-faixa {
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-faixa {
+    height: 300px;
+  }
+}
+
 .carousel-faixa .carousel-item img {
   height: 100%;
   width: 100%;

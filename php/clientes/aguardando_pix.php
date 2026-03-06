@@ -30,7 +30,7 @@ $pixCopia = $_SESSION['pix_copia'];
         body { background-color: #f8f9fa; }
         .pix-container { max-width: 500px; margin: 40px auto; }
         .pix-card { border: none; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        .pix-header { background-color: #28a745; color: white; padding: 25px; border-radius: 12px 12px 0 0; text-align: center; }
+        .pix-header { background-color: #7902e7ff; color: white; padding: 25px; border-radius: 12px 12px 0 0; text-align: center; }
         .pix-header h3 { font-size: 24px; margin: 0; font-weight: 600; }
         .pix-header p { margin: 10px 0 0 0; opacity: 0.9; }
         .qr-code-box { padding: 30px 20px; text-align: center; background: white; }
@@ -40,7 +40,7 @@ $pixCopia = $_SESSION['pix_copia'];
             background: white; 
             padding: 15px; 
             border-radius: 8px; 
-            border: 2px dashed #28a745; 
+            border: 2px dashed #601085ff; 
             font-family: monospace;
             font-size: 12px;
             word-break: break-all;
@@ -49,13 +49,13 @@ $pixCopia = $_SESSION['pix_copia'];
             transition: all 0.3s;
         }
         .pix-code:hover { background: #e8f5e9; }
-        .btn-copy { background-color: #28a745; border: none; font-weight: 600; }
-        .btn-copy:hover { background-color: #218838; }
+        .btn-copy { background-color: #914fcaff; border: none; font-weight: 600; }
+        .btn-copy:hover { background-color: #7812d8ff; }
         .status-box { padding: 20px; border-radius: 8px; margin: 15px 0; }
-        .pedido-info { padding: 15px; background: #e3f2fd; border-left: 4px solid #2196F3; border-radius: 4px; margin-bottom: 15px; }
-        .pedido-info h6 { color: #1976D2; margin: 0 0 8px 0; }
+        .pedido-info { padding: 15px; background: #ebe3fdff; border-left: 4px solid #7700ffff; border-radius: 4px; margin-bottom: 15px; }
+        .pedido-info h6 { color: #a200ffff; margin: 0 0 8px 0; }
         .pedido-info p { margin: 0; color: #555; }
-    </style>
+    </style>    
 </head>
 <body>
 
@@ -103,7 +103,7 @@ $pixCopia = $_SESSION['pix_copia'];
 
             <!-- BOTÕES -->
             <div class="px-3 pb-3">
-                <a href="../../index.php" class="btn btn-light btn-sm w-100">
+                <a href="index.php" class="btn btn-light btn-sm w-100">
                     <i class="bi bi-house"></i> Voltar à loja
                 </a>
             </div>
@@ -152,9 +152,7 @@ setInterval(() => {
 </script>
 </body>
 </html>
-            }
-        });
-}, 5000);
+         
 </script>
 
 </body>
