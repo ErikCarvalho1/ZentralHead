@@ -32,13 +32,19 @@ if (session_status() === PHP_SESSION_NONE) {
                 </li>
                 <li class="nav-item mx-3">
                     <a href="#" class="text-decoration-none text-reset">Promoções</a>
+                    </li>
+                    
             </ul>
 
             <ul class="navbar-nav ms-auto">
-           <!-- Botão do carrinho -->
-<li class="nav-item ">
-    <a href="login.php" class="text-decoration-none text-reset">
+           <!-- Botão do usuário/login -->
+<li class="nav-item ms-4">
+    <a href="../clientes/login.php" class="text-decoration-none text-reset d-flex align-items-center gap-2 px-3 py-2" 
+       style="border-radius: 8px; transition: all 0.3s ease; cursor: pointer;" 
+       onmouseover="this.style.backgroundColor='#f0f0f0';" 
+       onmouseout="this.style.backgroundColor='transparent';">
       <i class="bi bi-person-circle" style="font-size: 1.8rem;"></i>
+      <span style="font-size: 0.95rem; font-weight: 500;">Entrar</span>
     </a>
 </li>
             </ul>
