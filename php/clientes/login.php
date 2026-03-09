@@ -2,39 +2,44 @@
 
 require_once "../class/usuarios.php";
 
-// $usuarioLogado = false; 
 $mensagem = "";
 
+// inicia sessão
+if (session_status() === PHP_SESSION_NONE) {
+    session_name("zentralhead");
+    session_start();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $login = trim($_POST['email'] ?? '');
     $senha = trim($_POST['senha'] ?? '');
 
     if ($login !== "" && $senha !== "") {
+
         $user = new Usuarios();  
         $usuarioLogado = $user->efetuarLogin($login, $senha);
-        
-        if ($usuarioLogado) {
-          if (session_status() === PHP_SESSION_NONE) {
-            session_name("zentralhead");
-            session_start();
-          }
-        $_SESSION['nome_usuario'] = $usuarioLogado['nome'];
-        $_SESSION['email_usuario'] = $usuarioLogado['email'];
-        $_SESSION['nome_da_sessao'] = session_name();
-        
-        // Redireciona todos os usuários para a página de clientes
-        echo "<script>window.open('index.php','_self')</script>";
-        exit;
-            
+
+        if (!empty($usuarioLogado)) {
+
+            $_SESSION['nome_usuario'] = $usuarioLogado['nome'];
+            $_SESSION['email_usuario'] = $usuarioLogado['email'];
+            $_SESSION['nome_da_sessao'] = session_name();
+
+            // redireciona
+            header("Location: index.php");
+            exit;
+
         } else {
-          $mensagem = "<div class='alert alert-danger text-center mt-3'>Usuário ou senha inválidos!</div>";
+            $mensagem = "<div class='alert alert-danger text-center mt-3'>Usuário ou senha inválidos!</div>";
         }
-    } 
-}   
-          ?>
-<?php
-// login.php
+
+    } else {
+        $mensagem = "<div class='alert alert-warning text-center mt-3'>Preencha email e senha.</div>";
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
