@@ -89,22 +89,27 @@ class Usuarios{
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
   //efetuarlogin
-      public function efetuarLogin(string $loginInformado, string $senhaInformada): array
+ public function efetuarLogin(string $loginInformado, string $senhaInformada): array
 {
-    $sql = "SELECT * FROM cliente WHERE email = :email AND senha = md5(:senha)";
-    
+    $sql = "SELECT * FROM cliente WHERE email = :email LIMIT 1";
+
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(":email", $loginInformado);
-    $cmd->bindValue(":senha", $senhaInformada);
     $cmd->execute();
 
     $dados = $cmd->fetch(PDO::FETCH_ASSOC);
 
-    if (!$dados) {
-        return []; // retorna array vazio se não encontrar
+    if ($dados) {
+
+        // alguns hashes do C# usam $2a$ e o PHP usa $2y$
+        $hash = str_replace('$2a$', '$2y$', $dados['senha']);
+
+        if (password_verify($senhaInformada, $hash)) {
+            return $dados;
+        }
     }
 
-    return $dados;
+    return [];
 }
 }
 

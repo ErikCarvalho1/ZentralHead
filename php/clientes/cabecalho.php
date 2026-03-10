@@ -31,7 +31,7 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a href="categorias.php" class="text-decoration-none text-reset">Categorias</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a href="#" class="text-decoration-none text-reset">Promoções</a>
+                    <a href="promocoes.php" class="text-decoration-none text-reset">Promoções</a>
             </ul>
 
             <ul class="navbar-nav ms-auto">
