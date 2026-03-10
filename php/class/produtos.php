@@ -1,5 +1,5 @@
 <?php 
-include "db.php";
+require_once "db.php";
 class Produtos {
 
 private $id;
@@ -89,7 +89,7 @@ public function insert(){
     $cmd->bindValue(":descricao", $this->descricao);
     $cmd->bindValue(":valorUnit", $this->valorUnit);
     $cmd->bindValue(":unidade_venda", $this->unidade_Venda);
-    $cmd->bindValue(":categoria_id", $this->categoria_Id);
+    $cmd->bindValue(":categoria_id", $this->categorias_Id);
     $cmd->bindValue(":estoque_minimo", $this->estoque_Minimo);
     $cmd->bindValue(":classe_desconto", $this->classe_Desconto);
     $cmd->bindValue(":imagem", $this->imagem);
@@ -99,7 +99,17 @@ public function insert(){
 
 }
 public function listar (){
-    $sql = "SELECT * FROM produtos";
+    // retorna lista de produtos; também busca informações de desconto
+    // ativas para que páginas de listagem possam exibir os badges de
+    // promoção. A junção replica a lógica usada em listarDestaques.
+    $sql = "
+        SELECT p.*, d.tipo AS desconto_tipo, d.valor AS desconto_valor
+        FROM produtos p
+        LEFT JOIN produto_desconto pd ON p.id = pd.produto_id
+        LEFT JOIN descontos d ON d.id = pd.desconto_id
+            AND d.ativo = 1
+            AND CURDATE() BETWEEN d.data_inicio AND d.data_fim
+    ";
     $cmd = $this->pdo->prepare($sql);
     $cmd->execute();
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -123,7 +133,19 @@ public function listar (){
     
 }
 public function listarPorId ($id){
-    $sql = "SELECT * FROM  produtos WHERE id = :id LIMIT 1";
+    // include discount info when fetching a single product, mirroring the logic
+    // used in other list methods so that pages like pagina_produto can
+    // calculate and display the proper discounted price.
+    $sql = "
+        SELECT p.*, d.tipo AS desconto_tipo, d.valor AS desconto_valor
+        FROM produtos p
+        LEFT JOIN produto_desconto pd ON p.id = pd.produto_id
+        LEFT JOIN descontos d ON d.id = pd.desconto_id
+            AND d.ativo = 1
+            AND CURDATE() BETWEEN d.data_inicio AND d.data_fim
+        WHERE p.id = :id
+        LIMIT 1
+    ";
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(':id', $id, PDO::PARAM_INT);
     $cmd->execute();
@@ -137,7 +159,7 @@ public function atualizar (){
     $cmd->bindValue(":descricao", $this->descricao);
     $cmd->bindValue(":valorUnit", $this->valorUnit);
     $cmd->bindValue(":unidade_venda", $this->unidade_Venda);
-    $cmd->bindValue(":categoria_id", $this->categoria_Id);
+    $cmd->bindValue(":categoria_id", $this->categorias_Id);
     $cmd->bindValue(":estoque_minimo", $this->estoque_Minimo);
     $cmd->bindValue(":classe_desconto", $this->classe_Desconto);
     $cmd->bindValue(":imagem", $this->imagem);
@@ -197,5 +219,50 @@ public function listarPorNomeCategoria(string $nomeCat): array {
     
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+public function listarPorCategoriaId(int $categorias_Id): array {
+    $sql = "SELECT * FROM produtos WHERE categorias_id = :catId ORDER BY id DESC";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":catId", $categorias_Id, PDO::PARAM_INT);
+    $cmd->execute();
+    return $cmd->fetchAll(PDO::FETCH_ASSOC);
 }
+public function obterMediaAvaliacoes(int $produtoId): float {
+    $sql = "
+        SELECT ROUND(AVG(CAST(nota AS DECIMAL(3,2))), 2) as media
+        FROM avaliacoes
+        WHERE produtos_id = :produtos_id
+    ";
+    
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":produtos_id", $produtoId, PDO::PARAM_INT);
+    $cmd->execute();
+    
+    $resultado = $cmd->fetch(PDO::FETCH_ASSOC);
+    return $resultado['media'] ? floatval($resultado['media']) : 0;
+}
+
+public function obterContagemAvaliacoes(int $produtoId): int {
+    $sql = "
+        SELECT COUNT(*) as total
+        FROM avaliacoes
+        WHERE produtos_id = :produtos_id
+    ";
+    
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":produtos_id", $produtoId, PDO::PARAM_INT);
+    $cmd->execute();
+    
+    $resultado = $cmd->fetch(PDO::FETCH_ASSOC);
+    return intval($resultado['total']);
+}
+}
+
+
+
+
+
+
+
+
+
 ?>

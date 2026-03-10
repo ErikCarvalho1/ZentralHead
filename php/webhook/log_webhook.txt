@@ -1,0 +1,13 @@
+
+
+
+
+
+
+2025-12-24 22:50:30 {"action":"payment.created","api_version":"v1","data":{"id":"1343400261"},"date_created":"2025-12-24T21:32:56Z","id":127502884903,"live_mode":false,"type":"payment","user_id":"2010928981"}
+2025-12-24 23:03:07 {"action":"payment.created","api_version":"v1","data":{"id":"1343400329"},"date_created":"2025-12-24T22:03:09Z","id":127608683828,"live_mode":false,"type":"payment","user_id":"2010928981"}
+2025-12-24 23:06:27 {"action":"payment.created","api_version":"v1","data":{"id":"1325729532"},"date_created":"2025-12-24T22:06:29Z","id":127503274975,"live_mode":false,"type":"payment","user_id":"2010928981"}
+2025-12-24 23:12:47 {"action":"payment.created","api_version":"v1","data":{"id":"1325729536"},"date_created":"2025-12-24T22:12:49Z","id":127503399323,"live_mode":false,"type":"payment","user_id":"2010928981"}
+2025-12-24 23:24:37 {"action":"payment.created","api_version":"v1","data":{"id":"1325729548"},"date_created":"2025-12-24T22:24:39Z","id":127609185726,"live_mode":false,"type":"payment","user_id":"2010928981"}
+2025-12-24 23:28:07 {"action":"payment.created","api_version":"v1","data":{"id":"1325729562"},"date_created":"2025-12-24T22:28:08Z","id":127503741643,"live_mode":false,"type":"payment","user_id":"2010928981"}
+2025-12-24 23:32:15 {"action":"payment.created","api_version":"v1","data":{"id":"1343400445"},"date_created":"2025-12-24T22:32:16Z","id":127503853179,"live_mode":false,"type":"payment","user_id":"2010928981"}

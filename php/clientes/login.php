@@ -2,39 +2,44 @@
 
 require_once "../class/usuarios.php";
 
-// $usuarioLogado = false; 
 $mensagem = "";
 
+// inicia sessão
+if (session_status() === PHP_SESSION_NONE) {
+    session_name("zentralhead");
+    session_start();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $login = trim($_POST['email'] ?? '');
     $senha = trim($_POST['senha'] ?? '');
 
     if ($login !== "" && $senha !== "") {
+
         $user = new Usuarios();  
         $usuarioLogado = $user->efetuarLogin($login, $senha);
-        
-        if ($usuarioLogado) {
-          if (session_status() === PHP_SESSION_NONE) {
-            session_name("zentralhead");
-            session_start();
-          }
-        $_SESSION['nome_usuario'] = $usuarioLogado['nome'];
-        $_SESSION['email_usuario'] = $usuarioLogado['email'];
-        $_SESSION['nome_da_sessao'] = session_name();
-        
-        // Redireciona todos os usuários para a página de clientes
-        echo "<script>window.open('index.php','_self')</script>";
-        exit;
-            
+
+        if (!empty($usuarioLogado)) {
+
+            $_SESSION['nome_usuario'] = $usuarioLogado['nome'];
+            $_SESSION['email_usuario'] = $usuarioLogado['email'];
+            $_SESSION['nome_da_sessao'] = session_name();
+
+            // redireciona
+            header("Location: index.php");
+            exit;
+
         } else {
-          $mensagem = "<div class='alert alert-danger text-center mt-3'>Usuário ou senha inválidos!</div>";
+            $mensagem = "<div class='alert alert-danger text-center mt-3'>Usuário ou senha inválidos!</div>";
         }
-    } 
-}   
-          ?>
-<?php
-// login.php
+
+    } else {
+        $mensagem = "<div class='alert alert-warning text-center mt-3'>Preencha email e senha.</div>";
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -46,9 +51,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    
+    <!-- custom login styles -->
+    <style>
+      body.login-page {
+        background: linear-gradient(135deg, #161222ff 0%, #6316c9ff 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .login-card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        padding: 2rem 1.5rem;
+      }
+
+      .login-card .bi {
+        color: #7c4dff;
+      }
+
+      .login-card .form-control {
+        border-radius: 8px;
+      }
+
+      .btn-gradient {
+        background: linear-gradient(135deg, #6431f1ff 0%, #764faaff 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        transition: opacity 0.25s;
+      }
+
+      .btn-gradient:hover {
+        opacity: 0.9;
+      }
+
+      .login-note {
+        font-size: 0.875rem;
+        color: #666;
+        margin-top: 0.25rem;
+      }
+    </style>
   </head>
 
-  <body class="bg-dark text-light d-flex align-items-center justify-content-center min-vh-100">
+  <body class="login-page">
 
     <main class="container">
       <div class="row justify-content-center">
@@ -57,17 +108,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <!-- Logo -->
           <div class="text-center mb-4">
             <a href="../../images/LogoZentralPreto.png" target="_blank" class="text-decoration-none">
-              <img src="../../images/LogoZentralPreto.png" alt="Logo Zentral" class="img-fluid mb-3" style="max-width: 130px;">
+            
             </a>
 
           </div>
 
           <!-- Card -->
-          <div class="card bg-body-tertiary border-0 shadow-lg rounded-4">
-            <div class="card-body p-4">
+          <div class="login-card">
               
-              <div class="text-center mb-4">
-                <i class="bi bi-person-circle display-5 text-primary"></i>
+              <div class="text-center mb-3">
+                 <img src="../../images/login.png" alt="Logo Zentral" class="img-fluid mb-3" style="max-width: 130px;">
+                
+                <p class="login-note">Você será direcionado para a página inicial</p>
               </div>
 
               <form action="login.php" method="POST" id="form_email" enctype="multipart/form-data">
@@ -112,8 +164,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <!-- Botão -->
                 <div class="d-grid">
-                  <button type="submit" class="btn btn-primary fw-semibold py-2">
-                    Entrar
+                  <button type="submit" class="btn btn-gradient">
+                    Submit
                   </button>
                 </div>
               </form>

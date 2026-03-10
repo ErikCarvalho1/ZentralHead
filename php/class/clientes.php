@@ -1,5 +1,6 @@
 <?php 
-include_once "db.php";
+require_once "db.php";
+
 
 class Cliente{
     private $id;
@@ -112,18 +113,21 @@ class Cliente{
         $cmd = $this->pdo->query("select * from clientes order by id DESC");
         return $cmd->fetchAll(PDO::FETCH_ASSOC);
     }
+public function efetuarLogin(string $loginInformado, string $senhaInformada): array {
 
-       public function efetuarLogin(string $loginInformado, string $senhaInformada):array {
-        $sql = "select * from clientes where email = :email and senha = md5(:senha)";
-        $cmd =  $this->pdo->prepare($sql);
-        $cmd-> bindValue(":email", $loginInformado);
-        $cmd-> bindValue(":senha", $senhaInformada);
-        $cmd->execute();
-            $dados = $cmd->fetch(PDO::FETCH_ASSOC);
-            return $dados;
-         
- 
+    $sql = "SELECT * FROM clientes WHERE email = :email";
+    $cmd = $this->pdo->prepare($sql);
+    $cmd->bindValue(":email", $loginInformado);
+    $cmd->execute();
+
+    $dados = $cmd->fetch(PDO::FETCH_ASSOC);
+
+    if ($dados && password_verify($senhaInformada, $dados['senha'])) {
+        return $dados;
     }
+
+    return [];
+}
 }
 
 

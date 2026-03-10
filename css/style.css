@@ -1,8 +1,12 @@
-/* nosso estilo css */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
-@charset "utf8";
 
-/*tela principal  */
+html, body {
+    font-family: "Inter", sans-serif;
+}
+
+
+
 
 
 .carousel-control-prev-icon,
@@ -70,16 +74,16 @@
 header nav {
   background-color: rgb(255, 255, 255); /* Roxo translúcido */
   backdrop-filter: blur(10px); /* Deixa o fundo borrado por trás */
-  padding: 10px 20px;
+  
 }
 
 body {
       background: linear-gradient(to bottom, #ffffff, #ffffff);
       min-height: 100vh;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       font-family: Arial, sans-serif;
       color: rgb(0, 0, 0); 
-
 }
 form-control {
   background-color: transparent !important;
@@ -134,10 +138,7 @@ footer .list-unstyled a:hover {
 .card button {
   background-color: #000; /* ou deixe transparente se quiser */
 }
-nav {
-  height: 100px;
-  
-}
+
 footer{
   background-color: #000;
 }
@@ -146,16 +147,6 @@ footer{
 /* CARROSSEL FINO DO TOPO */
 /* ============================= */
 
-.top-bar-carousel {
-  position: relative;
-  width: 100%;
-  height: 32px;
-  background: #b30606;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* ocultar os radios */
 .top-bar-carousel input {
@@ -179,30 +170,4 @@ footer{
   line-height: 32px;
 }
 
-/* movimento */
-#t1:checked ~ .top-bar-inner { transform: translateX(0); }
-#t2:checked ~ .top-bar-inner { transform: translateX(-100%); }
-#t3:checked ~ .top-bar-inner { transform: translateX(-200%); }
-
-/* setas */
-.top-bar-carousel label {
-  position: absolute;
-  top: 0;
-  height: 32px;
-  width: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #f00000;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.top-prev { left: 0; }
-.top-next { right: 0; }
-
-.top-bar-carousel label:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
 

@@ -1,18 +1,33 @@
 <?php require_once __DIR__ . '/../clientes/autenticacao.php';?>
-<?php include "../class/produtos.php";
-
-
-if (!isset($_GET['id'])){     //!isset verifica se a variavel não existe
+<?php include "../class/produtos.php";?>
+<?php 
+if (!isset($_GET['id'])){
     die ("Produro não encontrado");
 }
 
 $id =(int) $_GET['id'];
 
-$prod = new produtos();
+$prod = new Produtos();
 $produto = $prod->listarPorId($id);
+
+// obter média e total de avaliações para o produto
+$mediaAvaliacoes = $prod->obterMediaAvaliacoes($id);
+$totalAvaliacoes = $prod->obterContagemAvaliacoes($id);
 
 if(!$produto){
     die("produto não encontrado");
+}
+
+// calcular preço com desconto (mesma lógica usada em produtos-destaques)
+$precoOriginal = $produto['valor_base'];
+$precoFinal = $precoOriginal;
+
+if (!empty($produto['desconto_tipo']) && $produto['desconto_valor'] > 0) {
+    if ($produto['desconto_tipo'] === 'percentual') {
+        $precoFinal -= ($precoOriginal * $produto['desconto_valor'] / 100);
+    } elseif ($produto['desconto_tipo'] === 'fixo') {
+        $precoFinal -= $produto['desconto_valor'];
+    }
 }
 ?>
 
@@ -25,103 +40,92 @@ if(!$produto){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script> 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../css/pagina_produto.css">
 
   <title>Pagina Produto</title>
 
 </head>
 <body>
-   <nav><?php include "cabecalho.php"; ?></nav> <main>
+
+   <nav>
+    <?php include_once "../menu_publico/faixa.php";?>
+    <?php include "cabecalho.php"; ?>
+</nav> 
+<hr>
+<main>
 
 <div class="container mt-5">
-  <div class="row">
-    <!-- Coluna da imagem -->
-    <div class="col-md-6">
+  <div class="row align-items-start">
+<!-- COLUNA ESQUERDA — IMAGENS DO PRODUTO -->
+<div class="col-md-6">
 
-    <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>" style="width:350px; height:450px">
-      <div class="d-flex gap-2 mt-2">
-        <!-- Miniaturas (poderia vir do banco de dados futuramente) -->
-        <img src="/ZentralHead/images/<?php echo $produto['imagem_principal']; ?>"  
-        class="img-thumbnail"  
-        style="width:80px; height:80px; object-fit:cover;">
+  <!-- IMAGEM PRINCIPAL -->
+  <img   src="data:image/jpeg;base64,<?= base64_encode($produto['imagem_principal']) ?>" 
+       class="img-fluid"
+       style="width:100%; max-width:450px; height:auto; border-radius:12px;">
 
-        <img src="<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
-        <img src="<?php echo $produto['imagem_principal']; ?>" class="img-thumbnail" style="width:80px; height:80px;">
-      </div>
-    </div>
-
-    <!-- Coluna de informações -->
-    <div class="col-md-6">
-      <h4 class="text-muted"><?php echo $produto['categoria'] ?? "Produto em destaque"; ?></h4>
-      <h2><?php echo $produto['nome']; ?></h2>
+  <!-- MINIATURAS -->
+  <div class="d-flex gap-2 mt-3">
+    <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem_principal']) ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
+    <img src="data:image/jpeg;base64,<?= base64_encode($produto['imagem_principal']) ?>" class="img-thumbnail" style="width:80px; height:80px; object-fit:cover;">
+  
+  </div>
 
 
-
-
-
-      
-      <!-- Avaliações -->
-      <?php
-$conn = getConnection();
-$sql = "SELECT AVG(nota) AS media, COUNT(*) AS total FROM avaliacoes WHERE produtos_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(1, $produto['id'], PDO::PARAM_INT);
-$stmt->execute();
-$result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-$media = round($result['media'] ?? 0, 1);
-$total = $result['total'] ?? 0;
-?>
-<div class="mb-2">
-  <span class="text-warning">
-    <?php
-    $estrelasCheias = floor($media);
-    $meia = ($media - $estrelasCheias >= 0.5);
-    for ($i = 1; $i <= 5; $i++) {
-        if ($i <= $estrelasCheias) echo "★";
-        elseif ($meia && $i == $estrelasCheias + 1) echo "☆";
-        else echo "☆";
-    }
-    ?>
-  </span>
-  <span class="text-muted">(<?php echo $media; ?>) • <?php echo $total; ?> avaliações</span>
 </div>
+<!-- FECHA COLUNA ESQUERDA -->
 
 
-      <!-- Preço -->
-     
-      <p class="text-muted"><?php echo $produto['valor_base']; ?></p>
+    <!-- COLUNA DIREITA — INFORMAÇÕES DO PRODUTO -->
+
+    <div class="col-md-6">
+
+      <h2 class="produto-titulo"><?php echo $produto['nome']; ?></h2>
+      <h2 class="preco-produto">
+          <?php if ($precoFinal < $precoOriginal): ?>
+              <!-- badge ao lado do preço quando há desconto -->
+              <span class="badge bg-danger badge-discount">
+                  <?= ($produto['desconto_tipo'] === 'percentual')
+                      ? "-{$produto['desconto_valor']}%"
+                      : "-R$ " . number_format($produto['desconto_valor'], 2, ',', '.') ?>
+              </span>
+              <span class="price-original">R$ <?= number_format($precoOriginal, 2, ',', '.') ?></span>
+          <?php endif; ?>
+          <span class="price-final">R$ <?= number_format($precoFinal, 2, ',', '.') ?></span>
+      </h2>
+
+  
+<!-- ESTRELAS-->
+
+<div class="mt-2">
+    <?php
+    // calculo de estrelas preenchidas/meia/ vazias com base na média
+    $fullStars = (int) floor($mediaAvaliacoes);
+    $halfStar  = ($mediaAvaliacoes - $fullStars) >= 0.5 ? 1 : 0;
+    $emptyStars = 5 - $fullStars - $halfStar;
+    ?>
+    <span class="avaliacao-estrelas">
+        <?php for ($i = 0; $i < $fullStars; $i++): ?>
+            <i class="bi bi-star-fill"></i>
+        <?php endfor; ?>
+        <?php if ($halfStar): ?>
+            <i class="bi bi-star-half"></i>
+        <?php endif; ?>
+        <?php for ($i = 0; $i < $emptyStars; $i++): ?>
+            <i class="bi bi-star"></i>
+        <?php endfor; ?>
+    </span>
+    <span class="text-muted">(<?= number_format($mediaAvaliacoes, 1, ',', '.') ?>) • <?= $totalAvaliacoes ?> avaliações</span>
+  </div>
+
+
+      <p class="descricao-produto"><?php echo nl2br($produto['descricao']); ?></p>
 
       <?php
-$conn = getConnection();
 
-// Buscar cores disponíveis para o produto atual
-$sql = "SELECT DISTINCT c.nome 
-        FROM produto_detalhes pd
-        JOIN cores c ON pd.cor_id = c.id
-        WHERE pd.produto_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(1, $produto['id'], PDO::PARAM_INT);
-$stmt->execute();
-$cores = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-
-<?php
-$conn = getConnection();
-
-// Buscar tamanhos disponíveis para o produto atual
-$sql = "SELECT DISTINCT t.nome 
-        FROM produto_detalhes pd
-        JOIN tamanhos t ON pd.tamanho_id = t.id
-        WHERE pd.produto_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bindValue(1, $produto['id'], PDO::PARAM_INT);
-$stmt->execute();
-$tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
 <div class="d-flex gap-4 mb-3">
-  <!-- Cores -->
   <div>
     <label class="form-label fw-bold">Cor:</label><br>
     <?php if (!empty($cores)): ?>
@@ -135,7 +139,6 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php endif; ?>
   </div>
 
-  <!-- Tamanhos -->
   <div>
     <label class="form-label fw-bold">Tamanho:</label><br>
     <?php if (!empty($tamanhos)): ?>
@@ -151,8 +154,7 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 
-
-      <!-- Quantidade -->
+      <!-- QUANTIDADE -->
       <div class="d-flex align-items-center mb-4">
           <label class="me-3 fw-bold">Quantidade:</label>
           <button class="btn btn-outline-secondary btn-sm" onclick="decrementQty()">-</button>
@@ -160,37 +162,28 @@ $tamanhos = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <button class="btn btn-outline-secondary btn-sm" onclick="incrementQty()">+</button>
       </div>
 
-      <!-- Botões -->
-      <div class="d-flex gap-2">
-          <button class="btn btn-warning" onclick="addToCart(<?php 
-              echo htmlspecialchars(json_encode([
-                  'id' => $produto['id'],
-                  'nome' => $produto['nome'],
-                  'preco' => floatval($produto['valor_base']),
-                  'img' => $produto['imagem_principal']
-              ])); 
-          ?>)"> Adicionar ao carrinho </button>
-          <button class="btn btn-danger"> Comprar agora </button>
+      <!-- BOTÃO ADICIONAR AO CARRINHO -->
+      <div class="d-flex gap-2 mb-4">
+          <button class="btn btn-adicionar-carrinho"
+onclick='addToCart(<?= json_encode([
+    "id" => $produto["id"],
+    "nome" => $produto["nome"],
+    "preco" => floatval($precoFinal)
+]) ?>)'>
+Adicionar ao carrinho
+</button>
       </div>
-    </div>
+
+      
+
   </div>
-</div>
-</main>
-<hr>
-<!--Avaliações-->
+    </div>
+    </main>
+    <hr>
+   <footer class="text-white">
+      <?php include_once "../menu_publico/rodape.php"?>
+    </footer>
 
-
-
-
-
-
-
-
-<footer class="text-white p-4 mt-5">
-    <?php include "../menu_publico/rodape.php"?> 
-  </footer>
- 
-<!--TESTE -->
 </body>
 
 </html>
@@ -209,33 +202,41 @@ function decrementQty() {
 
 function addToCart(produto) {
     const qty = parseInt(document.getElementById('qty').value);
+
     if (qty < 1) {
         alert('Quantidade inválida');
         return;
     }
 
     let cart = JSON.parse(localStorage.getItem('carrinho') || '[]');
-    
-    const existingItem = cart.find(item => item.id === produto.id);
-    
+
+    const existingItem = cart.find(item => item.id == produto.id);
+
     if (existingItem) {
         existingItem.qtd += qty;
     } else {
         cart.push({
-            ...produto,
+            id: produto.id,
+            nome: produto.nome,
+            preco: parseFloat(produto.preco),
             qtd: qty
         });
     }
 
     localStorage.setItem('carrinho', JSON.stringify(cart));
-    
-    // Atualiza o contador do carrinho
-    const cartCount = document.getElementById('cart-count');
-    const totalItems = cart.reduce((acc, item) => acc + item.qtd, 0);
-    if (cartCount) cartCount.textContent = totalItems;
+
+    atualizarContador();
 
     alert('Produto adicionado ao carrinho!');
 }
+
+function atualizarContador() {
+    let cart = JSON.parse(localStorage.getItem('carrinho') || '[]');
+    const cartCount = document.getElementById('cart-count');
+
+    if (cartCount) {
+        const totalItems = cart.reduce((acc, item) => acc + item.qtd, 0);
+        cartCount.textContent = totalItems;
+    }
+}
 </script>
-
-

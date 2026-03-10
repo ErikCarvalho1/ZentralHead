@@ -7,26 +7,31 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="../../css/bootstrap.min.css" />
   <link rel="stylesheet" href="../../css/style.css" />
-  <link rel="stylesheet" href="../../css/card-produto-destaque.css" />
+  <link rel="stylesheet" href="../../css/fonts.css" />
+  
   <script src="../../js/bootstrap.bundle.min.js" defer></script>
   <script src="../../js/inicial.js" defer></script>
   <title>ZentralHead</title>
 </head>
 <body>
   <!-- CABEÇALHO -->
-  <header>
+  <header class="">
     <?php include_once "../menu_publico/faixa.php";?>
     <?php include_once "cabecalho.php"; ?>
   </header>
 
   <!-- CONTEÚDO -->
-  <main class="container my-4">
+  <main class="container">
     
     <?php include_once "../menu_publico/destaque.php"; ?>
     <?php include_once "../menu_publico/produtos-destaques.php"; ?>
-    <?php include_once "../menu_publico/categorias.php"; ?>
-    <?php include_once "../menu_publico/promocoes.php"; ?>
+
+ 
   </main>
+
+  <!-- RODAPÉ -->
+   <footer><?php include_once "../menu_publico/rodape.php"; ?></footer>
+  
 
 
 

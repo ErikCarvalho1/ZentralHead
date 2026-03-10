@@ -5,7 +5,7 @@ if (session_status() === PHP_SESSION_NONE) {
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 <script src="/ZentralHead/js/carrinho.js" defer></script>
-
+<link rel="stylesheet" href="../../css/cabeçalho.css">
 
 <nav class="navbar navbar-expand-lg ">
     <div class="container-fluid">
@@ -22,7 +22,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
         <!-- Menu -->
 
-        <div class="collapse navbar-collapse" id="defaultNavbar">
+        <div class="a collapse navbar-collapse" id="defaultNavbar">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-3">
                     <a href="produtos.php" class="text-decoration-none text-reset">Produtos</a>
@@ -31,34 +31,30 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a href="categorias.php" class="text-decoration-none text-reset">Categorias</a>
                 </li>
                 <li class="nav-item mx-3">
-                    <a href="#" class="text-decoration-none text-reset">Promoções</a>
+                    <a href="promocoes.php" class="text-decoration-none text-reset">Promoções</a>
             </ul>
 
             <ul class="navbar-nav ms-auto">
            <!-- Botão do carrinho -->
 <li class="nav-item mx-3">
-    <button class="btn nav-link" type="button" data-bs-toggle="offcanvas" data-bs-target="#carrinhoOffcanvas">
-        <i class="bi bi-cart3"></i>
+    <button class="btn nav-link " type="button" data-bs-toggle="offcanvas" data-bs-target="#carrinhoOffcanvas">
+        <i class="bi bi-cart3 text-dark" style="font-size: 1.8rem;"></i>
         <span class="badge bg-danger" id="cart-count">0</span>
     </button>
 </li>
 
 
-                <?php
-    $nomeUsuario = $_SESSION['nome_usuario'] ?? 'Visitante'; 
-  ?>
-                Olá, <?= htmlspecialchars($nomeUsuario) ?>!
                 </span>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="../clientes/index.php">
-                        <i class="bi bi-house"></i>
+                        <i class="bi bi-house text-dark" style="font-size: 1.8rem;"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="logout.php">
-                        <i class="bi bi-box-arrow-right"></i>
+                    <a class="sair" href="logout.php">
+                        <i class="bi bi-box-arrow-right " style="font-size: 1.8rem;"></i>
                     </a>
                 </li>
             </ul>
@@ -67,7 +63,7 @@ if (session_status() === PHP_SESSION_NONE) {
 </nav>
 
 <!-- Offcanvas do Carrinho -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="carrinhoOffcanvas">
+<div class="offcanvas offcanvas-end " tabindex="-1" id="carrinhoOffcanvas">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title">Meu Carrinho</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
