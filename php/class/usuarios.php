@@ -49,24 +49,28 @@ class Usuarios{
         $this->ativo = $ativo;
     }
 
-    public function Inserir(){
-        // use MD5(:senha) if você quer armazenar MD5 (inseguro). Recomenda-se password_hash.
+  public function Inserir(){
 
-        $sql = "INSERT INTO cliente (nome, email, senha,  ativo) VALUES (:nome, :email, MD5(:senha), :ativo)";
+    // cria o hash da senha
+    $senhaHash = password_hash($this->senha, PASSWORD_DEFAULT);
 
-        $cmd = $this->pdo->prepare($sql);
-        $cmd->bindValue(":nome", $this->nome, PDO::PARAM_STR);
-        $cmd->bindValue(":email", $this->email, PDO::PARAM_STR);
-        $cmd->bindValue(":senha", $this->senha, PDO::PARAM_STR);
+    $sql = "INSERT INTO cliente (nome, email, senha, ativo) 
+            VALUES (:nome, :email, :senha, :ativo)";
 
-        $cmd->bindValue(":ativo", $this->ativo, PDO::PARAM_INT);
+    $cmd = $this->pdo->prepare($sql);
 
-        if($cmd->execute()){
-            $this->id = $this->pdo->lastInsertId();
-            return true;
-        }
-        return false;
+    $cmd->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+    $cmd->bindValue(":email", $this->email, PDO::PARAM_STR);
+    $cmd->bindValue(":senha", $senhaHash, PDO::PARAM_STR);
+    $cmd->bindValue(":ativo", $this->ativo, PDO::PARAM_INT);
+
+    if($cmd->execute()){
+        $this->id = $this->pdo->lastInsertId();
+        return true;
     }
+
+    return false;
+}
 
     public function Atualizar(int $idUpdate):bool{
              $id = $idUpdate;
