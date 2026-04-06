@@ -8,10 +8,10 @@
         <img src="../../images/375.png" class="d-block " alt="Banner 1">
       </div>
       <div class="carousel-item">
-        <img src="../../images/bannerPrincipal2.png" class="d-block w-100" alt="Banner 2">
+        <img src="../../images/ofertasZ.png" class="d-block w-100" alt="Banner 2">
       </div>
       <div class="carousel-item">
-        <img src="../../images/bannerPrincipal3.png" class="d-block w-100" alt="Banner 3">
+        <img src="../../images/bannerZZ.png" class="d-block w-100" alt="Banner 3">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselLoja" data-bs-slide="prev">

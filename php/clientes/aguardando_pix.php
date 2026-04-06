@@ -76,7 +76,7 @@ $pixCopia = $_SESSION['pix_copia'];
             <!-- QR CODE -->
             <div class="qr-code-box">
                 <img 
-                    src="../../images/codigoqr.webp" 
+                    src="../../images/qr.png" 
                     alt="QR Code PIX"
                     class="img-fluid"
                 >
