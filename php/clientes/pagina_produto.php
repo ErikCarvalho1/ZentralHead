@@ -17,6 +17,18 @@ $totalAvaliacoes = $prod->obterContagemAvaliacoes($id);
 if(!$produto){
     die("produto não encontrado");
 }
+
+// calcular preço com desconto (mesma lógica usada em produtos-destaques)
+$precoOriginal = $produto['valor_base'];
+$precoFinal = $precoOriginal;
+
+if (!empty($produto['desconto_tipo']) && $produto['desconto_valor'] > 0) {
+    if ($produto['desconto_tipo'] === 'percentual') {
+        $precoFinal -= ($precoOriginal * $produto['desconto_valor'] / 100);
+    } elseif ($produto['desconto_tipo'] === 'fixo') {
+        $precoFinal -= $produto['desconto_valor'];
+    }
+}
 ?>
 
 
@@ -69,7 +81,18 @@ if(!$produto){
     <div class="col-md-6">
 
       <h2 class="produto-titulo"><?php echo $produto['nome']; ?></h2>
-      <h2 class="preco-produto">R$ <?php echo number_format($produto['valor_base'], 2, ',', '.'); ?></h2>
+      <h2 class="preco-produto">
+          <?php if ($precoFinal < $precoOriginal): ?>
+              <!-- badge ao lado do preço quando há desconto -->
+              <span class="badge bg-danger badge-discount">
+                  <?= ($produto['desconto_tipo'] === 'percentual')
+                      ? "-{$produto['desconto_valor']}%"
+                      : "-R$ " . number_format($produto['desconto_valor'], 2, ',', '.') ?>
+              </span>
+              <span class="price-original">R$ <?= number_format($precoOriginal, 2, ',', '.') ?></span>
+          <?php endif; ?>
+          <span class="price-final">R$ <?= number_format($precoFinal, 2, ',', '.') ?></span>
+      </h2>
 
   
 <!-- ESTRELAS-->
@@ -145,7 +168,7 @@ if(!$produto){
 onclick='addToCart(<?= json_encode([
     "id" => $produto["id"],
     "nome" => $produto["nome"],
-    "preco" => floatval($produto["valor_base"])
+    "preco" => floatval($precoFinal)
 ]) ?>)'>
 Adicionar ao carrinho
 </button>

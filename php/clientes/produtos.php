@@ -3,12 +3,15 @@
  <?php 
 include "../class/produtos.php";
 $produto = new Produtos();
-$produtos = $produto->listar(1); 
+// listar() agora já traz informações de desconto; não é preciso passar
+// nenhum parâmetro (o "1" era remanescente de versões anteriores).
+$produtos = $produto->listar(); 
 
 
 $linha = count($produtos);
  
 ?>
+
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">

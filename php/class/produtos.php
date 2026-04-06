@@ -99,7 +99,17 @@ public function insert(){
 
 }
 public function listar (){
-    $sql = "SELECT * FROM produtos";
+    // retorna lista de produtos; também busca informações de desconto
+    // ativas para que páginas de listagem possam exibir os badges de
+    // promoção. A junção replica a lógica usada em listarDestaques.
+    $sql = "
+        SELECT p.*, d.tipo AS desconto_tipo, d.valor AS desconto_valor
+        FROM produtos p
+        LEFT JOIN produto_desconto pd ON p.id = pd.produto_id
+        LEFT JOIN descontos d ON d.id = pd.desconto_id
+            AND d.ativo = 1
+            AND CURDATE() BETWEEN d.data_inicio AND d.data_fim
+    ";
     $cmd = $this->pdo->prepare($sql);
     $cmd->execute();
     return $cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -123,7 +133,19 @@ public function listar (){
     
 }
 public function listarPorId ($id){
-    $sql = "SELECT * FROM  produtos WHERE id = :id LIMIT 1";
+    // include discount info when fetching a single product, mirroring the logic
+    // used in other list methods so that pages like pagina_produto can
+    // calculate and display the proper discounted price.
+    $sql = "
+        SELECT p.*, d.tipo AS desconto_tipo, d.valor AS desconto_valor
+        FROM produtos p
+        LEFT JOIN produto_desconto pd ON p.id = pd.produto_id
+        LEFT JOIN descontos d ON d.id = pd.desconto_id
+            AND d.ativo = 1
+            AND CURDATE() BETWEEN d.data_inicio AND d.data_fim
+        WHERE p.id = :id
+        LIMIT 1
+    ";
     $cmd = $this->pdo->prepare($sql);
     $cmd->bindValue(':id', $id, PDO::PARAM_INT);
     $cmd->execute();
